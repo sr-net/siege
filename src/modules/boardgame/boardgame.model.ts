@@ -1,9 +1,7 @@
-import { GraphQLJSONObject } from 'graphql-type-json'
 import { Field, Int, ObjectType, registerEnumType } from 'type-graphql'
 import { Column, Entity } from 'typeorm'
 
 import { ExtendedEntity } from '@/modules/exented-entity'
-import { JsonSchemaObject } from '@/types/json-schema'
 import { isNil, OptionalUuid } from '@/utils'
 
 export type ResultBase = {
@@ -28,7 +26,6 @@ type BoardgameConstructor = OptionalUuid<
     | 'rulebook'
     | 'maxPlayers'
     | 'minPlayers'
-    | 'resultSchema'
   >
 >
 
@@ -68,10 +65,6 @@ export class Boardgame extends ExtendedEntity {
   @Field(() => Int)
   public maxPlayers: number
 
-  @Column({ type: 'json' })
-  @Field(() => GraphQLJSONObject)
-  public resultSchema: JsonSchemaObject
-
   constructor(options: BoardgameConstructor) {
     super(options)
 
@@ -83,6 +76,5 @@ export class Boardgame extends ExtendedEntity {
     this.rulebook = options.rulebook
     this.minPlayers = options.minPlayers
     this.maxPlayers = options.maxPlayers
-    this.resultSchema = options.resultSchema
   }
 }
