@@ -8,7 +8,7 @@ import { OptionalUuid } from '@/utils'
 type StratConstructor = OptionalUuid<
   Pick<
     Strat,
-    'uuid' | 'title' | 'description' | 'atk' | 'def' | 'gamemodes' | 'score'
+    'uuid' | 'title' | 'description' | 'atk' | 'def' | 'gamemodes' | 'score' | 'submission'
   >
 > & { author: Author }
 
@@ -52,6 +52,10 @@ export class Strat extends ExtendedEntity {
   @Field(() => Int)
   public score: number
 
+  @Column()
+  @Field()
+  public submission: boolean
+
   constructor(options: StratConstructor) {
     super(options)
 
@@ -62,5 +66,6 @@ export class Strat extends ExtendedEntity {
     this.def = options?.def
     this.gamemodes = options?.gamemodes
     this.score = options?.score
+    this.submission = options?.submission
   }
 }

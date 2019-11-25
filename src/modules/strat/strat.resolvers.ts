@@ -8,6 +8,6 @@ export class StratResolver {
   public async strat(
     @Arg('uuid', () => ID) uuid: string,
   ): Promise<Strat | null> {
-    return (await Strat.findOne({ uuid })) ?? null
+    return (await Strat.findOne({ uuid, submission: false })) ?? null
   }
 }
