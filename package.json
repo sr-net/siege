@@ -20,16 +20,27 @@
   },
   "devDependencies": {
     "@types/express": "4.17.2",
-    "@types/helmet": "0.0.45",
-    "@types/superagent": "4.1.4",
-    "@types/uuid": "3.4.6",
     "@types/graphql-type-json": "0.3.2",
+    "@types/helmet": "0.0.45",
+    "@types/node": "12.12.12",
+    "@types/superagent": "4.1.4",
     "@types/supertest": "2.0.8",
     "@types/type-is": "1.6.3",
+    "@types/uuid": "3.4.6",
+    "eslint": "6.7.0",
+    "eslint-config-prettier": "6.7.0",
+    "eslint-import-resolver-alias": "1.1.2",
+    "eslint-plugin-import": "2.18.2",
     "eslint-plugin-node": "10.0.0",
+    "eslint-plugin-prettier": "3.1.1",
+    "eslint-plugin-promise": "4.2.1",
     "eslint-plugin-security": "1.4.0",
+    "husky": "3.1.0",
+    "lint-staged": "9.4.3",
+    "prettier": "1.19.1",
     "supertest": "5.0.0-0",
-    "ts-node-dev": "1.0.0-pre.44"
+    "ts-node-dev": "1.0.0-pre.44",
+    "typescript": "3.7.2"
   },
   "engines": {
     "node": "^13.0.0"
@@ -40,12 +51,7 @@
     }
   },
   "lint-staged": {
-    "*.{js,json,yml}": [
-      "prettier --write",
-      "git add"
-    ],
-    "*.{ts,tsx}": [
-      "eslint --fix",
+    "*.{ts,tsx,js,json,yml}": [
       "prettier --write",
       "git add"
     ]
