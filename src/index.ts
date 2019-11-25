@@ -5,7 +5,7 @@ import { createApp, connectApolloServer } from '@/apollo'
 import { createSchema } from '@/graphql'
 
 const shouldGenerateSnapshot = process.argv.find(
-  str => str.includes('--snapshot') ?? str.includes('-shot'),
+  str => str.includes('--snapshot') || str.includes('-shot'),
 )
 
 if (shouldGenerateSnapshot) {

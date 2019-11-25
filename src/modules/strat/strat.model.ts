@@ -3,7 +3,7 @@ import { Column, Entity, Index } from 'typeorm'
 
 import { ExtendedEntity } from '@/modules/exented-entity'
 import { Author } from '@/modules/strat/author.entity'
-import { isNil, OptionalUuid } from '@/utils'
+import { OptionalUuid } from '@/utils'
 
 type StratConstructor = OptionalUuid<
   Pick<
@@ -55,14 +55,12 @@ export class Strat extends ExtendedEntity {
   constructor(options: StratConstructor) {
     super(options)
 
-    if (isNil(options)) options = {} as any
-
-    this.title = options.title
-    this.description = options.description
-    this.author = options.author
-    this.atk = options.atk
-    this.def = options.def
-    this.gamemodes = options.gamemodes
-    this.score = options.score
+    this.title = options?.title
+    this.description = options?.description
+    this.author = options?.author
+    this.atk = options?.atk
+    this.def = options?.def
+    this.gamemodes = options?.gamemodes
+    this.score = options?.score
   }
 }

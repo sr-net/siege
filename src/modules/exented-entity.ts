@@ -2,8 +2,6 @@ import { Field, ID, ObjectType } from 'type-graphql'
 import { BaseEntity, PrimaryColumn } from 'typeorm'
 import uuid from 'uuid/v4'
 
-import { isNil } from '@/utils'
-
 @ObjectType({ isAbstract: true })
 export abstract class ExtendedEntity extends BaseEntity {
   @PrimaryColumn({ type: 'uuid' })
@@ -13,9 +11,7 @@ export abstract class ExtendedEntity extends BaseEntity {
   protected constructor(options: { uuid?: string }) {
     super()
 
-    if (isNil(options)) options = {} as any
-
-    this.uuid = options.uuid ?? uuid()
+    this.uuid = options?.uuid ?? uuid()
   }
 
   public shouldExistError<E extends typeof ExtendedEntity>(

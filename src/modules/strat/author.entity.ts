@@ -12,7 +12,7 @@ registerEnumType(AuthorType, { name: 'AuthorType' })
 
 @ObjectType()
 export class Author {
-  @Column({ length: 15 })
+  @Column({ type: 'enum', enum: AuthorType })
   @Field(() => AuthorType)
   public authorType!: AuthorType
 
@@ -22,6 +22,6 @@ export class Author {
   public name!: string
 
   @Column({ nullable: true })
-  @Field(() => String, { nullable: true })
-  public url!: string | null
+  @Field({ nullable: true })
+  public url?: string
 }
