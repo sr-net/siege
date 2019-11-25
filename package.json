@@ -1,0 +1,68 @@
+{
+  "name": "sr-net",
+  "version": "1.0.0",
+  "author": "BeeeQueue",
+  "dependencies": {
+    "apollo-server-express": "2.9.12",
+    "cors": "2.8.5",
+    "dotenv": "8.2.0",
+    "express": "4.17.1",
+    "graphql": "14.5.8",
+    "graphql-type-json": "0.3.1",
+    "helmet": "3.21.2",
+    "pg": "7.14.0",
+    "reflect-metadata": "0.1.13",
+    "ts-node": "8.5.2",
+    "tsconfig-paths": "3.9.0",
+    "type-graphql": "0.17.5",
+    "typeorm": "0.2.20",
+    "uuid": "3.3.3"
+  },
+  "devDependencies": {
+    "@types/express": "4.17.2",
+    "@types/helmet": "0.0.45",
+    "@types/superagent": "4.1.4",
+    "@types/uuid": "3.4.6",
+    "@types/graphql-type-json": "0.3.2",
+    "@types/supertest": "2.0.8",
+    "@types/type-is": "1.6.3",
+    "eslint-plugin-node": "10.0.0",
+    "eslint-plugin-security": "1.4.0",
+    "supertest": "5.0.0-0",
+    "ts-node-dev": "1.0.0-pre.44"
+  },
+  "engines": {
+    "node": "^13.0.0"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{js,json,yml}": [
+      "prettier --write",
+      "git add"
+    ],
+    "*.{ts,tsx}": [
+      "eslint --fix",
+      "prettier --write",
+      "git add"
+    ]
+  },
+  "private": true,
+  "repository": "https://github.com/BeeeQueue/scorekeep",
+  "scripts": {
+    "build": "yarn tsc --noEmit -P tsconfig.json",
+    "dev": "ts-node-dev --respawn --no-deps -r dotenv/config -r tsconfig-paths/register --files --inspect -- src/index.ts",
+    "lint": "eslint 'src/**/*.ts'",
+    "migrate": "yarn typeorm migration:run",
+    "migrate:generate": "typeorm migration:generate -d migrations -n",
+    "migrate:create": "typeorm migration:create -d migrations -n",
+    "start": "ts-node --files -r dotenv/config -r tsconfig-paths/register src/index.ts",
+    "pretest": "NODE_ENV=development yarn run migrate",
+    "test": "NODE_ENV=test jest server -i",
+    "test:coverage": "yarn run test --coverage",
+    "typeorm": "ts-node -T -r tsconfig-paths/register ../../node_modules/typeorm/cli.js"
+  }
+}
