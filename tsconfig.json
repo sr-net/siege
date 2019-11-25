@@ -16,17 +16,21 @@
     "allowSyntheticDefaultImports": true,
     "resolveJsonModule": true,
     "sourceMap": true,
-    "types": [
-      "node",
-      "jest"
-    ],
+    "types": ["node", "jest"],
     "baseUrl": ".",
     "paths": {
-      "@/*": [
-        "src/*"
-      ]
+      "@/*": ["src/*"]
     },
-    "lib": [      "es5",      "es2015",      "es2016",      "es2017",      "es2018",      "es2019",      "es2020",      "esnext"y@@],
+    "lib": [
+      "es5",
+      "es2015",
+      "es2016",
+      "es2017",
+      "es2018",
+      "es2019",
+      "es2020",
+      "esnext"
+    ],
     "skipLibCheck": true
   },
   "include": ["./src/**/*.ts", "./index.d.ts"],
