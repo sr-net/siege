@@ -1,7 +1,7 @@
 import { resolve } from 'path'
 import { buildSchema } from 'type-graphql'
 
-import { BoardgameResolver } from '@/modules/boardgame/boardgame.resolvers'
+import { StratResolver } from '@/modules/strat/strat.resolvers'
 
 export const createSchema = async (generateSnapshot = true) =>
   buildSchema({
@@ -9,5 +9,5 @@ export const createSchema = async (generateSnapshot = true) =>
       ? false
       : { path: resolve(__dirname, 'snapshot.graphql') },
     dateScalarMode: 'isoDate',
-    resolvers: [BoardgameResolver],
+    resolvers: [StratResolver],
   })
