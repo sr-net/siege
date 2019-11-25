@@ -5,7 +5,7 @@ import { createApp, connectApolloServer } from '@/apollo'
 import { createSchema } from '@/graphql'
 
 const shouldGenerateSnapshot = process.argv.find(
-  str => str.includes('--snapshot') || str.includes('-shot'),
+  str => str.includes('--snapshot') ?? str.includes('-shot'),
 )
 
 if (shouldGenerateSnapshot) {
@@ -14,7 +14,7 @@ if (shouldGenerateSnapshot) {
     process.exit(0)
   })
 } else {
-  const port = process.env.PORT || 3000
+  const port = process.env.PORT ?? 3000
 
   const start = async () => {
     await connectToDatabase()

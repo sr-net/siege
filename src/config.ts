@@ -12,12 +12,12 @@ type Config = {
 
 const defaultDbConfig = {
   type: 'postgres' as const,
-  host: process.env.DATABASE_HOST || 'localhost',
-  port: Number(process.env.DATABASE_PORT || 5432),
-  username: process.env.DATABASE_USER || 'scorekeep-admin',
-  password: process.env.DATABASE_PASS || "ADAM's COOL",
-  database: 'postgres',
+  host: process.env.DATABASE_HOST ?? 'localhost',
+  port: Number(process.env.DATABASE_PORT ?? 5432),
+  username: process.env.DATABASE_USER ?? 'postgres',
+  password: process.env.DATABASE_PASS,
   url: process.env.DATABASE_URL,
+  database: 'postgres',
 
   logging: false,
   entities: ['src/modules/**/*.model.ts'],
@@ -59,4 +59,4 @@ const _config: Config = {
 }
 
 export const config =
-  _config[(process.env.NODE_ENV || 'development') as Environment]
+  _config[(process.env.NODE_ENV ?? 'development') as Environment]
