@@ -22,6 +22,11 @@ enum Gamemodes {
   Areas
 }
 
+type Mutation {
+  likeStrat(uuid: ID!): Strat
+  unlikeStrat(uuid: ID!): Strat
+}
+
 type Query {
   strat(uuid: ID!): Strat
 }
@@ -35,4 +40,6 @@ type Strat {
   def: Boolean!
   gamemodes: [Gamemodes!]!
   score: Int!
+  submission: Boolean!
+  liked: Boolean!
 }

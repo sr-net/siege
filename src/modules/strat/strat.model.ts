@@ -1,14 +1,23 @@
-import { Field, Int, ObjectType, registerEnumType } from 'type-graphql'
+import { Ctx, Field, Int, ObjectType, registerEnumType } from 'type-graphql'
 import { Column, Entity, Index } from 'typeorm'
 
+import { Context } from '@/apollo'
 import { ExtendedEntity } from '@/modules/exented-entity'
 import { Author } from '@/modules/strat/author.entity'
-import { OptionalUuid } from '@/utils'
+import { Like } from '@/modules/like/like.model'
+import { isNil, OptionalUuid } from '@/utils'
 
 type StratConstructor = OptionalUuid<
   Pick<
     Strat,
-    'uuid' | 'title' | 'description' | 'atk' | 'def' | 'gamemodes' | 'score' | 'submission'
+    | 'uuid'
+    | 'title'
+    | 'description'
+    | 'atk'
+    | 'def'
+    | 'gamemodes'
+    | 'score'
+    | 'submission'
   >
 > & { author: Author }
 
@@ -55,6 +64,15 @@ export class Strat extends ExtendedEntity {
   @Column()
   @Field()
   public submission: boolean
+
+  @Field(() => Boolean)
+  public async liked(@Ctx() ctx: Context): Promise<boolean> {
+    if (isNil(ctx.sessionUuid)) {
+      return false
+    }
+
+    return (await Like.count({ stratUuid: this.uuid })) === 1
+  }
 
   constructor(options: StratConstructor) {
     super(options)
