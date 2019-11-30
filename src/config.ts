@@ -36,6 +36,7 @@ const _config: Config = {
       ...defaultDbConfig,
       synchronize: true,
       migrationsRun: true,
+      schema: 'srnet'
     },
   },
   [Environment.TEST]: {
