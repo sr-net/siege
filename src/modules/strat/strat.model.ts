@@ -21,13 +21,13 @@ type StratConstructor = OptionalUuid<
   >
 > & { author: Author }
 
-export enum Gamemodes {
+export enum Gamemode {
   Bombs = 'BOMBS',
   Hostage = 'HOSTAGE',
   Areas = 'CAPTURE_AREAS',
 }
 
-registerEnumType(Gamemodes, { name: 'Gamemodes' })
+registerEnumType(Gamemode, { name: 'Gamemode' })
 
 @Entity()
 @ObjectType()
@@ -54,8 +54,8 @@ export class Strat extends ExtendedEntity {
   public def: boolean
 
   @Column({ type: 'simple-array' })
-  @Field(() => [Gamemodes])
-  public gamemodes: Gamemodes[]
+  @Field(() => [Gamemode])
+  public gamemodes: Gamemode[]
 
   @Column({ type: 'int' })
   @Field(() => Int)

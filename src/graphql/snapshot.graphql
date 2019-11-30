@@ -16,7 +16,7 @@ enum AuthorType {
   Reddit
 }
 
-enum Gamemodes {
+enum Gamemode {
   Bombs
   Hostage
   Areas
@@ -38,7 +38,7 @@ type Strat {
   author: Author!
   atk: Boolean!
   def: Boolean!
-  gamemodes: [Gamemodes!]!
+  gamemodes: [Gamemode!]!
   score: Int!
   submission: Boolean!
   liked: Boolean!
