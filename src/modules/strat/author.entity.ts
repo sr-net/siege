@@ -14,7 +14,7 @@ registerEnumType(AuthorType, { name: 'AuthorType' })
 export class Author {
   @Column({ type: 'enum', enum: AuthorType })
   @Field(() => AuthorType)
-  public authorType!: AuthorType
+  public type!: AuthorType
 
   @Column()
   @Index()
