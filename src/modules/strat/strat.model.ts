@@ -18,6 +18,7 @@ type StratConstructor = OptionalUuid<
     | 'gamemodes'
     | 'score'
     | 'submission'
+    | 'acceptedAt'
   >
 > & { author: Author }
 
@@ -65,6 +66,10 @@ export class Strat extends ExtendedEntity {
   @Field()
   public submission: boolean
 
+  @Column({ nullable: true })
+  @Field({ nullable: true })
+  public acceptedAt?: Date
+
   @Field(() => Boolean)
   public async liked(@Ctx() ctx: Context): Promise<boolean> {
     if (isNil(ctx.sessionUuid)) {
@@ -85,5 +90,6 @@ export class Strat extends ExtendedEntity {
     this.gamemodes = options?.gamemodes
     this.score = options?.score
     this.submission = options?.submission
+    this.acceptedAt = options?.acceptedAt
   }
 }

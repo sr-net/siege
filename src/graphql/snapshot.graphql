@@ -16,6 +16,11 @@ enum AuthorType {
   Reddit
 }
 
+"""
+The javascript `Date` as string. Type represents date and time as the ISO Date string.
+"""
+scalar DateTime
+
 enum Gamemode {
   Bombs
   Hostage
@@ -41,5 +46,6 @@ type Strat {
   gamemodes: [Gamemode!]!
   score: Int!
   submission: Boolean!
+  acceptedAt: DateTime
   liked: Boolean!
 }
