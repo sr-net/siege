@@ -42,7 +42,7 @@ const _config: Config = {
   [Environment.TEST]: {
     db: {
       ...defaultDbConfig,
-      schema: 'scorekeep-tests',
+      schema: 'srnet-tests',
       synchronize: true,
       dropSchema: true,
     },
