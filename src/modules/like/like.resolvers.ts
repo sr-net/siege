@@ -46,11 +46,12 @@ export class LikeResolver {
       return null
     }
 
-    const like = await Like.findOne({ stratUuid: uuid })
+    const like = await Like.update(
+      { stratUuid: uuid, sessionUuid: ctx.sessionUuid },
+      { active: false },
+    )
 
-    if (isNil(like)) return strat
-
-    await like.remove()
+    if (like.affected ?? 0 < 1) return strat
 
     strat.score--
     await strat.save()
