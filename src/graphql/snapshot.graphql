@@ -33,8 +33,41 @@ type Mutation {
 }
 
 type Query {
-  strat(shortId: ID, uuid: ID): Strat
-  strats(page: Int = 0): [Strat!]!
+  strat(
+    uuid: ID
+    shortId: Int
+
+    """
+    Set to `true` to filter for Strats that work on attack. Setting to `false` does nothing.
+    """
+    atk: Boolean
+
+    """
+    Set to `true` to filter for Strats that work on defense. Setting to `false` does nothing.
+    """
+    def: Boolean
+
+    """A list of Strats to be excluded from the result."""
+    excludeShortIds: [ID!]
+  ): Strat
+  strats(
+    uuid: ID
+    shortId: Int
+
+    """
+    Set to `true` to filter for Strats that work on attack. Setting to `false` does nothing.
+    """
+    atk: Boolean
+
+    """
+    Set to `true` to filter for Strats that work on defense. Setting to `false` does nothing.
+    """
+    def: Boolean
+
+    """A list of Strats to be excluded from the result."""
+    excludeShortIds: [ID!]
+    page: Int = 1
+  ): [Strat!]!
   submission: Strat
 }
 
