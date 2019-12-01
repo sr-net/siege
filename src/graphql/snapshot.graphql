@@ -33,7 +33,8 @@ type Mutation {
 }
 
 type Query {
-  strat(uuid: ID!): Strat
+  strat(shortId: ID, uuid: ID): Strat
+  submission: Strat
 }
 
 type Strat {
