@@ -4,6 +4,7 @@
   "author": "BeeeQueue",
   "dependencies": {
     "apollo-server-express": "2.9.12",
+    "class-validator": "0.11.0",
     "cookie": "0.4.0",
     "cors": "2.8.5",
     "dotenv": "8.2.0",
