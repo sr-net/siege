@@ -38,6 +38,7 @@ type Query {
 
 type Strat {
   uuid: ID!
+  shortId: Int!
   title: String!
   description: String!
   author: Author!

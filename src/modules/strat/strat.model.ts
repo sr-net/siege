@@ -11,6 +11,7 @@ type StratConstructor = OptionalUuid<
   Pick<
     Strat,
     | 'uuid'
+    | 'shortId'
     | 'title'
     | 'description'
     | 'atk'
@@ -33,6 +34,11 @@ registerEnumType(Gamemode, { name: 'Gamemode' })
 @Entity()
 @ObjectType()
 export class Strat extends ExtendedEntity {
+  @Column({ unique: true })
+  @Index()
+  @Field(() => Int)
+  public shortId: number
+
   @Column({ length: 20 })
   @Index()
   @Field()
@@ -82,6 +88,7 @@ export class Strat extends ExtendedEntity {
   constructor(options: StratConstructor) {
     super(options)
 
+    this.shortId = options?.shortId
     this.title = options?.title
     this.description = options?.description
     this.author = options?.author
