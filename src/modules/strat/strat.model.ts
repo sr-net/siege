@@ -39,7 +39,7 @@ export class Strat extends ExtendedEntity {
   @Field(() => Int)
   public shortId: number
 
-  @Column({ length: 20 })
+  @Column({ length: 40 })
   @Index()
   @Field()
   public title: string
