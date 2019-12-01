@@ -1,13 +1,4 @@
-import {
-  Arg,
-  Args,
-  ArgsType,
-  Field,
-  ID,
-  Int,
-  Query,
-  Resolver,
-} from 'type-graphql'
+import { Args, ArgsType, Field, ID, Int, Query, Resolver } from 'type-graphql'
 import { FindOneOptions } from 'typeorm'
 import { IsUUID, Min } from 'class-validator'
 
@@ -15,6 +6,12 @@ import { Strat } from '@/modules/strat/strat.model'
 import { isNil } from '@/utils'
 
 type StratFilter = FindOneOptions<Strat>['where']
+
+@ArgsType()
+class PageArguments {
+  @Field(() => Int, { nullable: true, defaultValue: 1 })
+  public page!: number
+}
 
 @ArgsType()
 class StratArguments {
@@ -66,9 +63,6 @@ class StratArguments {
   }
 }
 
-@ArgsType()
-class StratsArguments extends StratArguments {}
-
 @Resolver()
 export class StratResolver {
   @Query(() => Strat, { nullable: true })
@@ -80,10 +74,8 @@ export class StratResolver {
 
   @Query(() => [Strat])
   public async strats(
-    @Arg('page', () => Int, { nullable: true, defaultValue: 1 })
-    page: number,
-    @Args()
-    { getFilters }: StratsArguments,
+    @Args() { page }: PageArguments,
+    @Args() { getFilters }: StratArguments,
   ): Promise<Strat[]> {
     const strats = await Strat.find({
       where: getFilters(),
