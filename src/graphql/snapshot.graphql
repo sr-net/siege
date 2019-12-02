@@ -49,6 +49,11 @@ type Query {
 
     """A list of Strats to be excluded from the result."""
     excludeShortIds: [ID!]
+
+    """
+    Return a random Strat matching the arguments instead of the first best one.
+    """
+    random: Boolean
   ): Strat
   strats(
     uuid: ID

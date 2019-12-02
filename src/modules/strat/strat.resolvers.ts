@@ -8,7 +8,7 @@ import {
   Query,
   Resolver,
 } from 'type-graphql'
-import { FindOneOptions } from 'typeorm'
+import { BaseEntity, FindOneOptions } from 'typeorm'
 import { IsUUID, Min } from 'class-validator'
 
 import { PageArguments, PaginatedResponse } from '@/modules/common'
@@ -18,7 +18,7 @@ import { isNil } from '@/utils'
 type StratFilter = FindOneOptions<Strat>['where']
 
 @ArgsType()
-class StratArguments {
+class CommonStratArguments {
   @Field(() => ID, { nullable: true })
   @IsUUID()
   public uuid?: string
@@ -69,6 +69,16 @@ class StratArguments {
   }
 }
 
+@ArgsType()
+class SingleStratArguments extends CommonStratArguments {
+  @Field({
+    nullable: true,
+    description:
+      'Return a random Strat matching the arguments instead of the first best one.',
+  })
+  public random?: boolean
+}
+
 @ObjectType()
 class StratPage extends PaginatedResponse(Strat) {}
 
@@ -76,15 +86,28 @@ class StratPage extends PaginatedResponse(Strat) {}
 export class StratResolver {
   @Query(() => Strat, { nullable: true })
   public async strat(
-    @Args() { getFilters }: StratArguments,
+    @Args() { random, getFilters }: SingleStratArguments,
   ): Promise<Strat | null> {
+    if (random === true) {
+      const uuids = await Strat.find<BaseEntity & Pick<Strat, 'uuid'>>({
+        where: getFilters(),
+        select: ['uuid'],
+      })
+
+      if (uuids.length < 1) return null
+
+      return Strat.findOneOrFail({
+        uuid: uuids[Math.floor(Math.random() * uuids.length)].uuid,
+      })
+    }
+
     return (await Strat.findOne({ where: getFilters() })) ?? null
   }
 
   @Query(() => StratPage)
   public async strats(
     @Args() { page }: PageArguments,
-    @Args() { getFilters }: StratArguments,
+    @Args() { getFilters }: CommonStratArguments,
   ): Promise<StratPage> {
     const offset = 10 * Math.max(0, page - 1)
 
