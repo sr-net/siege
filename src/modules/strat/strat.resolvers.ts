@@ -1,17 +1,21 @@
-import { Args, ArgsType, Field, ID, Int, Query, Resolver } from 'type-graphql'
+import {
+  Args,
+  ArgsType,
+  Field,
+  ID,
+  Int,
+  ObjectType,
+  Query,
+  Resolver,
+} from 'type-graphql'
 import { FindOneOptions } from 'typeorm'
 import { IsUUID, Min } from 'class-validator'
 
+import { PageArguments, PaginatedResponse } from '@/modules/common'
 import { Strat } from '@/modules/strat/strat.model'
 import { isNil } from '@/utils'
 
 type StratFilter = FindOneOptions<Strat>['where']
-
-@ArgsType()
-class PageArguments {
-  @Field(() => Int, { nullable: true, defaultValue: 1 })
-  public page!: number
-}
 
 @ArgsType()
 class StratArguments {
@@ -44,7 +48,9 @@ class StratArguments {
   public excludeShortIds?: number[]
 
   public getFilters = (): StratFilter | StratFilter[] => {
-    const commonFilters: StratFilter = {}
+    const commonFilters: StratFilter = {
+      submission: false,
+    }
 
     if (this.atk === true || this.def === true) {
       commonFilters.atk = this.atk ?? false
@@ -63,6 +69,9 @@ class StratArguments {
   }
 }
 
+@ObjectType()
+class StratPage extends PaginatedResponse(Strat) {}
+
 @Resolver()
 export class StratResolver {
   @Query(() => Strat, { nullable: true })
@@ -72,17 +81,24 @@ export class StratResolver {
     return (await Strat.findOne({ where: getFilters() })) ?? null
   }
 
-  @Query(() => [Strat])
+  @Query(() => StratPage)
   public async strats(
     @Args() { page }: PageArguments,
     @Args() { getFilters }: StratArguments,
-  ): Promise<Strat[]> {
+  ): Promise<StratPage> {
+    const offset = 10 * Math.max(0, page - 1)
+
     const strats = await Strat.find({
       where: getFilters(),
       take: 10,
-      skip: 10 * Math.min(0, page - 1),
+      skip: offset,
     })
 
-    return strats
+    const total = await Strat.count({ where: getFilters() })
+
+    return {
+      items: strats,
+      lastPage: Math.ceil(total / 10),
+    }
   }
 }

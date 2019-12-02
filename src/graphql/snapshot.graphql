@@ -67,7 +67,7 @@ type Query {
     """A list of Strats to be excluded from the result."""
     excludeShortIds: [ID!]
     page: Int = 1
-  ): [Strat!]!
+  ): StratPage!
   submission: Strat
 }
 
@@ -84,4 +84,9 @@ type Strat {
   submission: Boolean!
   acceptedAt: DateTime
   liked: Boolean!
+}
+
+type StratPage {
+  items: [Strat!]!
+  lastPage: Int!
 }
