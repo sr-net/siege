@@ -1,7 +1,6 @@
 import { Arg, Ctx, ID, Mutation, Resolver } from 'type-graphql'
 
 import { Context } from '@/apollo'
-import { Like } from '@/modules/like/like.model'
 import { Strat } from '@/modules/strat/strat.model'
 import { isNil } from '@/utils'
 
@@ -17,20 +16,10 @@ export class LikeResolver {
     if (isNil(strat)) return null
 
     if (isNil(ctx.sessionUuid)) {
-      ctx.setSessionUuid()
+      ctx.sessionUuid = ctx.setSessionUuid()
     }
 
-    const like = new Like({
-      sessionUuid: ctx.sessionUuid!,
-      stratUuid: strat.uuid,
-    })
-
-    await like.save()
-
-    strat.score++
-    await strat.save()
-
-    return strat
+    return strat.like(ctx.sessionUuid)
   }
 
   @Mutation(() => Strat, { nullable: true })
@@ -46,16 +35,6 @@ export class LikeResolver {
       return null
     }
 
-    const like = await Like.update(
-      { stratUuid: uuid, sessionUuid: ctx.sessionUuid },
-      { active: false },
-    )
-
-    if (like.affected ?? 0 < 1) return strat
-
-    strat.score--
-    await strat.save()
-
-    return strat
+    return strat.unlike(ctx.sessionUuid)
   }
 }

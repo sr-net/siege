@@ -99,4 +99,38 @@ export class Strat extends ExtendedEntity {
     this.submission = options?.submission
     this.acceptedAt = options?.acceptedAt
   }
+
+  public async like(sessionUuid: string): Promise<Strat> {
+    const options = {
+      sessionUuid: sessionUuid,
+      stratUuid: this.uuid,
+    }
+
+    const exists = (await Like.count(options)) === 1
+
+    if (exists) return this
+
+    const like = new Like(options)
+
+    await like.save()
+
+    this.score++
+    await this.save()
+
+    return this
+  }
+
+  public async unlike(sessionUuid: string): Promise<Strat> {
+    const like = await Like.update(
+      { stratUuid: this.uuid, sessionUuid: sessionUuid },
+      { active: false },
+    )
+
+    if (like.affected ?? 0 < 1) return this
+
+    this.score--
+    await this.save()
+
+    return this
+  }
 }

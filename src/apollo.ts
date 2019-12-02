@@ -11,7 +11,7 @@ import { router } from '@/router'
 
 export type Context = {
   sessionUuid: string | null
-  setSessionUuid: () => void
+  setSessionUuid: () => string
 }
 
 export const createApp = (): IExpress => {
@@ -46,6 +46,8 @@ export const connectApolloServer = async (app: IExpress) => {
             secure: process.env.NODE_ENV === 'production',
           }),
         )
+
+        return sessionUuid
       }
 
       return {
