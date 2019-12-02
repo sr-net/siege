@@ -8,8 +8,8 @@ import {
   Query,
   Resolver,
 } from 'type-graphql'
-import { BaseEntity, FindOneOptions } from 'typeorm'
-import { IsUUID, Min } from 'class-validator'
+import { BaseEntity, FindOneOptions, In, Not } from 'typeorm'
+import { ArrayMaxSize, IsUUID, Min } from 'class-validator'
 
 import { PageArguments, PaginatedResponse } from '@/modules/common'
 import { Strat } from '@/modules/strat/strat.model'
@@ -45,11 +45,16 @@ class CommonStratArguments {
     nullable: true,
     description: 'A list of Strats to be excluded from the result.',
   })
+  @ArrayMaxSize(15)
   public excludeShortIds?: number[]
 
   public getFilters = (): StratFilter | StratFilter[] => {
     const commonFilters: StratFilter = {
       submission: false,
+    }
+
+    if (this.excludeShortIds?.length ?? 0 > 0) {
+      commonFilters.shortId = Not(In(this.excludeShortIds ?? []))
     }
 
     if (this.atk === true || this.def === true) {
