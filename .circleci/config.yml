@@ -5,9 +5,6 @@ executors:
     docker:
       - image: circleci/node:13
     working_directory: ~/app
-    environment:
-      JEST_JUNIT_OUTPUT_NAME: 'results.xml'
-      JEST_JUNIT_ANCESTOR_SEPARATOR: ' > '
 
 jobs:
   checkout_code:
@@ -41,14 +38,11 @@ jobs:
           name: Build
           command: yarn run build
 
-test:
+  test:
     executor: node
     docker:
       - image: circleci/node:13
       - image: circleci/postgres:11-alpine
-        environment:
-          POSTGRES_USER: scorekeep-admin
-          POSTGRES_PASSWORD: "ADAM's COOL"
     environment:
       JEST_JUNIT_OUTPUT_DIR: '../../test-results/test'
       NODE_ENV: 'test'
@@ -56,8 +50,11 @@ test:
       - attach_workspace:
           at: .
       - run:
-          name: Test
-          command: yarn run test --ci --reporters=jest-junit --reporters=default
+          name: Run tests
+          command: yarn run test:ci
+      - run:
+          name: Send coverage report
+          command: cat coverage/lcov.info | yarn coveralls
       - store_test_results:
           when: always
           path: test-results
@@ -73,25 +70,6 @@ test:
       - store_test_results:
           when: always
           path: test-results
-
-  breaking_changes:
-    executor: node
-    steps:
-      - attach_workspace:
-          at: .
-      - run:
-          name: Check for changes in schema
-          command: npx @graphql-inspector/cli diff git:origin/master:src/graphql/snapshot.graphql src/graphql/snapshot.graphql
-
-  deploy:
-    executor: node
-    steps:
-      - attach_workspace:
-          at: .
-      - run:
-          working_directory: ~/app/packages/server
-          name: Check for changes in schema
-          command: npx @graphql-inspector/cli diff git:origin/master:packages/server/src/graphql/snapshot.graphql src/graphql/snapshot.graphql
 
 workflows:
   version: 2
@@ -110,16 +88,3 @@ workflows:
       - lint:
           requires:
             - dependencies
-      - breaking_changes:
-          requires:
-            - dependencies
-            - build
-            - test
-      - deploy:
-          requires:
-            - build
-            - test
-            - lint
-          filters:
-            branches:
-              only: master
