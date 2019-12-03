@@ -10,13 +10,13 @@ type LikeConstructor = OptionalUuid<
 @Entity()
 export class Report extends ExtendedEntity {
   @Column({ type: 'uuid' })
-  sessionUuid: string
+  public sessionUuid: string
 
   @Column({ type: 'uuid' })
-  stratUuid: string
+  public stratUuid: string
 
   @Column()
-  message: string
+  public message: string
 
   constructor(options: LikeConstructor) {
     super(options)
