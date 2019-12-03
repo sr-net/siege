@@ -108,7 +108,7 @@ workflows:
             - dependencies
       - breaking_changes:
           requires:
-            - dependencies
+            - lint
             - build
             - test
       - deploy:
