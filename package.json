@@ -1,5 +1,5 @@
 {
-  "name": "sr-net",
+  "name": "@sr-net/siege",
   "version": "1.0.0",
   "author": "BeeeQueue",
   "dependencies": {
@@ -66,7 +66,7 @@
     ]
   },
   "private": true,
-  "repository": "https://github.com/BeeeQueue/scorekeep",
+  "repository": "https://github.com/sr-net/siege",
   "scripts": {
     "build": "yarn tsc --noEmit -P tsconfig.json",
     "dev": "ts-node-dev --respawn --no-deps -r dotenv/config -r tsconfig-paths/register --files --inspect -- src/index.ts",
