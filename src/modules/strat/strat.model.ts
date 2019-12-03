@@ -82,7 +82,7 @@ export class Strat extends ExtendedEntity {
       return false
     }
 
-    return (await Like.count({ stratUuid: this.uuid })) === 1
+    return (await Like.count({ stratUuid: this.uuid, active: true })) === 1
   }
 
   constructor(options: StratConstructor) {
@@ -122,11 +122,11 @@ export class Strat extends ExtendedEntity {
 
   public async unlike(sessionUuid: string): Promise<Strat> {
     const like = await Like.update(
-      { stratUuid: this.uuid, sessionUuid: sessionUuid },
+      { stratUuid: this.uuid, sessionUuid: sessionUuid, active: true },
       { active: false },
     )
 
-    if (like.affected ?? 0 < 1) return this
+    if ((like.affected ?? 0) < 1) return this
 
     this.score--
     await this.save()
