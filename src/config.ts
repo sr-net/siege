@@ -38,6 +38,10 @@ const _config: Config = {
       migrationsRun: true,
       schema: 'srnet'
     },
+    apolloEngine: {
+      schemaTag: process.env.NODE_ENV ?? 'production',
+      apiKey: process.env.ENGINE_API_KEY,
+    },
   },
   [Environment.TEST]: {
     db: {
@@ -54,7 +58,8 @@ const _config: Config = {
       migrationsRun: true,
     },
     apolloEngine: {
-      apiKey: process.env.APOLLO_ENGINE_KEY,
+      schemaTag: process.env.NODE_ENV ?? 'production',
+      apiKey: process.env.ENGINE_API_KEY,
     },
   },
 }
