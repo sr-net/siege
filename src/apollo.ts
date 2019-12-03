@@ -30,6 +30,7 @@ export const connectApolloServer = async (app: IExpress) => {
     schema: await createSchema(),
     introspection: true,
     engine: config.apolloEngine,
+    playground: true,
     context: ({ req, res }): Context => {
       let sessionUuid = req.headers.cookie?.match(
         /sessionUuid=([a-zA-Z\d-]+);?/,
