@@ -77,8 +77,8 @@
     "migrate:create": "typeorm migration:create -d migrations -n",
     "prestart": "apollo service:push --localSchemaFile=src/graphql/snapshot.graphql -t $NODE_ENV",
     "start": "ts-node --files -r dotenv/config -r tsconfig-paths/register src/index.ts",
-    "pretest": "NODE_ENV=development yarn run migrate",
     "test": "NODE_ENV=test jest server -i",
-    "test:coverage": "yarn run test --coverage"
+    "test:coverage": "yarn run test --coverage",
+    "typeorm": "ts-node -T -r tsconfig-paths/register ./node_modules/typeorm/cli.js"
   }
 }
