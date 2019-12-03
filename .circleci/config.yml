@@ -46,11 +46,8 @@ jobs:
     docker:
       - image: circleci/node:13
       - image: circleci/postgres:11-alpine
-        environment:
-          POSTGRES_USER: scorekeep-admin
-          POSTGRES_PASSWORD: "ADAM's COOL"
     environment:
-      JEST_JUNIT_OUTPUT_DIR: '../../test-results/test'
+      JEST_JUNIT_OUTPUT_DIR: './test-results/test'
       NODE_ENV: 'test'
     steps:
       - attach_workspace:
@@ -69,7 +66,7 @@ jobs:
           at: .
       - run:
           name: Lint
-          command: yarn run lint -f junit -o ../../test-results/lint/results.xml
+          command: yarn run lint -f junit -o ./test-results/lint/results.xml
       - store_test_results:
           when: always
           path: test-results
@@ -89,9 +86,8 @@ jobs:
       - attach_workspace:
           at: .
       - run:
-          working_directory: ~/app/packages/server
-          name: Check for changes in schema
-          command: npx @graphql-inspector/cli diff git:origin/master:packages/server/src/graphql/snapshot.graphql src/graphql/snapshot.graphql
+          name: Deploy to Dokku
+          command: echo "git push dokku"
 
 workflows:
   version: 2
@@ -117,9 +113,7 @@ workflows:
             - test
       - deploy:
           requires:
-            - build
-            - test
-            - lint
+            - breaking_changes
           filters:
             branches:
               only: master
