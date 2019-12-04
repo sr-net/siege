@@ -120,6 +120,6 @@ workflows:
       - deploy:
           requires:
             - breaking_changes
-#          filters:
-#            branches:
-#              only: master
+          filters:
+            branches:
+              only: master
