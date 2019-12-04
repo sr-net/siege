@@ -89,6 +89,9 @@ jobs:
           fingerprints:
             - '82:ad:32:dd:dc:e7:47:d9:7c:e9:d4:77:8b:06:4b:87'
       - run:
+          name: Trust server host
+          command: echo "|1|+DMvKJQrt7hMh3kgeAXrlIbp1rk=|MaXNHnRb4SDKMDV+h2gz/6CNt+8= ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBGoaaGESTE5v5dfHtwXLW5vpx4cjJvHkbhyqORu0Ru0OXZfAKFfq3HS2RDpiJCptgUfuH6D5ppurO3D1ar5240Q=" >> ~/.ssh/known_hosts
+      - run:
           name: Deploy to Dokku
           command: git push dokku@142.93.167.243:siege
 
@@ -117,6 +120,6 @@ workflows:
       - deploy:
           requires:
             - breaking_changes
-          filters:
-            branches:
-              only: master
+#          filters:
+#            branches:
+#              only: master
