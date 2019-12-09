@@ -48,7 +48,7 @@ type Query {
     def: Boolean
 
     """A list of Strats to be excluded from the result."""
-    excludeShortIds: [ID!]
+    excludeShortIds: [Int!]
 
     """
     Return a random Strat matching the arguments instead of the first best one.
@@ -70,7 +70,7 @@ type Query {
     def: Boolean
 
     """A list of Strats to be excluded from the result."""
-    excludeShortIds: [ID!]
+    excludeShortIds: [Int!]
     page: Int = 1
   ): StratPage!
   submission: Strat
