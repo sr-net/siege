@@ -41,7 +41,7 @@ class CommonStratArguments {
   })
   public def?: boolean
 
-  @Field(() => [ID], {
+  @Field(() => [Int], {
     nullable: true,
     description: 'A list of Strats to be excluded from the result.',
   })
