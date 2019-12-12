@@ -1,18 +1,9 @@
-import {
-  Args,
-  ArgsType,
-  Field,
-  ID,
-  Int,
-  ObjectType,
-  Query,
-  Resolver,
-} from 'type-graphql'
-import { BaseEntity, FindOneOptions, In, Not } from 'typeorm'
+import { Args, ArgsType, Field, ID, Int, ObjectType, Query, Resolver } from 'type-graphql'
+import { BaseEntity, FindOneOptions, In, Like, Not } from 'typeorm'
 import { ArrayMaxSize, IsUUID, Min } from 'class-validator'
 
 import { PageArguments, PaginatedResponse } from '@/modules/common'
-import { Strat } from '@/modules/strat/strat.model'
+import { Gamemode, Strat } from '@/modules/strat/strat.model'
 import { isNil } from '@/utils'
 
 type StratFilter = FindOneOptions<Strat>['where']
@@ -41,6 +32,12 @@ class CommonStratArguments {
   })
   public def?: boolean
 
+  @Field(() => Gamemode,{
+    nullable: true,
+    description: 'Filter by gamemode'
+  })
+  public gamemode?: Gamemode
+
   @Field(() => [Int], {
     nullable: true,
     description: 'A list of Strats to be excluded from the result.',
@@ -60,6 +57,10 @@ class CommonStratArguments {
     if (this.atk === true || this.def === true) {
       commonFilters.atk = this.atk ?? false
       commonFilters.def = this.def ?? false
+    }
+
+    if (!isNil(this.gamemode)) {
+      commonFilters.gamemodes = Like(`%${this.gamemode}%`)
     }
 
     if (!isNil(this.uuid)) {
