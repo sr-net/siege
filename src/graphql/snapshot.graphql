@@ -47,6 +47,9 @@ type Query {
     """
     def: Boolean
 
+    """Filter by gamemode"""
+    gamemode: Gamemode
+
     """A list of Strats to be excluded from the result."""
     excludeShortIds: [Int!]
 
@@ -68,6 +71,9 @@ type Query {
     Set to `true` to filter for Strats that work on defense. Setting to `false` does nothing.
     """
     def: Boolean
+
+    """Filter by gamemode"""
+    gamemode: Gamemode
 
     """A list of Strats to be excluded from the result."""
     excludeShortIds: [Int!]

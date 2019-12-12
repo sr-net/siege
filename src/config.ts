@@ -39,8 +39,7 @@ const _config: Config = {
     db: {
       ...defaultDbConfig,
       synchronize: true,
-      migrationsRun: true,
-      schema: 'srnet'
+      schema: process.env.DB_SCHEMA ?? 'srnet'
     },
     apolloEngine: {
       schemaTag: process.env.NODE_ENV ?? 'production',
