@@ -1,10 +1,10 @@
 import 'reflect-metadata'
 import { init } from '@sentry/node'
 
-import { Environment } from '@/constants'
-import { config } from '@/config'
-import { connectToDatabase } from '@/db'
 import { connectApolloServer, createApp } from '@/apollo'
+import { config } from '@/config'
+import { Environment } from '@/constants'
+import { connectToDatabase } from '@/db'
 import { createSchema } from '@/graphql'
 
 const shouldGenerateSnapshot = process.argv.find(

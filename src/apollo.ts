@@ -1,8 +1,8 @@
 import { ApolloServer } from 'apollo-server-express'
-import Express, { Express as IExpress } from 'express'
 import { serialize } from 'cookie'
-import Helmet from 'helmet'
 import cors from 'cors'
+import Express, { Express as IExpress } from 'express'
+import Helmet from 'helmet'
 import uuid from 'uuid/v4'
 
 import { config } from '@/config'

@@ -1,7 +1,7 @@
-import dotenv from 'dotenv'
-import { EngineReportingOptions } from 'apollo-engine-reporting'
-import { ConnectionOptions } from 'typeorm'
 import { NodeOptions } from '@sentry/node/dist/backend'
+import { EngineReportingOptions } from 'apollo-engine-reporting'
+import dotenv from 'dotenv'
+import { ConnectionOptions } from 'typeorm'
 
 import { Environment } from '@/constants'
 

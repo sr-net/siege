@@ -1,5 +1,5 @@
-import { Column, Index } from 'typeorm'
 import { Field, ObjectType, registerEnumType } from 'type-graphql'
+import { Column, Index } from 'typeorm'
 
 export enum AuthorType {
   Name = 'NAME',
