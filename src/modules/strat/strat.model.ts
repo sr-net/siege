@@ -3,8 +3,8 @@ import { Column, Entity, Index } from 'typeorm'
 
 import { Context } from '@/apollo'
 import { ExtendedEntity } from '@/modules/exented-entity'
-import { Author } from '@/modules/strat/author.entity'
 import { Like } from '@/modules/like/like.model'
+import { Author } from '@/modules/strat/author.entity'
 import { isNil, OptionalUuid } from '@/utils'
 
 type StratConstructor = OptionalUuid<

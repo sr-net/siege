@@ -1,7 +1,10 @@
 import 'reflect-metadata'
+import { init } from '@sentry/node'
 
+import { connectApolloServer, createApp } from '@/apollo'
+import { config } from '@/config'
+import { Environment } from '@/constants'
 import { connectToDatabase } from '@/db'
-import { createApp, connectApolloServer } from '@/apollo'
 import { createSchema } from '@/graphql'
 
 const shouldGenerateSnapshot = process.argv.find(
@@ -14,7 +17,9 @@ if (shouldGenerateSnapshot) {
     process.exit(0)
   })
 } else {
-  const port = process.env.PORT ?? 3000
+  if (config.env === Environment.PRODUCTION) {
+    init(config.sentry)
+  }
 
   const start = async () => {
     await connectToDatabase()
@@ -22,9 +27,9 @@ if (shouldGenerateSnapshot) {
     const app = createApp()
     await connectApolloServer(app)
 
-    app.listen(port, () => {
+    app.listen(config.port, () => {
       // eslint-disable-next-line no-console
-      console.log(`Listening on ${port}`)
+      console.log(`Listening on ${config.port}`)
     })
   }
 

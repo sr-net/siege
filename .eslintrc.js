@@ -34,6 +34,11 @@ module.exports = {
     'node/no-unpublished-import': 'off',
     'node/prefer-promises/dns': 'error',
     'node/prefer-promises/fs': 'error',
+    'import/order': [2, {
+      alphabetize: {
+        order: "asc"
+      }
+    }],
     'import/no-default-export': 2,
     'import/no-useless-path-segments': [
       2,
