@@ -1,6 +1,5 @@
 import { ApolloServer } from 'apollo-server-express'
 import { serialize } from 'cookie'
-import cors from 'cors'
 import Express, { Express as IExpress } from 'express'
 import Helmet from 'helmet'
 import uuid from 'uuid/v4'
@@ -18,11 +17,6 @@ export const createApp = (): IExpress => {
   const app = Express()
 
   app.use(Helmet())
-
-  app.use(cors({
-    origin: ['stratroulette.net', 'localhost:8080'],
-    credentials: true
-  }))
 
   app.use(router)
 
@@ -72,7 +66,13 @@ export const connectApolloServer = async (app: IExpress) => {
     },
   })
 
-  server.applyMiddleware({ app })
+  server.applyMiddleware({
+    app,
+    cors: {
+      origin: [/\.stratroulette\.net$/, 'http://localhost:8080'],
+      credentials: true,
+    },
+  })
 
   return server
 }
