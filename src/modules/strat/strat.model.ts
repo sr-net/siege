@@ -106,11 +106,15 @@ export class Strat extends ExtendedEntity {
       stratUuid: this.uuid,
     }
 
-    const exists = (await Like.count(options)) === 1
+    let like = await Like.findOne(options)
 
-    if (exists) return this
+    if (!isNil(like)) {
+      if (like.active) return this
 
-    const like = new Like(options)
+      like.active = true
+    } else {
+      like = new Like(options)
+    }
 
     await like.save()
 
