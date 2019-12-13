@@ -19,7 +19,7 @@ export const createApp = (): IExpress => {
 
   app.use(Helmet())
 
-  app.use(cors())
+  app.use(cors({ origin: '*' }))
   app.use(router)
 
   return app
