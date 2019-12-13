@@ -19,9 +19,11 @@ export const createApp = (): IExpress => {
 
   app.use(Helmet())
 
-  // Worst case XSS scenario is that someone unlikes a Strat
-  // ...I think the risk is acceptable.
-  app.use(cors({ origin: '*', credentials: true }))
+  app.use(cors({
+    origin: ['stratroulette.net', 'localhost:8080'],
+    credentials: true
+  }))
+
   app.use(router)
 
   return app
