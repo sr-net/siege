@@ -69,7 +69,7 @@ export const connectApolloServer = async (app: IExpress) => {
   server.applyMiddleware({
     app,
     cors: {
-      origin: [/\.stratroulette\.net$/, 'http://localhost:8080'],
+      origin: [/.*/],
       credentials: true,
     },
   })
