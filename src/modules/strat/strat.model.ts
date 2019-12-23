@@ -82,7 +82,13 @@ export class Strat extends ExtendedEntity {
       return false
     }
 
-    return (await Like.count({ stratUuid: this.uuid, active: true })) === 1
+    const count = await Like.count({
+      stratUuid: this.uuid,
+      sessionUuid: ctx.sessionUuid,
+      active: true,
+    })
+
+    return count === 1
   }
 
   constructor(options: StratConstructor) {
