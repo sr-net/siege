@@ -1,6 +1,6 @@
-import { createConnection } from 'typeorm'
+import { createConnection } from "typeorm"
 
-import { config } from '@/config'
+import { config } from "@/config"
 
 export const connectToDatabase = () =>
-  createConnection({ ...config.db }).then(connection => connection)
+  createConnection({ ...config.db }).then((connection) => connection)

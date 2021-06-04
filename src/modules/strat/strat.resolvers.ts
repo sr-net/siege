@@ -1,21 +1,12 @@
-import { ArrayMaxSize, IsUUID, Min } from 'class-validator'
-import {
-  Args,
-  ArgsType,
-  Field,
-  ID,
-  Int,
-  ObjectType,
-  Query,
-  Resolver,
-} from 'type-graphql'
-import { BaseEntity, FindOneOptions, In, Like, Not } from 'typeorm'
+import { ArrayMaxSize, IsUUID, Min } from "class-validator"
+import { Args, ArgsType, Field, ID, Int, ObjectType, Query, Resolver } from "type-graphql"
+import { BaseEntity, FindOneOptions, In, Like, Not } from "typeorm"
 
-import { PageArguments, PaginatedResponse } from '@/modules/common'
-import { Gamemode, Strat } from '@/modules/strat/strat.model'
-import { isNil } from '@/utils'
+import { PageArguments, PaginatedResponse } from "@/modules/common"
+import { Gamemode, Strat } from "@/modules/strat/strat.model"
+import { isNil } from "@/utils"
 
-type StratFilter = FindOneOptions<Strat>['where']
+type StratFilter = FindOneOptions<Strat>["where"]
 
 @ArgsType()
 class CommonStratArguments {
@@ -30,26 +21,26 @@ class CommonStratArguments {
   @Field({
     nullable: true,
     description:
-      'Set to `true` to filter for Strats that work on attack. Setting to `false` does nothing.',
+      "Set to `true` to filter for Strats that work on attack. Setting to `false` does nothing.",
   })
   public atk?: boolean
 
   @Field({
     nullable: true,
     description:
-      'Set to `true` to filter for Strats that work on defense. Setting to `false` does nothing.',
+      "Set to `true` to filter for Strats that work on defense. Setting to `false` does nothing.",
   })
   public def?: boolean
 
   @Field(() => Gamemode, {
     nullable: true,
-    description: 'Filter by gamemode',
+    description: "Filter by gamemode",
   })
   public gamemode?: Gamemode
 
   @Field(() => [Int], {
     nullable: true,
-    description: 'A list of Strats to be excluded from the result.',
+    description: "A list of Strats to be excluded from the result.",
   })
   @ArrayMaxSize(15)
   public excludeShortIds?: number[]
@@ -89,7 +80,7 @@ class SingleStratArguments extends CommonStratArguments {
   @Field({
     nullable: true,
     description:
-      'Return a random Strat matching the arguments instead of the first best one.',
+      "Return a random Strat matching the arguments instead of the first best one.",
   })
   public random?: boolean
 }
@@ -104,9 +95,9 @@ export class StratResolver {
     @Args() { random, getFilters }: SingleStratArguments,
   ): Promise<Strat | null> {
     if (random === true) {
-      const uuids = await Strat.find<BaseEntity & Pick<Strat, 'uuid'>>({
+      const uuids = await Strat.find<BaseEntity & Pick<Strat, "uuid">>({
         where: getFilters(),
-        select: ['uuid'],
+        select: ["uuid"],
       })
 
       if (uuids.length === 0) return null

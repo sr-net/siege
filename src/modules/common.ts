@@ -1,4 +1,4 @@
-import { ArgsType, ClassType, Field, Int, ObjectType } from 'type-graphql'
+import { ArgsType, ClassType, Field, Int, ObjectType } from "type-graphql"
 
 // eslint-disable-next-line @typescript-eslint/naming-convention
 export const PaginatedResponse = <TItem>(TItemClass: ClassType<TItem>) => {

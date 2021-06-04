@@ -1,6 +1,6 @@
-import { Query, Resolver } from 'type-graphql'
+import { Query, Resolver } from "type-graphql"
 
-import { Strat } from '@/modules/strat/strat.model'
+import { Strat } from "@/modules/strat/strat.model"
 
 @Resolver()
 export class SubmissionResolver {

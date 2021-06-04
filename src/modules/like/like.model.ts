@@ -1,19 +1,18 @@
-import { Column, Entity } from 'typeorm'
+import { Column, Entity } from "typeorm"
 
-import { ExtendedEntity } from '@/modules/exented-entity'
-import { OptionalUuid } from '@/utils'
+import { ExtendedEntity } from "@/modules/exented-entity"
+import { OptionalUuid } from "@/utils"
 
 type LikeConstructor = OptionalUuid<
-  Pick<Like, 'uuid' | 'sessionUuid' | 'stratUuid'> &
-    Partial<Pick<Like, 'active'>>
+  Pick<Like, "uuid" | "sessionUuid" | "stratUuid"> & Partial<Pick<Like, "active">>
 >
 
 @Entity()
 export class Like extends ExtendedEntity {
-  @Column({ type: 'uuid' })
+  @Column({ type: "uuid" })
   public sessionUuid: string
 
-  @Column({ type: 'uuid' })
+  @Column({ type: "uuid" })
   public stratUuid: string
 
   @Column()

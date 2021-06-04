@@ -1,35 +1,35 @@
-import { Ctx, Field, Int, ObjectType, registerEnumType } from 'type-graphql'
-import { Column, Entity, Index } from 'typeorm'
+import { Ctx, Field, Int, ObjectType, registerEnumType } from "type-graphql"
+import { Column, Entity, Index } from "typeorm"
 
-import { Context } from '@/apollo'
-import { ExtendedEntity } from '@/modules/exented-entity'
-import { Like } from '@/modules/like/like.model'
-import { Author } from '@/modules/strat/author.entity'
-import { isNil, OptionalUuid } from '@/utils'
+import { Context } from "@/apollo"
+import { ExtendedEntity } from "@/modules/exented-entity"
+import { Like } from "@/modules/like/like.model"
+import { Author } from "@/modules/strat/author.entity"
+import { isNil, OptionalUuid } from "@/utils"
 
 type StratConstructor = OptionalUuid<
   Pick<
     Strat,
-    | 'uuid'
-    | 'shortId'
-    | 'title'
-    | 'description'
-    | 'atk'
-    | 'def'
-    | 'gamemodes'
-    | 'score'
-    | 'submission'
-    | 'acceptedAt'
+    | "uuid"
+    | "shortId"
+    | "title"
+    | "description"
+    | "atk"
+    | "def"
+    | "gamemodes"
+    | "score"
+    | "submission"
+    | "acceptedAt"
   >
 > & { author: Author }
 
 export enum Gamemode {
-  Bombs = 'BOMBS',
-  Hostage = 'HOSTAGE',
-  Areas = 'CAPTURE_AREAS',
+  Bombs = "BOMBS",
+  Hostage = "HOSTAGE",
+  Areas = "CAPTURE_AREAS",
 }
 
-registerEnumType(Gamemode, { name: 'Gamemode' })
+registerEnumType(Gamemode, { name: "Gamemode" })
 
 @Entity()
 @ObjectType()
@@ -60,11 +60,11 @@ export class Strat extends ExtendedEntity {
   @Field()
   public def: boolean
 
-  @Column({ type: 'simple-array' })
+  @Column({ type: "simple-array" })
   @Field(() => [Gamemode])
   public gamemodes: Gamemode[]
 
-  @Column({ type: 'int' })
+  @Column({ type: "int" })
   @Field(() => Int)
   public score: number
 
