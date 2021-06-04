@@ -1,5 +1,14 @@
 import { ArrayMaxSize, IsUUID, Min } from 'class-validator'
-import { Args, ArgsType, Field, ID, Int, ObjectType, Query, Resolver } from 'type-graphql'
+import {
+  Args,
+  ArgsType,
+  Field,
+  ID,
+  Int,
+  ObjectType,
+  Query,
+  Resolver,
+} from 'type-graphql'
 import { BaseEntity, FindOneOptions, In, Like, Not } from 'typeorm'
 
 import { PageArguments, PaginatedResponse } from '@/modules/common'
@@ -32,9 +41,9 @@ class CommonStratArguments {
   })
   public def?: boolean
 
-  @Field(() => Gamemode,{
+  @Field(() => Gamemode, {
     nullable: true,
-    description: 'Filter by gamemode'
+    description: 'Filter by gamemode',
   })
   public gamemode?: Gamemode
 
@@ -100,7 +109,7 @@ export class StratResolver {
         select: ['uuid'],
       })
 
-      if (uuids.length < 1) return null
+      if (uuids.length === 0) return null
 
       return Strat.findOneOrFail({
         uuid: uuids[Math.floor(Math.random() * uuids.length)].uuid,

@@ -1,7 +1,8 @@
-import { NodeOptions } from '@sentry/node/dist/backend'
 import { Config as ApolloConfig } from 'apollo-server-express'
 import dotenv from 'dotenv'
 import { ConnectionOptions } from 'typeorm'
+
+import { NodeOptions } from '@sentry/node'
 
 import { Environment } from '@/constants'
 

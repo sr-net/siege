@@ -1,11 +1,12 @@
-export const isNil = (variable: any): variable is null | undefined => {
+export const isNil = (variable: unknown): variable is null | undefined => {
   return variable === null || variable === undefined
 }
 
-export const prop = <O extends {}, P extends keyof O>(prop: P) => (obj: O) =>
-  obj[prop] ?? null
+export const prop = <O extends Record<string, unknown>, P extends keyof O>(
+  property: P,
+) => (obj: O) => obj[property] ?? null
 
-export const propEq = <O extends {}, P extends keyof O>(
-  prop: P,
+export const propEq = <O extends Record<string, unknown>, P extends keyof O>(
+  property: P,
   value: O[P],
-) => (obj: O) => obj[prop] === value
+) => (obj: O) => obj[property] === value
