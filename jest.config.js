@@ -1,24 +1,27 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
+/* eslint-disable @typescript-eslint/no-var-requires,node/no-unpublished-require */
 const { resolve } = require('path')
+
 const { pathsToModuleNameMapper } = require('ts-jest/utils')
+
 const { compilerOptions } = require('./tsconfig')
 
 const rootDir = resolve(__dirname)
 
 /**
- * @type DefaultOptions
+ * @type import('ts-jest/dist/types').ProjectConfigTsJest
  */
 module.exports = {
   preset: 'ts-jest',
-  testEnvironment: 'node',
-  roots: [`${rootDir}/packages/`],
+
   setupFiles: [`${rootDir}/jest.setup.ts`],
+
   moduleNameMapper: pathsToModuleNameMapper(compilerOptions.paths, {
     prefix: '<rootDir>/',
   }),
+
   globals: {
     'ts-jest': {
-      isolatedModules: true,
+      // isolatedModules: true,
     },
   },
 }
