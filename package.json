@@ -18,7 +18,6 @@
     ]
   },
   "scripts": {
-    "build": "yarn tsc --noEmit -P tsconfig.json",
     "dev": "ts-node-dev --respawn --no-deps -r tsconfig-paths/register --files --inspect -- src/index.ts",
     "lint": "eslint 'src/**/*.ts'",
     "migrate": "yarn typeorm migration:run",
@@ -29,6 +28,7 @@
     "start": "ts-node --files src/index.ts",
     "test": "NODE_ENV=test jest -i",
     "test:coverage": "yarn run test --coverage",
+    "typecheck": "yarn tsc --noEmit -P tsconfig.json",
     "typeorm": "ts-node -T ./node_modules/typeorm/cli.js"
   },
   "engines": {
