@@ -4,7 +4,6 @@ import Express, { Express as IExpress } from 'express'
 import Helmet from 'helmet'
 import { v4 as uuid } from 'uuid'
 
-import { config } from '@/config'
 import { createSchema } from '@/graphql'
 import { router } from '@/router'
 
@@ -31,7 +30,6 @@ export const connectApolloServer = async (app: IExpress) => {
   const server = new ApolloServer({
     schema: await createSchema(),
     introspection: true,
-    engine: config.apolloEngine,
     playground: true,
     context: ({ req, res }): Context => {
       let sessionUuid = req.headers.cookie?.match(
