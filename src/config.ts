@@ -1,4 +1,3 @@
-import { Config as ApolloConfig } from 'apollo-server-express'
 import dotenv from 'dotenv'
 import { ConnectionOptions } from 'typeorm'
 
@@ -11,11 +10,11 @@ type Config = {
     env: Environment
     port: number
     db: ConnectionOptions
-    apolloEngine?: ApolloConfig['engine']
     sentry?: NodeOptions
   }
 }
 
+// eslint-disable-next-line import/no-named-as-default-member
 dotenv.config()
 
 const port = Number(process.env.PORT || '3000')
@@ -54,10 +53,6 @@ const _config: Config = {
       synchronize: true,
       schema: process.env.DB_SCHEMA ?? 'srnet',
     },
-    apolloEngine: {
-      schemaTag: process.env.NODE_ENV ?? 'production',
-      apiKey: process.env.ENGINE_API_KEY,
-    },
   },
   [Environment.TEST]: {
     env: Environment.TEST,
@@ -76,10 +71,6 @@ const _config: Config = {
       ...defaultDbConfig,
       url: process.env.DATABASE_URL,
       migrationsRun: true,
-    },
-    apolloEngine: {
-      schemaTag: process.env.NODE_ENV ?? 'production',
-      apiKey: process.env.ENGINE_API_KEY,
     },
     sentry: {
       dsn: process.env.SENTRY_DSN,
