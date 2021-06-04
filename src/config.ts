@@ -1,9 +1,9 @@
-import dotenv from 'dotenv'
-import { ConnectionOptions } from 'typeorm'
+import dotenv from "dotenv"
+import { ConnectionOptions } from "typeorm"
 
-import { NodeOptions } from '@sentry/node'
+import { NodeOptions } from "@sentry/node"
 
-import { Environment } from '@/constants'
+import { Environment } from "@/constants"
 
 type Config = {
   [key in Environment]: {
@@ -17,30 +17,27 @@ type Config = {
 // eslint-disable-next-line import/no-named-as-default-member
 dotenv.config()
 
-const port = Number(process.env.PORT || '3000')
+const port = Number(process.env.PORT || "3000")
 
 const defaultDbConfig: ConnectionOptions = {
-  type: 'postgres' as const,
-  host: process.env.DB_HOST ?? 'localhost',
+  type: "postgres" as const,
+  host: process.env.DB_HOST ?? "localhost",
   port: Number(process.env.DB_PORT ?? 5432),
-  username: process.env.DB_USER ?? 'postgres',
+  username: process.env.DB_USER ?? "postgres",
   password: process.env.DB_PASS,
-  database: process.env.DB_NAME ?? 'postgres',
-  schema: 'public',
+  database: process.env.DB_NAME ?? "postgres",
+  schema: "public",
   url: process.env.DATABASE_URL,
-  ssl:
-    process.env.NODE_ENV === 'production'
-      ? { rejectUnauthorized: false }
-      : false,
+  ssl: process.env.NODE_ENV === "production" ? { rejectUnauthorized: false } : false,
 
   logging: false,
-  entities: ['src/modules/**/*.model.ts'],
-  migrations: ['migrations/**/*.ts'],
-  subscribers: ['src/subscribers/**/*.ts'],
+  entities: ["src/modules/**/*.model.ts"],
+  migrations: ["migrations/**/*.ts"],
+  subscribers: ["src/subscribers/**/*.ts"],
   cli: {
-    entitiesDir: 'src/modules',
-    migrationsDir: 'migrations',
-    subscribersDir: 'src/subscribers',
+    entitiesDir: "src/modules",
+    migrationsDir: "migrations",
+    subscribersDir: "src/subscribers",
   },
 }
 
@@ -51,7 +48,7 @@ const _config: Config = {
     db: {
       ...defaultDbConfig,
       synchronize: true,
-      schema: process.env.DB_SCHEMA ?? 'srnet',
+      schema: process.env.DB_SCHEMA ?? "srnet",
     },
   },
   [Environment.TEST]: {
@@ -59,7 +56,7 @@ const _config: Config = {
     port,
     db: {
       ...defaultDbConfig,
-      schema: 'srnet-tests',
+      schema: "srnet-tests",
       synchronize: true,
       dropSchema: true,
     },
@@ -80,5 +77,4 @@ const _config: Config = {
   },
 }
 
-export const config =
-  _config[(process.env.NODE_ENV ?? 'development') as Environment]
+export const config = _config[(process.env.NODE_ENV ?? "development") as Environment]

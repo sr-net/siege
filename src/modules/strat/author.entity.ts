@@ -1,18 +1,18 @@
-import { Field, ObjectType, registerEnumType } from 'type-graphql'
-import { Column, Index } from 'typeorm'
+import { Field, ObjectType, registerEnumType } from "type-graphql"
+import { Column, Index } from "typeorm"
 
 export enum AuthorType {
-  Name = 'NAME',
-  YouTube = 'YOUTUBE',
-  Twitch = 'TWITCH',
-  Reddit = 'REDDIT',
+  Name = "NAME",
+  YouTube = "YOUTUBE",
+  Twitch = "TWITCH",
+  Reddit = "REDDIT",
 }
 
-registerEnumType(AuthorType, { name: 'AuthorType' })
+registerEnumType(AuthorType, { name: "AuthorType" })
 
 @ObjectType()
 export class Author {
-  @Column({ type: 'enum', enum: AuthorType })
+  @Column({ type: "enum", enum: AuthorType })
   @Field(() => AuthorType)
   public type!: AuthorType
 

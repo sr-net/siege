@@ -1,14 +1,14 @@
-import 'reflect-metadata'
-import { init } from '@sentry/node'
+import "reflect-metadata"
+import { init } from "@sentry/node"
 
-import { connectApolloServer, createApp } from '@/apollo'
-import { config } from '@/config'
-import { Environment } from '@/constants'
-import { connectToDatabase } from '@/db'
-import { createSchema } from '@/graphql'
+import { connectApolloServer, createApp } from "@/apollo"
+import { config } from "@/config"
+import { Environment } from "@/constants"
+import { connectToDatabase } from "@/db"
+import { createSchema } from "@/graphql"
 
 const shouldGenerateSnapshot = process.argv.find(
-  str => str.includes('--snapshot') || str.includes('-shot'),
+  (str) => str.includes("--snapshot") || str.includes("-shot"),
 )
 
 if (shouldGenerateSnapshot) {

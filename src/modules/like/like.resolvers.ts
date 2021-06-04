@@ -1,14 +1,14 @@
-import { Arg, Ctx, ID, Mutation, Resolver } from 'type-graphql'
+import { Arg, Ctx, ID, Mutation, Resolver } from "type-graphql"
 
-import { Context } from '@/apollo'
-import { Strat } from '@/modules/strat/strat.model'
-import { isNil } from '@/utils'
+import { Context } from "@/apollo"
+import { Strat } from "@/modules/strat/strat.model"
+import { isNil } from "@/utils"
 
 @Resolver()
 export class LikeResolver {
   @Mutation(() => Strat, { nullable: true })
   public async likeStrat(
-    @Arg('uuid', () => ID) uuid: string,
+    @Arg("uuid", () => ID) uuid: string,
     @Ctx() ctx: Context,
   ): Promise<Strat | null> {
     const strat = await Strat.findOne({ uuid, submission: false })
@@ -24,12 +24,12 @@ export class LikeResolver {
 
   @Mutation(() => Strat, { nullable: true })
   public async unlikeStrat(
-    @Arg('uuid', () => ID) uuid: string,
+    @Arg("uuid", () => ID) uuid: string,
     @Ctx() ctx: Context,
   ): Promise<Strat | null> {
     const strat = await Strat.findOne({ uuid, submission: false })
 
-    if (isNil(strat)) throw new Error('Strat does not exist!')
+    if (isNil(strat)) throw new Error("Strat does not exist!")
 
     if (isNil(ctx.sessionUuid)) {
       return null

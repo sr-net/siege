@@ -44,10 +44,14 @@ type Query {
     """
     def: Boolean
 
-    """A list of Strats to be excluded from the result."""
+    """
+    A list of Strats to be excluded from the result.
+    """
     excludeShortIds: [Int!]
 
-    """Filter by gamemode"""
+    """
+    Filter by gamemode
+    """
     gamemode: Gamemode
 
     """
@@ -68,10 +72,14 @@ type Query {
     """
     def: Boolean
 
-    """A list of Strats to be excluded from the result."""
+    """
+    A list of Strats to be excluded from the result.
+    """
     excludeShortIds: [Int!]
 
-    """Filter by gamemode"""
+    """
+    Filter by gamemode
+    """
     gamemode: Gamemode
     page: Int = 1
     shortId: Int

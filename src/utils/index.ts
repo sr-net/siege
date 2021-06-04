@@ -1,5 +1,5 @@
-export * from './functional'
+export * from "./functional"
 
-export type OptionalUuid<T extends { uuid: string }> = Omit<T, 'uuid'> & {
+export type OptionalUuid<T extends { uuid: string }> = Omit<T, "uuid"> & {
   uuid?: string
 }
