@@ -7,13 +7,13 @@ on:
       - '**/*.md'
       - '.gitignore'
       - '.github/**'
-      - '!.github/workflows/CICD.yml'
+      - '!.github/workflows/*.yml'
   pull_request:
     paths-ignore:
       - '**/*.md'
       - '.gitignore'
       - '.github/**'
-      - '!.github/workflows/CICD.yml'
+      - '!.github/workflows/*.yml'
 
 jobs:
   lint:
