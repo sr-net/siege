@@ -1,5 +1,6 @@
 import { ApolloServer } from "apollo-server-express"
 import { serialize } from "cookie"
+import Cors from "cors"
 import Express, { Express as IExpress } from "express"
 import Helmet from "helmet"
 import { v4 as uuid } from "uuid"
@@ -16,10 +17,12 @@ export const createApp = (): IExpress => {
   const app = Express()
 
   app.use(
-    Helmet({
-      contentSecurityPolicy: false,
+    Cors({
+      origin: true,
+      credentials: true,
     }),
   )
+  app.use(Helmet({ contentSecurityPolicy: false }))
 
   app.use(router)
 
