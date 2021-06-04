@@ -7,10 +7,8 @@
     "type": "github",
     "url": "sr-net/siege"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
+  "simple-git-hooks": {
+    "pre-commit": "yarn lint-staged"
   },
   "lint-staged": {
     "*.{ts,tsx,js,json,yml}": [
@@ -23,6 +21,7 @@
     "migrate": "yarn typeorm migration:run",
     "migrate:create": "yarn typeorm migration:create -d migrations -n",
     "migrate:generate": "yarn typeorm migration:generate -d migrations -n",
+    "postinstall": "simple-git-hooks",
     "snapshot": "ts-node -T src/index.ts -shot",
     "start": "ts-node --files src/index.ts",
     "test": "NODE_ENV=test jest -i",
@@ -61,11 +60,11 @@
     "@types/supertest": "2.0.11",
     "@types/uuid": "8.3.0",
     "eslint": "7.27.0",
-    "husky": "3.1.0",
     "jest": "27.0.4",
     "jest-junit": "12.1.0",
     "lint-staged": "11.0.0",
     "prettier": "1.19.1",
+    "simple-git-hooks": "2.4.1",
     "supertest": "5.0.0-0",
     "ts-jest": "27.0.2",
     "ts-node-dev": "1.1.6",
