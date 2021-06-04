@@ -5,7 +5,7 @@ import {
   PrimaryColumn,
   UpdateDateColumn,
 } from 'typeorm'
-import uuid from 'uuid/v4'
+import { v4 as generateUuid } from 'uuid'
 
 @ObjectType({ isAbstract: true })
 export abstract class ExtendedEntity extends BaseEntity {
@@ -21,7 +21,7 @@ export abstract class ExtendedEntity extends BaseEntity {
   protected constructor(options: { uuid?: string }) {
     super()
 
-    this.uuid = options?.uuid ?? uuid()
+    this.uuid = options?.uuid ?? generateUuid()
   }
 
   public shouldExistError<E extends typeof ExtendedEntity>(

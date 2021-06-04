@@ -108,7 +108,7 @@ export class Strat extends ExtendedEntity {
 
   public async like(sessionUuid: string): Promise<Strat> {
     const options = {
-      sessionUuid: sessionUuid,
+      sessionUuid,
       stratUuid: this.uuid,
     }
 
@@ -132,7 +132,7 @@ export class Strat extends ExtendedEntity {
 
   public async unlike(sessionUuid: string): Promise<Strat> {
     const like = await Like.update(
-      { stratUuid: this.uuid, sessionUuid: sessionUuid, active: true },
+      { stratUuid: this.uuid, sessionUuid, active: true },
       { active: false },
     )
 

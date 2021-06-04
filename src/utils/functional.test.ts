@@ -3,6 +3,7 @@ import { isNil, prop, propEq } from './functional'
 describe('isNil()', () => {
   test('returns true on null/undefined', () => {
     expect(isNil(null)).toEqual(true)
+    // eslint-disable-next-line unicorn/no-useless-undefined
     expect(isNil(undefined)).toEqual(true)
   })
 

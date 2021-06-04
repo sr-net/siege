@@ -1,35 +1,27 @@
 {
+  "extends": "ts-node/node16/tsconfig.json",
   "compilerOptions": {
     "noEmit": true,
-    "target": "es2018",
-    "module": "commonjs",
-    "strict": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "forceConsistentCasingInFileNames": true,
-    "moduleResolution": "node",
-    "emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
-    "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
-    "resolveJsonModule": true,
+
     "sourceMap": true,
+
     "types": ["node", "jest"],
     "baseUrl": ".",
     "paths": {
       "@/*": ["src/*"]
     },
-    "lib": [
-      "es5",
-      "es2015",
-      "es2016",
-      "es2017",
-      "es2018",
-      "es2019",
-      "es2020",
-      "esnext"
-    ],
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "allowSyntheticDefaultImports": true,
+    "resolveJsonModule": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+
+    "noUnusedLocals": true,
+    "noUnusedParameters": true
+  },
+  "ts-node": {
+    "require": ["tsconfig-paths/register"]
   },
   "include": ["./src/**/*.ts", "./index.d.ts"],
   "exclude": ["node_modules"]

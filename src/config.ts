@@ -1,7 +1,7 @@
-import { NodeOptions } from '@sentry/node/dist/backend'
-import { EngineReportingOptions } from 'apollo-engine-reporting'
 import dotenv from 'dotenv'
 import { ConnectionOptions } from 'typeorm'
+
+import { NodeOptions } from '@sentry/node'
 
 import { Environment } from '@/constants'
 
@@ -10,16 +10,16 @@ type Config = {
     env: Environment
     port: number
     db: ConnectionOptions
-    apolloEngine?: EngineReportingOptions<unknown>
     sentry?: NodeOptions
   }
 }
 
+// eslint-disable-next-line import/no-named-as-default-member
 dotenv.config()
 
 const port = Number(process.env.PORT || '3000')
 
-const defaultDbConfig = {
+const defaultDbConfig: ConnectionOptions = {
   type: 'postgres' as const,
   host: process.env.DB_HOST ?? 'localhost',
   port: Number(process.env.DB_PORT ?? 5432),
@@ -28,6 +28,10 @@ const defaultDbConfig = {
   database: process.env.DB_NAME ?? 'postgres',
   schema: 'public',
   url: process.env.DATABASE_URL,
+  ssl:
+    process.env.NODE_ENV === 'production'
+      ? { rejectUnauthorized: false }
+      : false,
 
   logging: false,
   entities: ['src/modules/**/*.model.ts'],
@@ -47,11 +51,7 @@ const _config: Config = {
     db: {
       ...defaultDbConfig,
       synchronize: true,
-      schema: process.env.DB_SCHEMA ?? 'srnet'
-    },
-    apolloEngine: {
-      schemaTag: process.env.NODE_ENV ?? 'production',
-      apiKey: process.env.ENGINE_API_KEY,
+      schema: process.env.DB_SCHEMA ?? 'srnet',
     },
   },
   [Environment.TEST]: {
@@ -72,15 +72,11 @@ const _config: Config = {
       url: process.env.DATABASE_URL,
       migrationsRun: true,
     },
-    apolloEngine: {
-      schemaTag: process.env.NODE_ENV ?? 'production',
-      apiKey: process.env.ENGINE_API_KEY,
-    },
     sentry: {
       dsn: process.env.SENTRY_DSN,
       release: process.env.GIT_REV,
       environment: Environment.PRODUCTION,
-    }
+    },
   },
 }
 
