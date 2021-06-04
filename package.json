@@ -2,6 +2,39 @@
   "name": "@sr-net/siege",
   "version": "1.0.0",
   "author": "BeeeQueue",
+  "private": true,
+  "repository": {
+    "type": "github",
+    "url": "sr-net/siege"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{ts,tsx,js,json,yml}": [
+      "prettier --write",
+      "git add"
+    ]
+  },
+  "scripts": {
+    "build": "yarn tsc --noEmit -P tsconfig.json",
+    "dev": "ts-node-dev --respawn --no-deps -r tsconfig-paths/register --files --inspect -- src/index.ts",
+    "lint": "eslint 'src/**/*.ts'",
+    "migrate": "yarn typeorm migration:run",
+    "migrate:create": "yarn typeorm migration:create -d migrations -n",
+    "migrate:generate": "yarn typeorm migration:generate -d migrations -n",
+    "prestart": "apollo service:push --localSchemaFile=src/graphql/snapshot.graphql -t $NODE_ENV",
+    "snapshot": "ts-node -T  -r tsconfig-paths/register src/index.ts -shot",
+    "start": "ts-node --files -r tsconfig-paths/register src/index.ts",
+    "test": "NODE_ENV=test jest server -i",
+    "test:coverage": "yarn run test --coverage",
+    "typeorm": "ts-node -T -r tsconfig-paths/register ./node_modules/typeorm/cli.js"
+  },
+  "engines": {
+    "node": "^12"
+  },
   "dependencies": {
     "@sentry/node": "5.15.4",
     "apollo-server-express": "2.9.16",
@@ -52,35 +85,5 @@
     "ts-jest": "24.3.0",
     "ts-node-dev": "1.0.0-pre.44",
     "typescript": "3.8.3"
-  },
-  "engines": {
-    "node": "^13.0.0"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
-  "lint-staged": {
-    "*.{ts,tsx,js,json,yml}": [
-      "prettier --write",
-      "git add"
-    ]
-  },
-  "private": true,
-  "repository": "https://github.com/sr-net/siege",
-  "scripts": {
-    "build": "yarn tsc --noEmit -P tsconfig.json",
-    "dev": "ts-node-dev --respawn --no-deps -r tsconfig-paths/register --files --inspect -- src/index.ts",
-    "lint": "eslint 'src/**/*.ts'",
-    "migrate": "yarn typeorm migration:run",
-    "migrate:create": "yarn typeorm migration:create -d migrations -n",
-    "migrate:generate": "yarn typeorm migration:generate -d migrations -n",
-    "prestart": "apollo service:push --localSchemaFile=src/graphql/snapshot.graphql -t $NODE_ENV",
-    "snapshot": "ts-node -T  -r tsconfig-paths/register src/index.ts -shot",
-    "start": "ts-node --files -r tsconfig-paths/register src/index.ts",
-    "test": "NODE_ENV=test jest server -i",
-    "test:coverage": "yarn run test --coverage",
-    "typeorm": "ts-node -T -r tsconfig-paths/register ./node_modules/typeorm/cli.js"
   }
 }
