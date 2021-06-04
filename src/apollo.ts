@@ -2,7 +2,7 @@ import { ApolloServer } from 'apollo-server-express'
 import { serialize } from 'cookie'
 import Express, { Express as IExpress } from 'express'
 import Helmet from 'helmet'
-import uuid from 'uuid/v4'
+import { v4 as uuid } from 'uuid'
 
 import { config } from '@/config'
 import { createSchema } from '@/graphql'
@@ -16,7 +16,11 @@ export type Context = {
 export const createApp = (): IExpress => {
   const app = Express()
 
-  app.use(Helmet())
+  app.use(
+    Helmet({
+      contentSecurityPolicy: false,
+    }),
+  )
 
   app.use(router)
 

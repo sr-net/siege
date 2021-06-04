@@ -5,7 +5,7 @@ import {
   PrimaryColumn,
   UpdateDateColumn,
 } from 'typeorm'
-import uuid from 'uuid/v4'
+import { v4 as uuid } from 'uuid'
 
 @ObjectType({ isAbstract: true })
 export abstract class ExtendedEntity extends BaseEntity {

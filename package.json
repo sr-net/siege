@@ -25,14 +25,14 @@
     "migrate:create": "yarn typeorm migration:create -d migrations -n",
     "migrate:generate": "yarn typeorm migration:generate -d migrations -n",
     "prestart": "apollo service:push --localSchemaFile=src/graphql/snapshot.graphql -t $NODE_ENV",
-    "snapshot": "ts-node -T  -r tsconfig-paths/register src/index.ts -shot",
-    "start": "ts-node --files -r tsconfig-paths/register src/index.ts",
+    "snapshot": "ts-node -T src/index.ts -shot",
+    "start": "ts-node --files src/index.ts",
     "test": "NODE_ENV=test jest server -i",
     "test:coverage": "yarn run test --coverage",
-    "typeorm": "ts-node -T -r tsconfig-paths/register ./node_modules/typeorm/cli.js"
+    "typeorm": "ts-node -T ./node_modules/typeorm/cli.js"
   },
   "engines": {
-    "node": "^12"
+    "node": "^16"
   },
   "dependencies": {
     "@sentry/node": "6.5.1",
@@ -43,24 +43,23 @@
     "dotenv": "10.0.0",
     "express": "4.17.1",
     "graphql": "15.5.0",
-    "helmet": "3.23.3",
-    "pg": "7.18.2",
+    "helmet": "4.6.0",
+    "pg": "8.6.0",
     "reflect-metadata": "0.1.13",
-    "ts-node": "9.1.1",
+    "ts-node": "10.0.0",
     "tsconfig-paths": "3.9.0",
     "type-graphql": "1.1.1",
     "typeorm": "0.2.34",
-    "uuid": "3.3.3"
+    "uuid": "8.3.2"
   },
   "devDependencies": {
     "@types/cookie": "0.4.0",
     "@types/express": "4.17.12",
-    "@types/helmet": "0.0.48",
     "@types/jest": "24.9.1",
     "@types/node": "14.17.2",
     "@types/superagent": "4.1.11",
     "@types/supertest": "2.0.11",
-    "@types/uuid": "3.4.9",
+    "@types/uuid": "8.3.0",
     "@typescript-eslint/eslint-plugin": "2.34.0",
     "@typescript-eslint/parser": "2.34.0",
     "apollo": "2.33.4",

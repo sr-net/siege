@@ -19,7 +19,7 @@ dotenv.config()
 
 const port = Number(process.env.PORT || '3000')
 
-const defaultDbConfig = {
+const defaultDbConfig: ConnectionOptions = {
   type: 'postgres' as const,
   host: process.env.DB_HOST ?? 'localhost',
   port: Number(process.env.DB_PORT ?? 5432),
@@ -28,6 +28,10 @@ const defaultDbConfig = {
   database: process.env.DB_NAME ?? 'postgres',
   schema: 'public',
   url: process.env.DATABASE_URL,
+  ssl:
+    process.env.NODE_ENV === 'production'
+      ? { rejectUnauthorized: false }
+      : false,
 
   logging: false,
   entities: ['src/modules/**/*.model.ts'],
