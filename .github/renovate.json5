@@ -1,0 +1,32 @@
+{
+  extends: ["config:js-app", "helpers:disableTypesNodeMajor"],
+  prConcurrentLimit: 5,
+  branchConcurrentLimit: 5,
+  schedule: ["before 11am"],
+  labels: ["dependencies"],
+  postUpdateOptions: ["yarnDedupeHighest"],
+  postUpgradeTasks: {
+    commands: ["yarn eslint --fix"],
+    fileFilters: ["yarn.lock", "**/*.{js,ts,vue}"],
+    executionMode: "update"
+  },
+  baseBranches: ["master"],
+  packageRules: [
+    {
+      "packageNames": ["node"],
+      "allowedVersions": "<=16",
+      "rangeStrategy": "replace"
+    },
+    {
+      groupName: "Testing",
+      matchPackagePatterns: ["jest"]
+    },
+    {
+      "groupName": "`@types` package patches",
+      "matchPackagePrefixes": [
+        "@types/"
+      ],
+      "patch": true
+    }
+  ]
+}
