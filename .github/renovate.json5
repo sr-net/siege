@@ -8,25 +8,30 @@
   postUpgradeTasks: {
     commands: ["yarn eslint --fix"],
     fileFilters: ["yarn.lock", "**/*.{js,ts,vue}"],
-    executionMode: "update"
+    executionMode: "update",
   },
   baseBranches: ["master"],
   packageRules: [
     {
-      "packageNames": ["node"],
-      "allowedVersions": "<=16",
-      "rangeStrategy": "replace"
+      packageNames: ["node"],
+      allowedVersions: "<=16",
+      rangeStrategy: "replace",
+    },
+    {
+      groupName: "`@types` package patches",
+      matchPackagePrefixes: ["@types/"],
+      patch: true,
+      automerge: true
+    },
+    {
+      groupName: "Linting",
+      matchPackageNames: ["lint"],
+      automerge: true,
     },
     {
       groupName: "Testing",
-      matchPackagePatterns: ["jest"]
+      matchPackageNames: ["jest"],
+      automerge: true,
     },
-    {
-      "groupName": "`@types` package patches",
-      "matchPackagePrefixes": [
-        "@types/"
-      ],
-      "patch": true
-    }
-  ]
+  ],
 }
