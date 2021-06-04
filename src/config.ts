@@ -1,5 +1,5 @@
 import { NodeOptions } from '@sentry/node/dist/backend'
-import { EngineReportingOptions } from 'apollo-engine-reporting'
+import { Config as ApolloConfig } from 'apollo-server-express'
 import dotenv from 'dotenv'
 import { ConnectionOptions } from 'typeorm'
 
@@ -10,7 +10,7 @@ type Config = {
     env: Environment
     port: number
     db: ConnectionOptions
-    apolloEngine?: EngineReportingOptions<unknown>
+    apolloEngine?: ApolloConfig['engine']
     sentry?: NodeOptions
   }
 }
@@ -47,7 +47,7 @@ const _config: Config = {
     db: {
       ...defaultDbConfig,
       synchronize: true,
-      schema: process.env.DB_SCHEMA ?? 'srnet'
+      schema: process.env.DB_SCHEMA ?? 'srnet',
     },
     apolloEngine: {
       schemaTag: process.env.NODE_ENV ?? 'production',
@@ -80,7 +80,7 @@ const _config: Config = {
       dsn: process.env.SENTRY_DSN,
       release: process.env.GIT_REV,
       environment: Environment.PRODUCTION,
-    }
+    },
   },
 }
 

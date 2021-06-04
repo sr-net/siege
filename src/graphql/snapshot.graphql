@@ -4,16 +4,16 @@
 # -----------------------------------------------
 
 type Author {
-  type: AuthorType!
   name: String!
+  type: AuthorType!
   url: String
 }
 
 enum AuthorType {
   Name
-  YouTube
-  Twitch
   Reddit
+  Twitch
+  YouTube
 }
 
 """
@@ -22,9 +22,9 @@ The javascript `Date` as string. Type represents date and time as the ISO Date s
 scalar DateTime
 
 enum Gamemode {
+  Areas
   Bombs
   Hostage
-  Areas
 }
 
 type Mutation {
@@ -34,9 +34,6 @@ type Mutation {
 
 type Query {
   strat(
-    uuid: ID
-    shortId: Int
-
     """
     Set to `true` to filter for Strats that work on attack. Setting to `false` does nothing.
     """
@@ -47,21 +44,20 @@ type Query {
     """
     def: Boolean
 
-    """Filter by gamemode"""
-    gamemode: Gamemode
-
     """A list of Strats to be excluded from the result."""
     excludeShortIds: [Int!]
+
+    """Filter by gamemode"""
+    gamemode: Gamemode
 
     """
     Return a random Strat matching the arguments instead of the first best one.
     """
     random: Boolean
+    shortId: Int
+    uuid: ID
   ): Strat
   strats(
-    uuid: ID
-    shortId: Int
-
     """
     Set to `true` to filter for Strats that work on attack. Setting to `false` does nothing.
     """
@@ -72,29 +68,31 @@ type Query {
     """
     def: Boolean
 
-    """Filter by gamemode"""
-    gamemode: Gamemode
-
     """A list of Strats to be excluded from the result."""
     excludeShortIds: [Int!]
+
+    """Filter by gamemode"""
+    gamemode: Gamemode
     page: Int = 1
+    shortId: Int
+    uuid: ID
   ): StratPage!
   submission: Strat
 }
 
 type Strat {
-  uuid: ID!
-  shortId: Int!
-  title: String!
-  description: String!
-  author: Author!
-  atk: Boolean!
-  def: Boolean!
-  gamemodes: [Gamemode!]!
-  score: Int!
-  submission: Boolean!
   acceptedAt: DateTime
+  atk: Boolean!
+  author: Author!
+  def: Boolean!
+  description: String!
+  gamemodes: [Gamemode!]!
   liked: Boolean!
+  score: Int!
+  shortId: Int!
+  submission: Boolean!
+  title: String!
+  uuid: ID!
 }
 
 type StratPage {
