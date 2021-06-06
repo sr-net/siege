@@ -16,13 +16,13 @@ export type Context = {
 export const createApp = (): IExpress => {
   const app = Express()
 
+  app.use(Helmet({ contentSecurityPolicy: false }))
   app.use(
     Cors({
       origin: true,
       credentials: true,
     }),
   )
-  app.use(Helmet({ contentSecurityPolicy: false }))
 
   app.use(router)
 
