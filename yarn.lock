@@ -1022,7 +1022,7 @@ __metadata:
     graphql: 15.5.0
     helmet: 4.6.0
     jest: 27.0.4
-    jest-junit: 12.1.0
+    jest-junit: 12.2.0
     lint-staged: 11.0.0
     pg: 8.6.0
     prettier: 2.3.1
@@ -5068,15 +5068,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"jest-junit@npm:12.1.0":
-  version: 12.1.0
-  resolution: "jest-junit@npm:12.1.0"
+"jest-junit@npm:12.2.0":
+  version: 12.2.0
+  resolution: "jest-junit@npm:12.2.0"
   dependencies:
     mkdirp: ^1.0.4
     strip-ansi: ^5.2.0
-    uuid: ^3.3.3
+    uuid: ^8.3.2
     xml: ^1.0.1
-  checksum: 91785f02033b6bbdfcc2822c40be24a0fbd528dc7051158bbb4f39d6af32945c8f265b16b8873878121f27b73428839adc71ca5c56cedde42dd1a7d5afcef97e
+  checksum: 6a666b017eac77fd549a64ec68fda858d078e016405318684361392eac4c4d189a42f8dd9d9d1266ceab2245b1d9c7c63ea76827cd6429705ccdc1675b049d7d
   languageName: node
   linkType: hard
 
@@ -8407,7 +8407,7 @@ typescript@4.3.2:
   languageName: node
   linkType: hard
 
-"uuid@npm:8.3.2, uuid@npm:^8.0.0":
+"uuid@npm:8.3.2, uuid@npm:^8.0.0, uuid@npm:^8.3.2":
   version: 8.3.2
   resolution: "uuid@npm:8.3.2"
   bin:
@@ -8416,7 +8416,7 @@ typescript@4.3.2:
   languageName: node
   linkType: hard
 
-"uuid@npm:^3.1.0, uuid@npm:^3.3.3":
+"uuid@npm:^3.1.0":
   version: 3.3.3
   resolution: "uuid@npm:3.3.3"
   bin:
