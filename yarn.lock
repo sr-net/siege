@@ -1019,7 +1019,7 @@ __metadata:
     dotenv: 10.0.0
     eslint: 7.29.0
     express: 4.17.1
-    graphql: 15.5.0
+    graphql: 15.5.1
     helmet: 4.6.0
     jest: 27.0.4
     jest-junit: 12.2.0
@@ -4211,10 +4211,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"graphql@npm:15.5.0":
-  version: 15.5.0
-  resolution: "graphql@npm:15.5.0"
-  checksum: 58a69f7274ae94c690bfa2517f96bbaf1327e1ca1fc46606e772ba2f7ca517adeb375346301373351e693022f448b7866163034209623d7c5315819ef8c5e7c0
+"graphql@npm:15.5.1":
+  version: 15.5.1
+  resolution: "graphql@npm:15.5.1"
+  checksum: 7e45ae27021e5bafd2a3ce557e708606ff28504aae705654764fa6239b0151d014a90cbd4c68300f4f95a9074820aaee9b1f25b560ff089c8db0b49563e34080
   languageName: node
   linkType: hard
 
