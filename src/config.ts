@@ -1,4 +1,3 @@
-import dotenv from "dotenv"
 import { ConnectionOptions } from "typeorm"
 
 import { NodeOptions } from "@sentry/node"
@@ -13,9 +12,6 @@ type Config = {
     sentry?: NodeOptions
   }
 }
-
-// eslint-disable-next-line import/no-named-as-default-member
-dotenv.config()
 
 const port = Number(process.env.PORT || "3000")
 

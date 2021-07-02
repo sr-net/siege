@@ -1,4 +1,5 @@
 import "reflect-metadata"
+
 import { init } from "@sentry/node"
 
 import { connectApolloServer, createApp } from "@/apollo"
