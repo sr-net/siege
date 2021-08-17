@@ -1540,7 +1540,7 @@ __metadata:
     prettier: 2.3.2
     reflect-metadata: 0.1.13
     simple-git-hooks: 2.5.1
-    supertest: 6.1.3
+    supertest: 6.1.6
     ts-jest: 27.0.4
     ts-node: 10.0.0
     ts-node-dev: 1.1.8
@@ -8403,13 +8403,13 @@ resolve@^2.0.0-next.3:
   languageName: node
   linkType: hard
 
-"supertest@npm:6.1.3":
-  version: 6.1.3
-  resolution: "supertest@npm:6.1.3"
+"supertest@npm:6.1.6":
+  version: 6.1.6
+  resolution: "supertest@npm:6.1.6"
   dependencies:
     methods: ^1.1.2
     superagent: ^6.1.0
-  checksum: c39eb304f56826f9d27e69acd6b44e4dd84aea7c1e1720ff24a5fc7228800cc4fb8dc2734f364072725e7b14a0d3acf86768019f7778bbb221b9bd0a37439c50
+  checksum: 51d11b794a022b49f0f9664e6d8ffef5e8d18467f65d2b4326e52ec96f0801d7066bf9a97eb06e8b6cd3eb6f662ee5bed937cd5764ab0617a822d7ee4c72ff36
   languageName: node
   linkType: hard
 
