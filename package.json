@@ -48,7 +48,7 @@
     "lightstep-opentelemetry-launcher-node": "0.18.0",
     "pg": "8.6.0",
     "reflect-metadata": "0.1.13",
-    "ts-node": "10.0.0",
+    "ts-node": "10.2.1",
     "tsconfig-paths": "3.10.1",
     "type-graphql": "1.1.1",
     "typeorm": "0.2.34",
