@@ -1,3 +1,5 @@
+// eslint-disable-next-line import/no-extraneous-dependencies
+import { ApolloServerPluginLandingPageDisabled } from "apollo-server-core"
 import { ApolloServer } from "apollo-server-express"
 import { serialize } from "cookie"
 import Cors from "cors"
@@ -33,7 +35,6 @@ export const connectApolloServer = async (app: IExpress) => {
   const server = new ApolloServer({
     schema: await createSchema(),
     introspection: true,
-    playground: true,
     context: ({ req, res }): Context => {
       let sessionUuid = req.headers.cookie?.match(/sessionUuid=([\dA-Za-z-]+);?/)?.[1]
 
@@ -57,6 +58,7 @@ export const connectApolloServer = async (app: IExpress) => {
         setSessionUuid,
       }
     },
+    plugins: [ApolloServerPluginLandingPageDisabled()],
     formatError(error) {
       // Workaround for apollo adding two UserInputError details for some reason
       if (error.extensions?.code === "BAD_USER_INPUT") {
@@ -68,6 +70,8 @@ export const connectApolloServer = async (app: IExpress) => {
       return error
     },
   })
+
+  await server.start()
 
   server.applyMiddleware({
     app,

@@ -20,7 +20,7 @@
       groupName: "`@types` package patches",
       matchPackagePrefixes: ["@types/"],
       patch: true,
-      automerge: true
+      automerge: true,
     },
     {
       groupName: "Linting",
@@ -31,6 +31,6 @@
       groupName: "Testing",
       matchPackagePatterns: ["jest"],
       automerge: true,
-    }
+    },
   ],
 }
