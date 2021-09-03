@@ -33,7 +33,7 @@
     "node": "^16"
   },
   "resolutions": {
-    "@types/node": "15.12.0"
+    "@types/node": "16.7.10"
   },
   "dependencies": {
     "@sentry/node": "6.12.0",
@@ -71,6 +71,6 @@
     "supertest": "6.1.6",
     "ts-jest": "27.0.5",
     "ts-node-dev": "1.1.8",
-    "typescript": "4.3.5"
+    "typescript": "4.4.2"
   }
 }
