@@ -1,3 +1,4 @@
+// eslint-disable-next-line import/no-extraneous-dependencies
 import { ApolloServerPluginLandingPageDisabled } from "apollo-server-core"
 import { ApolloServer } from "apollo-server-express"
 import { serialize } from "cookie"
