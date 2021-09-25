@@ -36,7 +36,7 @@
     "@types/node": "16.7.10"
   },
   "dependencies": {
-    "@sentry/node": "6.12.0",
+    "@sentry/node": "6.13.2",
     "apollo-server-express": "3.3.0",
     "class-validator": "0.13.1",
     "cookie": "0.4.1",
