@@ -21,7 +21,7 @@
     "noUnusedParameters": true
   },
   "ts-node": {
-    "require": ["dotenv/config", "tsconfig-paths/register", "./tracing.ts"]
+    "require": ["dotenv/config", "tsconfig-paths/register"]
   },
   "include": ["./src/**/*.ts", "./index.d.ts"],
   "exclude": ["node_modules"]

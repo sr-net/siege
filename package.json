@@ -45,7 +45,6 @@
     "express": "4.17.1",
     "graphql": "15.6.0",
     "helmet": "4.6.0",
-    "lightstep-opentelemetry-launcher-node": "0.24.0",
     "pg": "8.7.1",
     "reflect-metadata": "0.1.13",
     "ts-node": "10.2.1",
