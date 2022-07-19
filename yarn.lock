@@ -1091,7 +1091,7 @@ __metadata:
     dotenv: 10.0.0
     eslint: 7.32.0
     express: 4.17.1
-    graphql: 15.6.0
+    graphql: 15.8.0
     helmet: 4.6.0
     jest: 27.2.5
     jest-junit: 13.0.0
@@ -3953,10 +3953,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"graphql@npm:15.6.0":
-  version: 15.6.0
-  resolution: "graphql@npm:15.6.0"
-  checksum: 439959514665bc03ba86d6e55d8fb81d4c1e8ba3fc7f5114878b0ba794147e7ef57f368e40dadbb3f94d7c5f6685d15599bebb3a124cee2a1a8871a797d5ae81
+"graphql@npm:15.8.0":
+  version: 15.8.0
+  resolution: "graphql@npm:15.8.0"
+  checksum: 423325271db8858428641b9aca01699283d1fe5b40ef6d4ac622569ecca927019fce8196208b91dd1d8eb8114f00263fe661d241d0eb40c10e5bfd650f86ec5e
   languageName: node
   linkType: hard
 
