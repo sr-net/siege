@@ -107,7 +107,7 @@ export class StratResolver {
       })
     }
 
-    return (await Strat.findOne({ where: getFilters() })) ?? null
+    return (await Strat.findOne<Strat>({ where: getFilters() })) ?? null
   }
 
   @Query(() => StratPage)
@@ -117,7 +117,7 @@ export class StratResolver {
   ): Promise<StratPage> {
     const offset = 10 * Math.max(0, page - 1)
 
-    const strats = await Strat.find({
+    const strats = await Strat.find<Strat>({
       where: getFilters(),
       take: 10,
       skip: offset,

@@ -112,7 +112,7 @@ export class Strat extends ExtendedEntity {
       stratUuid: this.uuid,
     }
 
-    let like = await Like.findOne(options)
+    let like = await Like.findOne<Like>({ where: options })
 
     if (!isNil(like)) {
       if (like.active) return this
