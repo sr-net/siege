@@ -7,10 +7,6 @@
     "type": "github",
     "url": "sr-net/siege"
   },
-  "packageManager": "yarn@3.2.1",
-  "engines": {
-    "node": "^16"
-  },
   "simple-git-hooks": {
     "pre-commit": "yarn lint-staged"
   },
@@ -33,25 +29,28 @@
     "typecheck": "yarn tsc --noEmit -P tsconfig.json",
     "typeorm": "ts-node -T ./node_modules/typeorm/cli.js"
   },
+  "engines": {
+    "node": "^16"
+  },
   "resolutions": {
-    "@types/node": "16.11.45"
+    "@types/node": "16.7.10"
   },
   "dependencies": {
-    "@sentry/node": "7.7.0",
+    "@sentry/node": "6.13.2",
     "apollo-server-express": "3.3.0",
-    "class-validator": "0.13.2",
+    "class-validator": "0.13.1",
     "cookie": "0.4.1",
     "cors": "2.8.5",
-    "dotenv": "16.0.1",
-    "express": "4.18.1",
-    "graphql": "15.8.0",
+    "dotenv": "10.0.0",
+    "express": "4.17.1",
+    "graphql": "15.6.0",
     "helmet": "4.6.0",
-    "pg": "8.7.3",
+    "pg": "8.7.1",
     "reflect-metadata": "0.1.13",
-    "ts-node": "10.9.1",
-    "tsconfig-paths": "3.14.1",
+    "ts-node": "10.2.1",
+    "tsconfig-paths": "3.11.0",
     "type-graphql": "1.1.1",
-    "typeorm": "0.2.45",
+    "typeorm": "0.2.38",
     "uuid": "8.3.2"
   },
   "devDependencies": {
@@ -59,18 +58,18 @@
     "@types/cookie": "0.4.1",
     "@types/express": "4.17.13",
     "@types/jest": "27.0.2",
-    "@types/node": "16.11.45",
-    "@types/supertest": "2.0.12",
-    "@types/uuid": "8.3.4",
+    "@types/node": "16.7.10",
+    "@types/supertest": "2.0.11",
+    "@types/uuid": "8.3.1",
     "eslint": "7.32.0",
-    "jest": "27.5.1",
-    "jest-junit": "13.2.0",
-    "lint-staged": "13.0.3",
+    "jest": "27.2.5",
+    "jest-junit": "13.0.0",
+    "lint-staged": "11.2.3",
     "prettier": "2.4.1",
-    "simple-git-hooks": "2.8.0",
-    "supertest": "6.2.4",
+    "simple-git-hooks": "2.6.1",
+    "supertest": "6.1.6",
     "ts-jest": "27.0.5",
-    "ts-node-dev": "2.0.0",
+    "ts-node-dev": "1.1.8",
     "typescript": "4.4.3"
   }
 }
