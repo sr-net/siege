@@ -7,8 +7,12 @@
     "type": "github",
     "url": "sr-net/siege"
   },
+  "packageManager": "pnpm@7.5.2",
+  "engines": {
+    "node": "^16"
+  },
   "simple-git-hooks": {
-    "pre-commit": "yarn lint-staged"
+    "pre-commit": "pnpm lint-staged"
   },
   "lint-staged": {
     "*.{ts,tsx,js,json,yml}": [
@@ -18,19 +22,16 @@
   "scripts": {
     "dev": "ts-node-dev --respawn --no-deps -r tsconfig-paths/register --files --inspect -- src/index.ts",
     "lint": "eslint 'src/**/*.ts'",
-    "migrate": "yarn typeorm migration:run",
-    "migrate:create": "yarn typeorm migration:create -d migrations -n",
-    "migrate:generate": "yarn typeorm migration:generate -d migrations -n",
+    "migrate": "pnpm typeorm migration:run",
+    "migrate:create": "pnpm typeorm migration:create -d migrations -n",
+    "migrate:generate": "pnpm typeorm migration:generate -d migrations -n",
     "postinstall": "simple-git-hooks",
     "snapshot": "ts-node -T src/index.ts -shot",
     "start": "ts-node -T --files src/index.ts",
     "test": "NODE_ENV=test jest -i",
-    "test:coverage": "yarn run test --coverage",
-    "typecheck": "yarn tsc --noEmit -P tsconfig.json",
+    "test:coverage": "pnpm run test --coverage",
+    "typecheck": "pnpm tsc --noEmit -P tsconfig.json",
     "typeorm": "ts-node -T ./node_modules/typeorm/cli.js"
-  },
-  "engines": {
-    "node": "^16"
   },
   "resolutions": {
     "@types/node": "16.7.10"
