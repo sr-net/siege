@@ -97,31 +97,3 @@ jobs:
         with:
           files: node_modules/.coverage/lcov.info
           fail_ci_if_error: true
-
-  build:
-    runs-on: ubuntu-latest
-
-    steps:
-      - uses: actions/checkout@v3
-
-      - uses: actions/setup-node@v3
-        with:
-          node-version: 16
-
-      - run: corepack enable
-
-      - name: find pnpm cache path
-        id: cache
-        run: echo "::set-output name=path::$(pnpm store path)"
-
-      - uses: actions/cache@v3
-        with:
-          path: ${{ steps.cache.outputs.path }}
-          key: v1-pnpm-${{ hashFiles('**/pnpm-lock.yaml') }}
-          restore-keys: |
-            v1-pnpm-
-
-      - name: Install dependencies
-        run: pnpm install --frozen-lockfile
-
-      - run: pnpm build
