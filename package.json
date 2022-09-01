@@ -37,7 +37,7 @@
   },
   "dependencies": {
     "@sentry/node": "6.13.2",
-    "apollo-server-express": "3.3.0",
+    "apollo-server-express": "3.10.2",
     "class-validator": "0.13.1",
     "cookie": "0.4.1",
     "cors": "2.8.5",
