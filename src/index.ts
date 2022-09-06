@@ -14,7 +14,7 @@ const shouldGenerateSnapshot = process.argv.find(
 
 if (shouldGenerateSnapshot) {
   void createSchema().then(() => {
-    // eslint-disable-next-line no-process-exit,unicorn/no-process-exit
+    // eslint-disable-next-line n/no-process-exit,unicorn/no-process-exit
     process.exit(0)
   })
 } else {
