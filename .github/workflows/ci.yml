@@ -1,65 +1,121 @@
-name: CI
+name: ci
+
 on:
   push:
     branches:
-      - master
-    paths-ignore:
-      - "**/*.md"
-      - ".gitignore"
-      - ".github/**"
-      - "!.github/workflows/*.yml"
+      - main
   pull_request:
-    paths-ignore:
-      - "**/*.md"
-      - ".gitignore"
-      - ".github/**"
-      - "!.github/workflows/*.yml"
 
 jobs:
   lint:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
-      - uses: actions/setup-node@v2
+      - uses: BeeeQueue/setup-node@corepack
         with:
-          node-version: 16
-          cache: yarn
+          node-version: 18
+          corepack: true
+
+      - name: find pnpm cache path
+        id: cache
+        run: echo "::set-output name=path::$(pnpm store path)"
+
+      - uses: actions/cache@v3
+        with:
+          path: ${{ steps.cache.outputs.path }}
+          key: v1-pnpm-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            v1-pnpm-
 
       - name: Install dependencies
-        run: yarn install --immutable
+        run: pnpm install --frozen-lockfile
 
-      - run: yarn lint
-
-  test:
-    runs-on: ubuntu-latest
-
-    steps:
-      - uses: actions/checkout@v2
-
-      - uses: actions/setup-node@v2
-        with:
-          node-version: 16
-          cache: yarn
-
-      - name: Install dependencies
-        run: yarn install --immutable
-
-      - run: yarn test
+      - run: pnpm lint --format compact
 
   typecheck:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
-      - uses: actions/setup-node@v2
+      - uses: BeeeQueue/setup-node@corepack
         with:
-          node-version: 16
-          cache: yarn
+          node-version: 18
+          corepack: true
+
+      - name: find pnpm cache path
+        id: cache
+        run: echo "::set-output name=path::$(pnpm store path)"
+
+      - uses: actions/cache@v3
+        with:
+          path: ${{ steps.cache.outputs.path }}
+          key: v1-pnpm-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            v1-pnpm-
 
       - name: Install dependencies
-        run: yarn install --immutable
+        run: pnpm install --frozen-lockfile
 
-      - run: yarn typecheck
+      - run: pnpm typecheck
+
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: BeeeQueue/setup-node@corepack
+        with:
+          node-version: 18
+          corepack: true
+
+      - name: find pnpm cache path
+        id: cache
+        run: echo "::set-output name=path::$(pnpm store path)"
+
+      - uses: actions/cache@v3
+        with:
+          path: ${{ steps.cache.outputs.path }}
+          key: v1-pnpm-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            v1-pnpm-
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - run: pnpm test
+
+      - uses: codecov/codecov-action@v2
+        with:
+          files: node_modules/.coverage/lcov.info
+          fail_ci_if_error: true
+
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: BeeeQueue/setup-node@corepack
+        with:
+          node-version: 18
+          corepack: true
+
+      - name: find pnpm cache path
+        id: cache
+        run: echo "::set-output name=path::$(pnpm store path)"
+
+      - uses: actions/cache@v3
+        with:
+          path: ${{ steps.cache.outputs.path }}
+          key: v1-pnpm-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            v1-pnpm-
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - run: pnpm build

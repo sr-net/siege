@@ -1,22 +1,11 @@
-## Project
-.idea
+.DS_Store
+
+node_modules/
+dist/
+
+.idea/
+!.idea/jsLibraryMappings.xml
+!.idea/template.iml
+!.idea/prettier.xml
+
 .env
-!.gitkeep
-test-results
-
-postgres
-sqlite
-dist
-
-# Yarn
-node_modules
-.yarn/*
-!.yarn/cache
-!.yarn/releases
-!.yarn/plugins
-!.yarn/sdks
-!.yarn/versions
-
-# Logs
-logs
-*.log
