@@ -11,20 +11,20 @@ import { createSchema } from "@/graphql"
 
 export type Context = {
   sessionUuid: string | null
-  setSessionUuid: () => Promise<string>
+  setSessionUuid: () => string
 }
 
 const buildContext = (req: FastifyRequest, res: FastifyReply): Context => {
   let sessionUuid = req.headers.cookie?.match(/sessionUuid=([\dA-Za-z-]+);?/)?.[1]
 
-  const setSessionUuid = async () => {
+  const setSessionUuid = () => {
     sessionUuid = uuid()
 
-    await res.setCookie("sessionUuid", sessionUuid, {
+    void res.setCookie("sessionUuid", sessionUuid, {
       maxAge: 60 * 60 * 24 * 30 * 12 * 5,
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
-      signed: false,
+      sameSite: "lax",
     })
 
     return sessionUuid
