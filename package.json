@@ -20,7 +20,7 @@
     ]
   },
   "scripts": {
-    "dev": "ts-node-dev --respawn --no-deps -r tsconfig-paths/register --files --inspect -- src/index.ts",
+    "dev": "",
     "lint": "eslint 'src/**/*.ts'",
     "migrate": "typeorm migration:run",
     "migrate:create": "typeorm migration:create -d migrations -n",
@@ -49,13 +49,14 @@
     "helmet": "4.6.0",
     "pg": "8.7.1",
     "reflect-metadata": "0.1.13",
-    "ts-node": "10.2.1",
+    "ts-node": "10.9.1",
     "tsconfig-paths": "3.11.0",
     "type-graphql": "1.1.1",
     "typeorm": "0.2.38",
     "uuid": "8.3.2"
   },
   "devDependencies": {
+    "@abraham/reflection": "0.10.0",
     "@beequeue/eslint-plugin": "0.8.0",
     "@tsconfig/node18": "1.0.1",
     "@types/cookie": "0.5.1",
@@ -73,7 +74,6 @@
     "simple-git-hooks": "2.6.1",
     "supertest": "6.1.6",
     "ts-jest": "27.0.5",
-    "ts-node-dev": "1.1.8",
     "typescript": "4.8.2"
   }
 }

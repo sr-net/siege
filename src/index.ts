@@ -1,4 +1,4 @@
-import "reflect-metadata"
+import "@abraham/reflection"
 
 import { init } from "@sentry/node"
 
