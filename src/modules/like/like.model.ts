@@ -10,19 +10,22 @@ type LikeConstructor = OptionalUuid<
 @Entity()
 export class Like extends ExtendedEntity {
   @Column({ type: "uuid" })
-  public sessionUuid: string
+  public sessionUuid!: string
 
   @Column({ type: "uuid" })
-  public stratUuid: string
+  public stratUuid!: string
 
   @Column()
-  public active: boolean
+  public active!: boolean
 
-  constructor(options: LikeConstructor) {
-    super(options)
+  public static from(options: LikeConstructor): Like {
+    const like = new Like()
 
-    this.sessionUuid = options?.sessionUuid
-    this.stratUuid = options?.stratUuid
-    this.active = options?.active ?? true
+    like.addUuid(options)
+    like.sessionUuid = options?.sessionUuid
+    like.stratUuid = options?.stratUuid
+    like.active = options?.active ?? true
+
+    return like
   }
 }

@@ -1,6 +1,9 @@
-import { createConnection } from "typeorm"
+import { DataSource } from "typeorm"
 
 import { config } from "@/config"
 
-export const connectToDatabase = () =>
-  createConnection({ ...config.db }).then((connection) => connection)
+export const connectToDatabase = async () => {
+  const source = new DataSource(config.db)
+
+  return await source.initialize()
+}

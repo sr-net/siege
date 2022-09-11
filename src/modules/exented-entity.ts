@@ -6,16 +6,14 @@ import { v4 as generateUuid } from "uuid"
 export abstract class ExtendedEntity extends BaseEntity {
   @PrimaryColumn({ type: "uuid", unique: true })
   @Field(() => ID)
-  public readonly uuid: string
+  public uuid!: string
 
   @CreateDateColumn()
   public readonly createdAt!: Date
   @UpdateDateColumn()
   public readonly updatedAt!: Date
 
-  protected constructor(options: { uuid?: string }) {
-    super()
-
+  public addUuid(options: { uuid?: string }) {
     this.uuid = options?.uuid ?? generateUuid()
   }
 

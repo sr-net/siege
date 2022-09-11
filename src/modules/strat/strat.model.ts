@@ -37,40 +37,40 @@ export class Strat extends ExtendedEntity {
   @Column({ unique: true })
   @Index()
   @Field(() => Int)
-  public shortId: number
+  public shortId!: number
 
   @Column({ length: 40 })
   @Index()
   @Field()
-  public title: string
+  public title!: string
 
   @Column({ length: 450 })
   @Field()
-  public description: string
+  public description!: string
 
   @Column(() => Author)
   @Field(() => Author)
-  public author: Author
+  public author!: Author
 
   @Column()
   @Field()
-  public atk: boolean
+  public atk!: boolean
 
   @Column()
   @Field()
-  public def: boolean
+  public def!: boolean
 
   @Column({ type: "simple-array" })
   @Field(() => [Gamemode])
-  public gamemodes: Gamemode[]
+  public gamemodes!: Gamemode[]
 
   @Column({ type: "int" })
   @Field(() => Int)
-  public score: number
+  public score!: number
 
   @Column()
   @Field()
-  public submission: boolean
+  public submission!: boolean
 
   @Column({ nullable: true })
   @Field({ nullable: true })
@@ -91,19 +91,22 @@ export class Strat extends ExtendedEntity {
     return count === 1
   }
 
-  constructor(options: StratConstructor) {
-    super(options)
+  public static from(options: StratConstructor): Strat {
+    const strat = new Strat()
 
-    this.shortId = options?.shortId
-    this.title = options?.title
-    this.description = options?.description
-    this.author = options?.author
-    this.atk = options?.atk
-    this.def = options?.def
-    this.gamemodes = options?.gamemodes
-    this.score = options?.score
-    this.submission = options?.submission
-    this.acceptedAt = options?.acceptedAt
+    strat.addUuid(options)
+    strat.shortId = options?.shortId
+    strat.title = options?.title
+    strat.description = options?.description
+    strat.author = options?.author
+    strat.atk = options?.atk
+    strat.def = options?.def
+    strat.gamemodes = options?.gamemodes
+    strat.score = options?.score
+    strat.submission = options?.submission
+    strat.acceptedAt = options?.acceptedAt
+
+    return strat
   }
 
   public async like(sessionUuid: string): Promise<Strat> {
