@@ -44,7 +44,7 @@ const _config: Config = {
     db: {
       ...defaultDbConfig,
       synchronize: true,
-      schema: process.env.DB_SCHEMA ?? "srnet",
+      schema: process.env.DB_SCHEMA ?? "public",
     },
   },
   [Environment.TEST]: {

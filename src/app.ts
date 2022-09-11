@@ -38,6 +38,7 @@ const buildContext = (req: FastifyRequest, res: FastifyReply): Context => {
 
 export const buildApp = async () => {
   const app = Fastify({
+    genReqId: () => uuid(),
     logger: {
       transport: config.env !== "production" ? { target: "pino-pretty" } : undefined,
     },
@@ -60,24 +61,6 @@ export const buildApp = async () => {
 
     jit: 8,
     queryDepth: 8,
-
-    errorFormatter: (executionResult, context) => {
-      const log = context.reply ? context.reply.log : context.app.log
-      const errors = executionResult.errors?.map((error) => {
-        error.extensions!.exception = error.originalError
-        Object.defineProperty(error, "extensions", { enumerable: true })
-        return error
-      })
-      log.info({ err: executionResult.errors }, "Argument Validation Error")
-
-      return {
-        statusCode: 201,
-        response: {
-          data: executionResult.data,
-          errors,
-        },
-      }
-    },
   })
 
   return app
