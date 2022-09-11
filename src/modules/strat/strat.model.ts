@@ -1,7 +1,7 @@
 import { Ctx, Field, Int, ObjectType, registerEnumType } from "type-graphql"
 import { Column, Entity, Index } from "typeorm"
 
-import { Context } from "@/apollo"
+import { Context } from "@/app"
 import { ExtendedEntity } from "@/modules/exented-entity"
 import { Like } from "@/modules/like/like.model"
 import { Author } from "@/modules/strat/author.entity"

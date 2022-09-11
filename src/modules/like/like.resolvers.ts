@@ -1,6 +1,6 @@
 import { Arg, Ctx, ID, Mutation, Resolver } from "type-graphql"
 
-import { Context } from "@/apollo"
+import { Context } from "@/app"
 import { Strat } from "@/modules/strat/strat.model"
 import { isNil } from "@/utils"
 

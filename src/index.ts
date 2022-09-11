@@ -2,7 +2,7 @@ import "@abraham/reflection"
 
 import { init } from "@sentry/node"
 
-import { connectApolloServer, createApp } from "@/apollo"
+import { buildApp } from "@/app"
 import { config } from "@/config"
 import { Environment } from "@/constants"
 import { connectToDatabase } from "@/db"
@@ -25,13 +25,13 @@ if (shouldGenerateSnapshot) {
   const start = async () => {
     await connectToDatabase()
 
-    const app = createApp()
-    await connectApolloServer(app)
+    const app = await buildApp()
 
-    app.listen(config.port, () => {
-      // eslint-disable-next-line no-console
-      console.log(`Listening on ${config.port}`)
+    await app.listen({
+      host: "0.0.0.0",
+      port: config.port,
     })
+    console.log(`Listening on ${config.port}`)
   }
 
   void start()
