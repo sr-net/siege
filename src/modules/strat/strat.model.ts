@@ -83,9 +83,11 @@ export class Strat extends ExtendedEntity {
     }
 
     const count = await Like.count({
-      stratUuid: this.uuid,
-      sessionUuid: ctx.sessionUuid,
-      active: true,
+      where: {
+        stratUuid: this.uuid,
+        sessionUuid: ctx.sessionUuid,
+        active: true,
+      },
     })
 
     return count === 1
@@ -115,14 +117,16 @@ export class Strat extends ExtendedEntity {
       stratUuid: this.uuid,
     }
 
-    let like = await Like.findOne(options)
+    let like = await Like.findOne({
+      where: options,
+    })
 
     if (!isNil(like)) {
       if (like.active) return this
 
       like.active = true
     } else {
-      like = new Like(options)
+      like = Like.from(options)
     }
 
     await like.save()

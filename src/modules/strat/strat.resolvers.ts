@@ -1,12 +1,12 @@
 import { ArrayMaxSize, IsUUID, Min } from "class-validator"
 import { Args, ArgsType, Field, ID, Int, ObjectType, Query, Resolver } from "type-graphql"
-import { BaseEntity, FindOneOptions, In, Like, Not } from "typeorm"
+import { BaseEntity, FindOperator, FindOptionsWhere, In, Like, Not } from "typeorm"
 
 import { PageArguments, PaginatedResponse } from "@/modules/common"
 import { Gamemode, Strat } from "@/modules/strat/strat.model"
 import { isNil } from "@/utils"
 
-type StratFilter = FindOneOptions<Strat>["where"]
+type StratFilter = FindOptionsWhere<Strat>
 
 @ArgsType()
 class CommonStratArguments {
@@ -16,7 +16,7 @@ class CommonStratArguments {
 
   @Field(() => Int, { nullable: true })
   @Min(1)
-  public shortId?: string
+  public shortId?: number
 
   @Field({
     nullable: true,
@@ -60,7 +60,9 @@ class CommonStratArguments {
     }
 
     if (!isNil(this.gamemode)) {
-      commonFilters.gamemodes = Like(`%${this.gamemode}%`)
+      commonFilters.gamemodes = Like(
+        `%${this.gamemode}%` as const,
+      ) as unknown as FindOperator<Gamemode.Bombs>
     }
 
     if (!isNil(this.uuid)) {
@@ -103,7 +105,9 @@ export class StratResolver {
       if (uuids.length === 0) return null
 
       return Strat.findOneOrFail({
-        uuid: uuids[Math.floor(Math.random() * uuids.length)].uuid,
+        where: {
+          uuid: uuids[Math.floor(Math.random() * uuids.length)].uuid,
+        },
       })
     }
 
