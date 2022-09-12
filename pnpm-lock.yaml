@@ -53,8 +53,8 @@ dependencies:
     specifier: 1.2.0-rc.1
     version: 1.2.0-rc.1_fbsxzjmyftzumhp4yafdf3ubuy
   typeorm:
-    specifier: 0.2.45
-    version: 0.2.45_pg@8.8.0
+    specifier: 0.3.9
+    version: 0.3.9_pg@8.8.0+ts-node@10.9.1
   uuid:
     specifier: 9.0.0
     version: 9.0.0
@@ -1117,10 +1117,6 @@ packages:
       '@types/yargs-parser': 21.0.0
     dev: true
 
-  /@types/zen-observable/0.8.3:
-    resolution: {integrity: sha512-fbF6oTd4sGGy0xjHPKAt+eS2CrxJ3+6gQ3FGcBoIJR2TLAyCkCyI8JqZNy+FeON0AhVgNJoUumVoZQjBFUqHkw==}
-    dev: false
-
   /@typescript-eslint/eslint-plugin/5.36.1_zbk5nblg4bnwvezsn6tio6q3dm:
     resolution: {integrity: sha512-iC40UK8q1tMepSDwiLbTbMXKDxzNy+4TfPWgIL661Ym0sD42vRcQU93IsZIrmi+x292DBr60UI/gSwfdVYexCA==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
@@ -1846,6 +1842,11 @@ packages:
     resolution: {integrity: sha512-sdQSFB7+llfUcQHUQO3+B8ERRj0Oa4w9POWMI/puGtuf7gFywGmkaLCElnudfTiKZV+NvHqL0ifzdrI8Ro7ESA==}
     dev: true
 
+  /date-fns/2.29.2:
+    resolution: {integrity: sha512-0VNbwmWJDS/G3ySwFSJA3ayhbURMTJLtwM2DTxf9CWondCnh6DTNlO9JgRSq6ibf4eD0lfMJNBxUdEAHHix+bA==}
+    engines: {node: '>=0.11'}
+    dev: false
+
   /dateformat/4.6.3:
     resolution: {integrity: sha512-2P0p0pFGzHS5EMnhdxQi7aJN+iMheud0UhG4dlE1DLAlvL8JHjJJTX/CSm4JXwV0Ka5nGk3zC5mcb5bUQUxxMA==}
     dev: false
@@ -1958,11 +1959,6 @@ packages:
   /dotenv/16.0.2:
     resolution: {integrity: sha512-JvpYKUmzQhYoIFgK2MOnF3bciIZoItIIoryihy0rIA+H4Jy0FmgyKYAHCTN98P5ybGSJcIFbh6QKeJdtZd1qhA==}
     engines: {node: '>=12'}
-    dev: false
-
-  /dotenv/8.6.0:
-    resolution: {integrity: sha512-IrPdXQsk2BbzvCBGBOTmmSH5SodmqZNt4ERAZDmW4CT+tL8VtvinqywuANaFu4bOMWki16nqf0e4oC0QIaDr/g==}
-    engines: {node: '>=10'}
     dev: false
 
   /eastasianwidth/0.2.0:
@@ -5334,26 +5330,31 @@ packages:
       tslib: 2.4.0
     dev: false
 
-  /typeorm/0.2.45_pg@8.8.0:
-    resolution: {integrity: sha512-c0rCO8VMJ3ER7JQ73xfk0zDnVv0WDjpsP6Q1m6CVKul7DB9iVdWLRjPzc8v2eaeBuomsbZ2+gTaYr8k1gm3bYA==}
+  /typeorm/0.3.9_pg@8.8.0+ts-node@10.9.1:
+    resolution: {integrity: sha512-xNcE44D4hn74n7pjuMog9hRgep+BiO3IBpjEaQZ8fb56zsDz7xHT1GAeWwmGuuU+4nDEELp2mIqgSCR+zxR7Jw==}
+    engines: {node: '>= 12.9.0'}
     hasBin: true
     peerDependencies:
-      '@sap/hana-client': ^2.11.14
+      '@google-cloud/spanner': ^5.18.0
+      '@sap/hana-client': ^2.12.25
       better-sqlite3: ^7.1.2
       hdb-pool: ^0.1.6
-      ioredis: ^4.28.3
+      ioredis: ^5.0.4
       mongodb: ^3.6.0
-      mssql: ^6.3.1
+      mssql: ^7.3.0
       mysql2: ^2.2.5
       oracledb: ^5.1.0
       pg: ^8.5.1
       pg-native: ^3.0.0
       pg-query-stream: ^4.0.0
-      redis: ^3.1.1
+      redis: ^3.1.1 || ^4.0.0
       sql.js: ^1.4.0
-      sqlite3: ^5.0.2
+      sqlite3: ^5.0.3
+      ts-node: ^10.7.0
       typeorm-aurora-data-api-driver: ^2.0.0
     peerDependenciesMeta:
+      '@google-cloud/spanner':
+        optional: true
       '@sap/hana-client':
         optional: true
       better-sqlite3:
@@ -5382,6 +5383,8 @@ packages:
         optional: true
       sqlite3:
         optional: true
+      ts-node:
+        optional: true
       typeorm-aurora-data-api-driver:
         optional: true
     dependencies:
@@ -5390,19 +5393,20 @@ packages:
       buffer: 6.0.3
       chalk: 4.1.2
       cli-highlight: 2.1.11
+      date-fns: 2.29.2
       debug: 4.3.4
-      dotenv: 8.6.0
+      dotenv: 16.0.2
       glob: 7.2.3
       js-yaml: 4.1.0
       mkdirp: 1.0.4
       pg: 8.8.0
       reflect-metadata: 0.1.13
       sha.js: 2.4.11
+      ts-node: 10.9.1_jq3ovzqw3j7j4aj2v37zonaj5u
       tslib: 2.4.0
       uuid: 8.3.2
       xml2js: 0.4.23
       yargs: 17.5.1
-      zen-observable-ts: 1.1.0
     transitivePeerDependencies:
       - supports-color
     dev: false
@@ -5641,14 +5645,3 @@ packages:
   /yocto-queue/0.1.0:
     resolution: {integrity: sha512-rVksvsnNCdJ/ohGc6xgPwyN8eheCxsiLM8mxuE/t/mOVqJewPuO1miLpTHQiRgTKCLexL4MeAFVagts7HmNZ2Q==}
     engines: {node: '>=10'}
-
-  /zen-observable-ts/1.1.0:
-    resolution: {integrity: sha512-1h4zlLSqI2cRLPJUHJFL8bCWHhkpuXkF+dbGkRaWjgDIG26DmzyshUMrdV/rL3UnR+mhaX4fRq8LPouq0MYYIA==}
-    dependencies:
-      '@types/zen-observable': 0.8.3
-      zen-observable: 0.8.15
-    dev: false
-
-  /zen-observable/0.8.15:
-    resolution: {integrity: sha512-PQ2PC7R9rslx84ndNBZB/Dkv8V8fZEpk83RLgXtYd0fwUgEjseMn1Dgajh2x6S8QbZAFa9p2qVCEuYZNgve0dQ==}
-    dev: false

@@ -11,7 +11,7 @@ export class LikeResolver {
     @Arg("uuid", () => ID) uuid: string,
     @Ctx() ctx: Context,
   ): Promise<Strat | null> {
-    const strat = await Strat.findOne({ uuid, submission: false })
+    const strat = await Strat.findOne({ where: { uuid, submission: false } })
 
     if (isNil(strat)) return null
 
@@ -27,7 +27,7 @@ export class LikeResolver {
     @Arg("uuid", () => ID) uuid: string,
     @Ctx() ctx: Context,
   ): Promise<Strat | null> {
-    const strat = await Strat.findOne({ uuid, submission: false })
+    const strat = await Strat.findOne({ where: { uuid, submission: false } })
 
     if (isNil(strat)) throw new Error("Strat does not exist!")
 

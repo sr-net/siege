@@ -5,7 +5,7 @@ import { init } from "@sentry/node"
 import { buildApp } from "@/app"
 import { config } from "@/config"
 import { Environment } from "@/constants"
-import { connectToDatabase } from "@/db"
+import { dataSource } from "@/db"
 import { createSchema } from "@/graphql"
 
 const shouldGenerateSnapshot = process.argv.find(
@@ -23,7 +23,7 @@ if (shouldGenerateSnapshot) {
   }
 
   const start = async () => {
-    await connectToDatabase()
+    await dataSource.initialize()
 
     const app = await buildApp()
 
@@ -31,6 +31,8 @@ if (shouldGenerateSnapshot) {
       host: "0.0.0.0",
       port: config.port,
     })
+
+    // eslint-disable-next-line no-console
     console.log(`Listening on ${config.port}`)
   }
 
