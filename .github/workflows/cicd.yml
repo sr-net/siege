@@ -87,10 +87,11 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - run: pnpm test
-  #      - uses: codecov/codecov-action@v2
-  #        with:
-  #          files: node_modules/.coverage/lcov.info
-  #          fail_ci_if_error: true
+
+      # - uses: codecov/codecov-action@v2
+      #   with:
+      #     files: node_modules/.coverage/lcov.info
+      #     fail_ci_if_error: true
 
   build:
     runs-on: ubuntu-latest
@@ -135,7 +136,7 @@ jobs:
     runs-on: ubuntu-latest
     environment:
       name: prod
-      #url: https://siege.sr.haglund.dev/graphiql
+      # url: https://siege.sr.haglund.dev/graphiql
 
     steps:
       - uses: actions/checkout@v3
