@@ -87,8 +87,7 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - run: pnpm test
-
-      - uses: codecov/codecov-action@v2
-        with:
-          files: node_modules/.coverage/lcov.info
-          fail_ci_if_error: true
+#      - uses: codecov/codecov-action@v2
+#        with:
+#          files: node_modules/.coverage/lcov.info
+#          fail_ci_if_error: true

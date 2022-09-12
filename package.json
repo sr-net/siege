@@ -22,14 +22,10 @@
   "scripts": {
     "dev": "",
     "lint": "eslint 'src/**/*.ts'",
-    "migrate": "typeorm migration:run",
-    "migrate:create": "typeorm migration:create -d migrations -n",
-    "migrate:generate": "typeorm migration:generate -d migrations -n",
     "postinstall": "simple-git-hooks",
     "snapshot": "ts-node -T src/index.ts -shot",
     "start": "ts-node -T --files src/index.ts",
-    "test": "NODE_ENV=test jest -i",
-    "test:coverage": "pnpm run test --coverage",
+    "test": "NODE_ENV=test jest",
     "typecheck": "tsc --noEmit -P tsconfig.json",
     "typeorm": "ts-node -T ./node_modules/typeorm/cli.js"
   },
