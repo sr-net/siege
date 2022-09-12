@@ -43,6 +43,9 @@ dependencies:
   pino-pretty:
     specifier: 9.1.0
     version: 9.1.0
+  remeda:
+    specifier: 1.1.0
+    version: 1.1.0
   ts-node:
     specifier: 10.9.1
     version: 10.9.1_jq3ovzqw3j7j4aj2v37zonaj5u
@@ -4631,6 +4634,10 @@ packages:
     resolution: {integrity: sha512-pq2bWo9mVD43nbts2wGv17XLiNLya+GklZ8kaDLV2Z08gDCsGpnKn9BFMepvWuHCbyVvY7J5o5+BVvoQbmlJLg==}
     engines: {node: '>=8'}
     dev: true
+
+  /remeda/1.1.0:
+    resolution: {integrity: sha512-dtPAM1fP1HEorGDYyJiZUYfgzswyey0S1sD1FpCOhfgmpTJmnLz32q2WeEB1EyNLMENJuXSKWY8Hrm1CKM9lpw==}
+    dev: false
 
   /require-directory/2.1.1:
     resolution: {integrity: sha512-fGxEI7+wsG9xrvdjsrlmL22OMTTiHRwAMroiEeMgq8gzoLC/PQr7RsRDSTLUg/bZAZtF+TVIkHc6/4RIKrui+Q==}

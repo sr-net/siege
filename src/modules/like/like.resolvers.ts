@@ -1,8 +1,8 @@
+import { isNil } from "remeda"
 import { Arg, Ctx, ID, Mutation, Resolver } from "type-graphql"
 
 import { Context } from "@/app"
 import { Strat } from "@/modules/strat/strat.model"
-import { isNil } from "@/utils"
 
 @Resolver()
 export class LikeResolver {

@@ -1,10 +1,10 @@
 import { ArrayMaxSize, IsUUID, Min } from "class-validator"
+import { isNil } from "remeda"
 import { Args, ArgsType, Field, ID, Int, ObjectType, Query, Resolver } from "type-graphql"
 import { BaseEntity, FindOperator, FindOptionsWhere, In, Like, Not } from "typeorm"
 
 import { PageArguments, PaginatedResponse } from "@/modules/common"
 import { Gamemode, Strat } from "@/modules/strat/strat.model"
-import { isNil } from "@/utils"
 
 type StratFilter = FindOptionsWhere<Strat>
 
