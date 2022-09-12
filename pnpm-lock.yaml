@@ -19,6 +19,9 @@ dependencies:
   '@sentry/node':
     specifier: 7.12.1
     version: 7.12.1
+  '@tsconfig/node18':
+    specifier: 1.0.1
+    version: 1.0.1
   class-validator:
     specifier: 0.13.2
     version: 0.13.2
@@ -66,9 +69,6 @@ devDependencies:
   '@beequeue/eslint-plugin':
     specifier: 0.8.0
     version: 0.8.0_prdxvwpqz7ols7qpi4wzmubrfu
-  '@tsconfig/node18':
-    specifier: 1.0.1
-    version: 1.0.1
   '@types/jest':
     specifier: 29.0.1
     version: 29.0.1
@@ -1002,7 +1002,7 @@ packages:
 
   /@tsconfig/node18/1.0.1:
     resolution: {integrity: sha512-sNFeK6X2ATlhlvzyH4kKYQlfHXE2f2/wxtB9ClvYXevWpmwkUT7VaSrjIN9E76Qebz8qP5JOJJ9jD3QoD/Z9TA==}
-    dev: true
+    dev: false
 
   /@types/babel__core/7.1.19:
     resolution: {integrity: sha512-WEOTgRsbYkvA/KCsDwVEGkd7WAr1e3g31VHQ8zy5gul/V1qKullU/BU5I68X5v7V3GnB9eotmom4v5a5gjxorw==}

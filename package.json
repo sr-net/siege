@@ -21,6 +21,9 @@
   },
   "scripts": {
     "dev": "",
+    "docker:build": "docker build . --tag siege",
+    "docker:prune": "docker image prune --force",
+    "docker:run": "docker run --rm --name siege -p 3000:3000 siege",
     "lint": "eslint 'src/**/*.ts'",
     "postinstall": "simple-git-hooks",
     "snapshot": "ts-node -T src/index.ts -shot",
@@ -38,6 +41,7 @@
     "@fastify/cors": "8.1.0",
     "@fastify/helmet": "10.0.0",
     "@sentry/node": "7.12.1",
+    "@tsconfig/node18": "1.0.1",
     "class-validator": "0.13.2",
     "dotenv": "16.0.2",
     "fastify": "4.5.3",
@@ -55,7 +59,6 @@
   },
   "devDependencies": {
     "@beequeue/eslint-plugin": "0.8.0",
-    "@tsconfig/node18": "1.0.1",
     "@types/jest": "29.0.1",
     "@types/node": "18.7.17",
     "@types/uuid": "8.3.4",
