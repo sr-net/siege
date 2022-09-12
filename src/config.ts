@@ -22,10 +22,11 @@ const defaultDbConfig: DataSourceOptions = {
   username: process.env.DB_USER ?? "postgres",
   password: process.env.DB_PASS,
   database: process.env.DB_NAME ?? "postgres",
-  schema: "public",
+  schema: process.env.DB_SCHEMA ?? "public",
   url: process.env.DATABASE_URL,
   ssl: process.env.NODE_ENV === "production" ? { rejectUnauthorized: false } : false,
 
+  migrationsRun: true,
   logging: false,
   entities: ["src/modules/**/*.model.ts"],
   migrations: ["migrations/**/*.ts"],
@@ -38,8 +39,6 @@ const _config: Config = {
     port,
     db: {
       ...defaultDbConfig,
-      synchronize: true,
-      schema: process.env.DB_SCHEMA ?? "public",
     },
   },
   [Environment.TEST]: {
@@ -58,7 +57,6 @@ const _config: Config = {
     db: {
       ...defaultDbConfig,
       url: process.env.DATABASE_URL,
-      migrationsRun: true,
     },
     sentry: {
       dsn: process.env.SENTRY_DSN,
