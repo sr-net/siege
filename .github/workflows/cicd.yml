@@ -3,7 +3,7 @@ name: ci&cd
 on:
   push:
     branches:
-      - main
+      - master
   pull_request:
 
 jobs:
