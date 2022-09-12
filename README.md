@@ -2,5 +2,5 @@
 
 ## Development
 
-1. Install dependencies - `yarn`
-1. Start server - `yarn dev`
+1. Install dependencies - `pnpm i`
+1. Start server - `pnpm dev`

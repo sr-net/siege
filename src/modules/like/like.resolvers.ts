@@ -1,8 +1,8 @@
+import { isNil } from "remeda"
 import { Arg, Ctx, ID, Mutation, Resolver } from "type-graphql"
 
-import { Context } from "@/apollo"
+import { Context } from "@/app"
 import { Strat } from "@/modules/strat/strat.model"
-import { isNil } from "@/utils"
 
 @Resolver()
 export class LikeResolver {
@@ -11,7 +11,7 @@ export class LikeResolver {
     @Arg("uuid", () => ID) uuid: string,
     @Ctx() ctx: Context,
   ): Promise<Strat | null> {
-    const strat = await Strat.findOne({ uuid, submission: false })
+    const strat = await Strat.findOne({ where: { uuid, submission: false } })
 
     if (isNil(strat)) return null
 
@@ -27,7 +27,7 @@ export class LikeResolver {
     @Arg("uuid", () => ID) uuid: string,
     @Ctx() ctx: Context,
   ): Promise<Strat | null> {
-    const strat = await Strat.findOne({ uuid, submission: false })
+    const strat = await Strat.findOne({ where: { uuid, submission: false } })
 
     if (isNil(strat)) throw new Error("Strat does not exist!")
 

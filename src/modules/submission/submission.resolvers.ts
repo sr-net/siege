@@ -6,6 +6,6 @@ import { Strat } from "@/modules/strat/strat.model"
 export class SubmissionResolver {
   @Query(() => Strat, { nullable: true })
   public async submission(): Promise<Strat | null> {
-    return (await Strat.findOne({ submission: true })) ?? null
+    return (await Strat.findOne({ where: { submission: true } })) ?? null
   }
 }

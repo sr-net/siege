@@ -1,11 +1,12 @@
+import { isNil } from "remeda"
 import { Ctx, Field, Int, ObjectType, registerEnumType } from "type-graphql"
 import { Column, Entity, Index } from "typeorm"
 
-import { Context } from "@/apollo"
+import { Context } from "@/app"
 import { ExtendedEntity } from "@/modules/exented-entity"
 import { Like } from "@/modules/like/like.model"
 import { Author } from "@/modules/strat/author.entity"
-import { isNil, OptionalUuid } from "@/utils"
+import { OptionalUuid } from "@/utils"
 
 type StratConstructor = OptionalUuid<
   Pick<
@@ -37,40 +38,40 @@ export class Strat extends ExtendedEntity {
   @Column({ unique: true })
   @Index()
   @Field(() => Int)
-  public shortId: number
+  public shortId!: number
 
   @Column({ length: 40 })
   @Index()
   @Field()
-  public title: string
+  public title!: string
 
   @Column({ length: 450 })
   @Field()
-  public description: string
+  public description!: string
 
   @Column(() => Author)
   @Field(() => Author)
-  public author: Author
+  public author!: Author
 
   @Column()
   @Field()
-  public atk: boolean
+  public atk!: boolean
 
   @Column()
   @Field()
-  public def: boolean
+  public def!: boolean
 
   @Column({ type: "simple-array" })
   @Field(() => [Gamemode])
-  public gamemodes: Gamemode[]
+  public gamemodes!: Gamemode[]
 
   @Column({ type: "int" })
   @Field(() => Int)
-  public score: number
+  public score!: number
 
   @Column()
   @Field()
-  public submission: boolean
+  public submission!: boolean
 
   @Column({ nullable: true })
   @Field({ nullable: true })
@@ -83,27 +84,32 @@ export class Strat extends ExtendedEntity {
     }
 
     const count = await Like.count({
-      stratUuid: this.uuid,
-      sessionUuid: ctx.sessionUuid,
-      active: true,
+      where: {
+        stratUuid: this.uuid,
+        sessionUuid: ctx.sessionUuid,
+        active: true,
+      },
     })
 
     return count === 1
   }
 
-  constructor(options: StratConstructor) {
-    super(options)
+  public static from(options: StratConstructor): Strat {
+    const strat = new Strat()
 
-    this.shortId = options?.shortId
-    this.title = options?.title
-    this.description = options?.description
-    this.author = options?.author
-    this.atk = options?.atk
-    this.def = options?.def
-    this.gamemodes = options?.gamemodes
-    this.score = options?.score
-    this.submission = options?.submission
-    this.acceptedAt = options?.acceptedAt
+    strat.addUuid(options)
+    strat.shortId = options?.shortId
+    strat.title = options?.title
+    strat.description = options?.description
+    strat.author = options?.author
+    strat.atk = options?.atk
+    strat.def = options?.def
+    strat.gamemodes = options?.gamemodes
+    strat.score = options?.score
+    strat.submission = options?.submission
+    strat.acceptedAt = options?.acceptedAt
+
+    return strat
   }
 
   public async like(sessionUuid: string): Promise<Strat> {
@@ -112,14 +118,16 @@ export class Strat extends ExtendedEntity {
       stratUuid: this.uuid,
     }
 
-    let like = await Like.findOne(options)
+    let like = await Like.findOne({
+      where: options,
+    })
 
     if (!isNil(like)) {
       if (like.active) return this
 
       like.active = true
     } else {
-      like = new Like(options)
+      like = Like.from(options)
     }
 
     await like.save()

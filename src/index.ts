@@ -1,11 +1,11 @@
-import "reflect-metadata"
+import "@abraham/reflection"
 
 import { init } from "@sentry/node"
 
-import { connectApolloServer, createApp } from "@/apollo"
+import { buildApp } from "@/app"
 import { config } from "@/config"
 import { Environment } from "@/constants"
-import { connectToDatabase } from "@/db"
+import { dataSource } from "@/db"
 import { createSchema } from "@/graphql"
 
 const shouldGenerateSnapshot = process.argv.find(
@@ -14,7 +14,7 @@ const shouldGenerateSnapshot = process.argv.find(
 
 if (shouldGenerateSnapshot) {
   void createSchema().then(() => {
-    // eslint-disable-next-line no-process-exit,unicorn/no-process-exit
+    // eslint-disable-next-line n/no-process-exit,unicorn/no-process-exit
     process.exit(0)
   })
 } else {
@@ -23,15 +23,17 @@ if (shouldGenerateSnapshot) {
   }
 
   const start = async () => {
-    await connectToDatabase()
+    await dataSource.initialize()
 
-    const app = createApp()
-    await connectApolloServer(app)
+    const app = await buildApp()
 
-    app.listen(config.port, () => {
-      // eslint-disable-next-line no-console
-      console.log(`Listening on ${config.port}`)
+    await app.listen({
+      host: "0.0.0.0",
+      port: config.port,
     })
+
+    // eslint-disable-next-line no-console
+    console.log(`Listening on ${config.port}`)
   }
 
   void start()

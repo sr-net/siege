@@ -1,15 +1,13 @@
-/* eslint-disable @typescript-eslint/no-var-requires,node/no-unpublished-require */
+/* eslint-disable n/no-unpublished-require,unicorn/import-style */
 const { resolve } = require("path")
 
-const { pathsToModuleNameMapper } = require("ts-jest/utils")
+const { pathsToModuleNameMapper } = require("ts-jest")
 
 const { compilerOptions } = require("./tsconfig")
 
 const rootDir = resolve(__dirname)
 
-/**
- * @type import('ts-jest/dist/types').ProjectConfigTsJest
- */
+/** @type {import('ts-jest').InitialOptionsTsJest} */
 module.exports = {
   preset: "ts-jest",
 
@@ -18,10 +16,4 @@ module.exports = {
   moduleNameMapper: pathsToModuleNameMapper(compilerOptions.paths, {
     prefix: "<rootDir>/",
   }),
-
-  globals: {
-    "ts-jest": {
-      // isolatedModules: true,
-    },
-  },
 }
