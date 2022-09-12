@@ -16,7 +16,7 @@ export class LikeResolver {
     if (isNil(strat)) return null
 
     if (isNil(ctx.sessionUuid)) {
-      ctx.sessionUuid = await ctx.setSessionUuid()
+      ctx.sessionUuid = ctx.setSessionUuid()
     }
 
     return strat.like(ctx.sessionUuid)

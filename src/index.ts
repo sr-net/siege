@@ -31,6 +31,8 @@ if (shouldGenerateSnapshot) {
       host: "0.0.0.0",
       port: config.port,
     })
+
+    // eslint-disable-next-line no-console
     console.log(`Listening on ${config.port}`)
   }
 
