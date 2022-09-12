@@ -148,4 +148,5 @@ jobs:
         with:
           git_remote_url: "ssh://dokku@siege.sr.haglund.dev:22/siege"
           git_push_flags: "--force"
+          deploy_docker_image: "ghcr.io/${{ github.repository }}:latest"
           ssh_private_key: ${{ secrets.DOKKU_PRIVATE_KEY }}
