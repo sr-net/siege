@@ -46,7 +46,7 @@
     "dotenv": "16.0.2",
     "fastify": "4.5.3",
     "graphql": "15.6.0",
-    "mercurius": "8.13.1",
+    "mercurius": "11.0.0",
     "pg": "8.8.0",
     "pino": "8.5.0",
     "pino-pretty": "9.1.0",
