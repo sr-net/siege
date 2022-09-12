@@ -58,6 +58,7 @@ export const buildApp = async () => {
   await app.register(Mercurius, {
     schema: await createSchema(),
     context: buildContext,
+    graphiql: true,
 
     jit: 8,
     queryDepth: 8,
