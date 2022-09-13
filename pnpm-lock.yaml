@@ -70,8 +70,8 @@ devDependencies:
     specifier: 0.8.0
     version: 0.8.0_prdxvwpqz7ols7qpi4wzmubrfu
   '@types/jest':
-    specifier: 29.0.1
-    version: 29.0.1
+    specifier: 29.0.2
+    version: 29.0.2
   '@types/node':
     specifier: 18.7.17
     version: 18.7.17
@@ -94,8 +94,8 @@ devDependencies:
     specifier: 2.8.0
     version: 2.8.0
   ts-jest:
-    specifier: 29.0.0
-    version: 29.0.0_jksntdpmkmo5cthob65gehuuvi
+    specifier: 29.0.1
+    version: 29.0.1_jksntdpmkmo5cthob65gehuuvi
   typescript:
     specifier: 4.8.3
     version: 4.8.3
@@ -1063,8 +1063,8 @@ packages:
       '@types/istanbul-lib-report': 3.0.0
     dev: true
 
-  /@types/jest/29.0.1:
-    resolution: {integrity: sha512-CAZrjLRZs4xEdIrfrdV74xK1Vo/BKQZwUcjJv3gp6gMeV3BsVxMnXTcgtYOKyphT4DPPo7jxVEVhuwJTQn3oPQ==}
+  /@types/jest/29.0.2:
+    resolution: {integrity: sha512-TaklkwSEtvwJpleiKBHgEBySIQlcZ08gYP/s5wdtdLnjz9uxjnDd7U+Y0JWACebkqBc+jtbol2PEtEW0wQV2zQ==}
     dependencies:
       expect: 29.0.3
       pretty-format: 29.0.3
@@ -5098,8 +5098,8 @@ packages:
     engines: {node: '>=0.6'}
     dev: false
 
-  /ts-jest/29.0.0_jksntdpmkmo5cthob65gehuuvi:
-    resolution: {integrity: sha512-OxUaigbv5Aon3OMLY9HBtwkGMs1upWE/URrmmVQFzzOcGlEPVuWzGmXUIkWGt/95Dj/T6MGuTrHHGL6kT6Yn8g==}
+  /ts-jest/29.0.1_jksntdpmkmo5cthob65gehuuvi:
+    resolution: {integrity: sha512-htQOHshgvhn93QLxrmxpiQPk69+M1g7govO1g6kf6GsjCv4uvRV0znVmDrrvjUrVCnTYeY4FBxTYYYD4airyJA==}
     engines: {node: ^14.15.0 || ^16.10.0 || >=18.0.0}
     hasBin: true
     peerDependencies:
