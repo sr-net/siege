@@ -44,7 +44,7 @@
     "@tsconfig/node18": "1.0.1",
     "class-validator": "0.13.2",
     "dotenv": "16.0.2",
-    "fastify": "4.5.3",
+    "fastify": "4.6.0",
     "graphql": "15.6.0",
     "mercurius": "11.0.0",
     "pg": "8.8.0",
