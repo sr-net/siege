@@ -27,10 +27,10 @@ module default {
              property acceptedAt -> datetime;
 
      required link author  -> Author;
-        multi link reports -> Report;
-        multi link likes   -> `Like`;
+        multi link reports := .<strat[is Report];
+        multi link likes   := .<strat[is `Like`];
 
-    index on (.shortId);
+    index on ((.atk, .def, .gamemodes, .submission));
     # index on (.title);
   }
 

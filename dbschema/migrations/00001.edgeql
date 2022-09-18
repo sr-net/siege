@@ -1,4 +1,4 @@
-CREATE MIGRATION m1oajmva3rnqydd4mkpwkucdw2zirlyksflk6xqg6skxdwsk545gcq
+CREATE MIGRATION m1w2cwrzy6hjyjqfbxkh7z5dcgw6sg327l36novgc5whfltggmlmzq
     ONTO initial
 {
   CREATE SCALAR TYPE default::Gamemode EXTENDING enum<BOMBS, HOSTAGE, CAPTURE_AREAS>;
@@ -10,18 +10,18 @@ CREATE MIGRATION m1oajmva3rnqydd4mkpwkucdw2zirlyksflk6xqg6skxdwsk545gcq
   };
   CREATE TYPE default::Strat EXTENDING default::EnhancedObject {
       CREATE REQUIRED PROPERTY gamemodes -> array<default::Gamemode>;
+      CREATE REQUIRED PROPERTY atk -> std::bool;
+      CREATE REQUIRED PROPERTY def -> std::bool;
+      CREATE REQUIRED PROPERTY submission -> std::bool {
+          SET default := false;
+      };
+      CREATE INDEX ON ((.atk, .def, .gamemodes, .submission));
+      CREATE PROPERTY acceptedAt -> std::datetime;
+      CREATE REQUIRED PROPERTY description -> std::str;
+      CREATE REQUIRED PROPERTY score -> std::int32;
       CREATE REQUIRED PROPERTY shortId -> std::int32 {
           SET readonly := true;
           CREATE CONSTRAINT std::exclusive;
-      };
-      CREATE INDEX ON (.shortId);
-      CREATE PROPERTY acceptedAt -> std::datetime;
-      CREATE REQUIRED PROPERTY atk -> std::bool;
-      CREATE REQUIRED PROPERTY def -> std::bool;
-      CREATE REQUIRED PROPERTY description -> std::str;
-      CREATE REQUIRED PROPERTY score -> std::int32;
-      CREATE REQUIRED PROPERTY submission -> std::bool {
-          SET default := false;
       };
       CREATE REQUIRED PROPERTY title -> std::str;
   };
@@ -53,7 +53,7 @@ CREATE MIGRATION m1oajmva3rnqydd4mkpwkucdw2zirlyksflk6xqg6skxdwsk545gcq
       CREATE PROPERTY message -> std::str;
   };
   ALTER TYPE default::Strat {
-      CREATE MULTI LINK likes -> default::`Like`;
-      CREATE MULTI LINK reports -> default::Report;
+      CREATE MULTI LINK likes := (.<strat[IS default::`Like`]);
+      CREATE MULTI LINK reports := (.<strat[IS default::Report]);
   };
 };

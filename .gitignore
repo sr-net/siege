@@ -3,12 +3,12 @@
 node_modules/
 dist/
 
-dbschema/data/*.json
-dbschema/edgeql-js
-
 .idea/
 !.idea/jsLibraryMappings.xml
 !.idea/template.iml
 !.idea/prettier.xml
+
+dbschema/data/*.json
+src/edgedb
 
 .env
