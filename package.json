@@ -20,7 +20,7 @@
     ]
   },
   "scripts": {
-    "dev": "",
+    "db:reset": "nu scripts/db-reset.nu",
     "docker:build": "docker build . --tag siege",
     "docker:prune": "docker image prune --force",
     "docker:run": "docker run --rm --name siege -p 3000:3000 siege",
