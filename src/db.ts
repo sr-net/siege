@@ -1,3 +1,4 @@
 import { createClient } from "edgedb"
 
-export const dbClient = createClient()
+// ?. needed for tests
+export const dbClient = createClient?.()

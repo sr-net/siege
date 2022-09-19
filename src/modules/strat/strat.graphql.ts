@@ -1,20 +1,11 @@
-import {
-  arg,
-  booleanArg,
-  enumType,
-  idArg,
-  intArg,
-  list,
-  nonNull,
-  objectType,
-} from "nexus"
+import { enumType, objectType } from "nexus"
 import { FieldResolver } from "nexus/src/typegenTypeHelpers"
 import { dedent } from "ts-dedent"
 
 import { dbClient } from "@/db"
-import { Gamemode, Strat as DBStrat } from "@/edgedb/types"
+import { Gamemode } from "@/edgedb/types"
 import { DateTime } from "@/graphql/scalars"
-import { NexusGenArgTypes } from "@/graphql/types.generated"
+import { NexusGenArgTypes, NexusGenTypes } from "@/graphql/types.generated"
 
 import { Author } from "./author.entity"
 
@@ -39,7 +30,7 @@ export const Strat = objectType({
     t.nonNull.field("author", { type: Author })
 
     t.nonNull.int("score")
-    t.nonNull.boolean("liked")
+    // t.nonNull.boolean("liked")
 
     t.nonNull.boolean("submission")
     t.field("acceptedAt", { type: DateTime })
@@ -56,7 +47,7 @@ export const StratPage = objectType({
 
 const baseStratQuery = dedent`
   SELECT Strat {
-    id,
+    uuid := .id,
     shortId,
     title,
     description,
@@ -66,52 +57,73 @@ const baseStratQuery = dedent`
     score,
     author: {
       name,
-      kind,
+      type := .kind,
       url,
     },
   }
-  filter .submission = false
 `
 
-export const getFilters = (args: NexusGenArgTypes["Query"]["strat"]): string => {
+export const getFilters = (
+  args: NexusGenArgTypes["Query"]["strat"],
+): { filters: string; args: NexusGenArgTypes["Query"]["strat"] } => {
   if (args.uuid != null) {
-    return ".id = $uuid"
+    return {
+      filters: ".id = <uuid>$uuid",
+      args: {
+        uuid: args.uuid,
+      },
+    }
   }
 
   if (args.shortId != null) {
-    return ".shortId = $shortId"
+    return {
+      filters: ".shortId = <int32>$shortId",
+      args: {
+        shortId: args.shortId,
+      },
+    }
   }
 
+  const newArgs: Record<string, unknown> = {}
   const filters = [
     // Not a submission
     ".submission = false",
   ]
 
   if (args.excludeShortIds != null && args.excludeShortIds.length > 0) {
-    filters.push("not contains($excludeShortIds, .shortId)")
+    filters.push("not contains(<array<int32>>$excludeShortIds, .shortId)")
+    newArgs["excludeShortIds"] = args.excludeShortIds
   }
 
   if (args.atk === true || args.def === true) {
-    filters.push(
-      `.atk = ${Boolean(args.atk ?? "false").toString()}`,
-      `.def = ${Boolean(args.def ?? "false").toString()}`,
-    )
+    filters.push(".atk = <bool>$atk", ".def = <bool>$def")
+
+    newArgs["atk"] = args.atk ?? false
+    newArgs["def"] = args.def ?? false
   }
 
   if (args.gamemode != null) {
     filters.push("contains(.gamemodes, <Gamemode>$gamemode)")
+    newArgs["gamemode"] = args.gamemode
   }
 
-  return filters.join(" and ")
+  return {
+    filters: `filter ${filters.join(" and ")}`,
+    args: newArgs,
+  }
 }
 
-export const resolveStrat: FieldResolver<"Query", "strat"> = async (_, args) => {
-  const result = await dbClient.querySingle<DBStrat>(
-    baseStratQuery + getFilters(args),
-    args,
-  )
+export const resolveStrat: FieldResolver<"Query", "strat"> = async (_, gqlArgs, ctx) => {
+  const { filters, args } = getFilters(gqlArgs)
 
-  console.log(result)
+  // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
+  const result = (await dbClient.querySingle(
+    `${baseStratQuery} ${filters} limit 1`,
+    args,
+  )) as NexusGenTypes["allTypes"]["Strat"] | null
+
+  if (result == null) return null
+  ctx.logger.info({ result }, "HELLO?")
 
   return result
 }

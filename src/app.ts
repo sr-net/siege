@@ -1,4 +1,4 @@
-import Fastify, { FastifyReply, FastifyRequest } from "fastify"
+import Fastify, { FastifyBaseLogger, FastifyReply, FastifyRequest } from "fastify"
 import Mercurius from "mercurius"
 import type { NexusGraphQLSchema } from "nexus/dist/definitions/_types"
 import { v4 as uuid } from "uuid"
@@ -10,6 +10,7 @@ import Helmet from "@fastify/helmet"
 import { config } from "@/config"
 
 export type Context = {
+  logger: FastifyBaseLogger
   sessionUuid: string | null
   setSessionUuid: () => string
 }
@@ -31,6 +32,7 @@ const buildContext = (req: FastifyRequest, res: FastifyReply): Context => {
   }
 
   return {
+    logger: req.log,
     sessionUuid: sessionUuid ?? null,
     setSessionUuid,
   }

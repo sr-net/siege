@@ -2,26 +2,48 @@ import { getFilters } from "@/modules/strat/strat.graphql"
 
 describe("getFilters", () => {
   test("no args returns only submission exclusion", () => {
-    expect(getFilters({ page: null })).toMatchInlineSnapshot('".submission = false"')
+    expect(getFilters({})).toMatchInlineSnapshot(`
+      {
+        "args": {},
+        "filters": "filter .submission = false",
+      }
+    `)
   })
 
   test("uuid only filters for id", () => {
-    expect(getFilters({ uuid: "uuid", page: null })).toMatchInlineSnapshot(
-      '".id = $uuid"',
-    )
+    expect(getFilters({ uuid: "uuid" })).toMatchInlineSnapshot(`
+      {
+        "args": {
+          "uuid": "uuid",
+        },
+        "filters": ".id = <uuid>$uuid",
+      }
+    `)
   })
 
   test("uuid only filters for shortId", () => {
-    expect(getFilters({ shortId: 123, page: null })).toMatchInlineSnapshot(
-      '".shortId = $shortId"',
-    )
+    expect(getFilters({ shortId: 123 })).toMatchInlineSnapshot(`
+      {
+        "args": {
+          "shortId": 123,
+        },
+        "filters": ".shortId = <int32>$shortId",
+      }
+    `)
   })
 
   test("multiple filters are chained together", () => {
-    expect(
-      getFilters({ gamemode: "BOMBS", atk: true, page: null }),
-    ).toMatchInlineSnapshot(
-      '".submission = false and .atk = true and .def = true and contains(.gamemodes, <Gamemode>$gamemode)"',
+    expect(getFilters({ gamemode: "BOMBS", atk: true })).toMatchInlineSnapshot(
+      `
+        {
+          "args": {
+            "atk": true,
+            "def": false,
+            "gamemode": "BOMBS",
+          },
+          "filters": "filter .submission = false and .atk = <bool>$atk and .def = <bool>$def and contains(.gamemodes, <Gamemode>$gamemode)",
+        }
+      `,
     )
   })
 })
