@@ -42,6 +42,7 @@ export const buildApp = async (schema: NexusGraphQLSchema) => {
   const app = Fastify({
     genReqId: () => uuid(),
     logger: {
+      level: process.env.LOG_LEVEL ?? config.env === "development" ? "debug" : "info",
       transport: config.env !== "production" ? { target: "pino-pretty" } : undefined,
     },
   })

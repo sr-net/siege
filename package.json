@@ -20,6 +20,7 @@
     ]
   },
   "scripts": {
+    "dev": "na nodemon --exec tsx src/index.ts",
     "db:reset": "nu scripts/db-reset.nu",
     "docker:build": "docker build . --tag siege",
     "docker:prune": "docker image prune --force",

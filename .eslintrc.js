@@ -1,4 +1,5 @@
 module.exports = {
+  ignorePatterns: ["*.generated.ts"],
   extends: [
     "plugin:@beequeue/base",
     "plugin:@beequeue/node",
