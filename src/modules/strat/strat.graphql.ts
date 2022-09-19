@@ -16,7 +16,7 @@ import { Gamemode } from "@/edgedb/types"
 import { DateTime } from "@/graphql/scalars"
 import { NexusGenArgTypes, NexusGenTypes } from "@/graphql/types.generated"
 
-import { Author } from "./author.entity"
+import { Author } from "./author.graphql"
 
 export const getFilters = <Args extends NexusGenArgTypes["Query"]["strat"]>(
   args: Args,
