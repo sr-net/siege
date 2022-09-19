@@ -1,6 +1,8 @@
 import { readFileSync } from "fs"
 import path from "path"
 
+import { test, expect } from "vitest"
+
 import { createSchema } from "@/graphql/schema"
 
 test("generated schema should be identical to snapshot", async () => {

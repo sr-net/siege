@@ -17,6 +17,7 @@ export const createSchema = (generateSnapshot = true) =>
 
     shouldGenerateArtifacts: generateSnapshot,
     shouldExitAfterGenerateArtifacts: generateSnapshot,
+    prettierConfig: path.resolve(__dirname, "../../.prettierrc"),
     outputs: {
       schema: path.resolve(__dirname, "snapshot.graphql"),
       typegen: path.resolve(__dirname, "types.generated.ts"),

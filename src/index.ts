@@ -7,7 +7,7 @@ import { init } from "@sentry/node"
 import { buildApp } from "@/app"
 import { config } from "@/config"
 import { Environment } from "@/constants"
-import { dataSource } from "@/db"
+import { dbClient } from "@/db"
 import { createSchema } from "@/graphql/schema"
 
 const shouldGenerateSnapshot = process.argv.some(
@@ -23,7 +23,7 @@ const start = async () => {
   const app = await buildApp(schema)
 
   await setTimeout(1000)
-  await dataSource.initialize()
+  await dbClient.ensureConnected()
 
   await app.listen({
     host: "0.0.0.0",

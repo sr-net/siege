@@ -8,9 +8,11 @@ import {
   nonNull,
   objectType,
 } from "nexus"
+import { FieldResolver } from "nexus/src/typegenTypeHelpers"
 import { dedent } from "ts-dedent"
 
-import e, { Gamemode } from "@/edgedb"
+import { dbClient } from "@/db"
+import { Gamemode, Strat as DBStrat } from "@/edgedb/types"
 import { DateTime } from "@/graphql/scalars"
 import { NexusGenArgTypes } from "@/graphql/types.generated"
 
@@ -52,36 +54,6 @@ export const StratPage = objectType({
   },
 })
 
-const params = {
-  atk: e.optional(e.bool),
-  def: e.optional(e.bool),
-  excludeShortIds: e.optional(e.array(e.int32)),
-  gamemode: e.optional(e.Gamemode),
-  page: e.optional(e.int32),
-  shortId: e.optional(e.int32),
-  uuid: e.optional(e.uuid),
-}
-
-const query = e.params(params, (_params) =>
-  e.select(e.Strat, () => ({
-    id: true,
-    shortId: true,
-    title: true,
-    description: true,
-    atk: true,
-    def: true,
-    gamemodes: true,
-    author: {
-      name: true,
-      kind: true,
-      url: true,
-    },
-    score: true,
-
-    // filter: getFilters(strat as any, params),
-  })),
-)
-
 const baseStratQuery = dedent`
   SELECT Strat {
     id,
@@ -101,10 +73,7 @@ const baseStratQuery = dedent`
   filter .submission = false
 `
 
-export const getFilters = (
-  strat: typeof e.Strat,
-  args: NexusGenArgTypes["Query"]["strats"],
-): string => {
+export const getFilters = (args: NexusGenArgTypes["Query"]["strat"]): string => {
   if (args.uuid != null) {
     return ".id = $uuid"
   }
@@ -124,8 +93,8 @@ export const getFilters = (
 
   if (args.atk === true || args.def === true) {
     filters.push(
-      `.atk = ${args.atk?.toString() ?? "false"}`,
-      `.def = ${args.def?.toString() ?? "false"}`,
+      `.atk = ${Boolean(args.atk ?? "false").toString()}`,
+      `.def = ${Boolean(args.def ?? "false").toString()}`,
     )
   }
 
@@ -136,42 +105,13 @@ export const getFilters = (
   return filters.join(" and ")
 }
 
-console.log(query.toEdgeQL())
+export const resolveStrat: FieldResolver<"Query", "strat"> = async (_, args) => {
+  const result = await dbClient.querySingle<DBStrat>(
+    baseStratQuery + getFilters(args),
+    args,
+  )
 
-export const StratQuery = objectType({
-  name: "Query",
-  definition(t) {
-    t.field("strat", {
-      type: Strat,
-      args: {
-        atk: booleanArg({
-          description:
-            "Set to `true` to filter for Strats that work on attack. Setting to `false` does nothing.",
-        }),
-        def: booleanArg({
-          description:
-            "Set to `true` to filter for Strats that work on defense. Setting to `false` does nothing.",
-        }),
-        excludeShortIds: list(
-          nonNull(
-            intArg({ description: "A list of Strats to be excluded from the result." }),
-          ),
-        ),
-        gamemode: arg({
-          type: GamemodeEnum,
-          description: "Filter by gamemode",
-        }),
-        random: booleanArg({
-          description:
-            "Return a random Strat matching the arguments instead of the first best one.",
-        }),
-        shortId: intArg(),
-        uuid: idArg(),
-      },
+  console.log(result)
 
-      resolve: async (_, _args) => {
-        return { test: true }
-      },
-    })
-  },
-})
+  return result
+}

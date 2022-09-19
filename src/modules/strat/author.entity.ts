@@ -1,6 +1,6 @@
 import { enumType, objectType } from "nexus"
 
-import { AuthorKind } from "@/edgedb"
+import { AuthorKind } from "@/edgedb/types"
 
 const AuthorTypeEnum = enumType({
   name: "AuthorType",

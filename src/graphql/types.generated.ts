@@ -76,6 +76,7 @@ export interface NexusGenFieldTypes {
   }
   Query: {
     // field return type
+    strat: NexusGenRootTypes["Strat"] | null // Strat
     strats: NexusGenRootTypes["StratPage"] // StratPage!
   }
   Strat: {
@@ -114,6 +115,7 @@ export interface NexusGenFieldTypeNames {
   }
   Query: {
     // field return type name
+    strat: "Strat"
     strats: "StratPage"
   }
   Strat: {
@@ -150,6 +152,16 @@ export interface NexusGenArgTypes {
     }
   }
   Query: {
+    strat: {
+      // args
+      atk?: boolean | null // Boolean
+      def?: boolean | null // Boolean
+      excludeShortIds?: number[] | null // [Int!]
+      gamemode?: NexusGenEnums["Gamemode"] | null // Gamemode
+      random?: boolean | null // Boolean
+      shortId?: number | null // Int
+      uuid?: string | null // ID
+    }
     strats: {
       // args
       atk?: boolean | null // Boolean
