@@ -1,7 +1,7 @@
 import { readFileSync } from "fs"
 import path from "path"
 
-import { createSchema } from "@/graphql/index"
+import { createSchema } from "@/graphql/schema"
 
 test("generated schema should be identical to snapshot", async () => {
   const snapshot = readFileSync(path.resolve(__dirname, "snapshot.graphql")).toString()

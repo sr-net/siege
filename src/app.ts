@@ -1,5 +1,6 @@
 import Fastify, { FastifyReply, FastifyRequest } from "fastify"
 import Mercurius from "mercurius"
+import type { NexusGraphQLSchema } from "nexus/dist/definitions/_types"
 import { v4 as uuid } from "uuid"
 
 import Cookie from "@fastify/cookie"
@@ -7,7 +8,6 @@ import Cors from "@fastify/cors"
 import Helmet from "@fastify/helmet"
 
 import { config } from "@/config"
-import { createSchema } from "@/graphql"
 
 export type Context = {
   sessionUuid: string | null
@@ -36,7 +36,7 @@ const buildContext = (req: FastifyRequest, res: FastifyReply): Context => {
   }
 }
 
-export const buildApp = async () => {
+export const buildApp = async (schema: NexusGraphQLSchema) => {
   const app = Fastify({
     genReqId: () => uuid(),
     logger: {
@@ -57,7 +57,7 @@ export const buildApp = async () => {
   })
 
   await app.register(Mercurius, {
-    schema: await createSchema(),
+    schema,
     context: buildContext,
     graphiql: true,
 

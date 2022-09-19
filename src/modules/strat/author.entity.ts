@@ -1,27 +1,17 @@
-import { Field, ObjectType, registerEnumType } from "type-graphql"
-import { Column, Index } from "typeorm"
+import { enumType, objectType } from "nexus"
 
-export enum AuthorType {
-  Name = "NAME",
-  YouTube = "YOUTUBE",
-  Twitch = "TWITCH",
-  Reddit = "REDDIT",
-}
+import { AuthorKind } from "@/edgedb"
 
-registerEnumType(AuthorType, { name: "AuthorType" })
+const AuthorTypeEnum = enumType({
+  name: "AuthorType",
+  members: Object.values(AuthorKind),
+})
 
-@ObjectType()
-export class Author {
-  @Column({ type: "enum", enum: AuthorType })
-  @Field(() => AuthorType)
-  public type!: AuthorType
-
-  @Column()
-  @Index()
-  @Field()
-  public name!: string
-
-  @Column({ nullable: true })
-  @Field({ nullable: true })
-  public url?: string
-}
+export const Author = objectType({
+  name: "Author",
+  definition(t) {
+    t.nonNull.string("name")
+    t.nonNull.field("type", { type: AuthorTypeEnum })
+    t.string("url")
+  },
+})
