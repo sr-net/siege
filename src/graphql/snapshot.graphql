@@ -92,6 +92,7 @@ type Strat {
   def: Boolean!
   description: String!
   gamemodes: [Gamemode!]!
+  liked: Boolean!
   score: Int!
   shortId: Int!
   submission: Boolean!

@@ -15,6 +15,7 @@ import { dbClient } from "@/db"
 import { Gamemode } from "@/edgedb/types"
 import { DateTime } from "@/graphql/scalars"
 import { NexusGenArgTypes, NexusGenTypes } from "@/graphql/types.generated"
+import { resolveLiked } from "@/modules/like/like.graphql"
 
 import { Author } from "./author.graphql"
 
@@ -100,7 +101,9 @@ export const Strat = objectType({
     t.nonNull.field("author", { type: Author })
 
     t.nonNull.int("score")
-    // t.nonNull.boolean("liked")
+    t.nonNull.boolean("liked", {
+      resolve: resolveLiked,
+    })
 
     t.nonNull.boolean("submission")
     t.field("acceptedAt", { type: DateTime })
@@ -154,9 +157,8 @@ export const queryStrat = queryField("strat", {
   },
   resolve: async (_, gqlArgs) => {
     const { filters, args } = getFilters(gqlArgs)
-
     const result = await dbClient.querySingle<NexusGenTypes["allTypes"]["Strat"]>(
-      `${baseStratQuery} ${filters} LIMIT 1`,
+      `${baseStratQuery} FILTER ${filters} LIMIT 1`,
       args,
     )
 

@@ -88,6 +88,7 @@ export interface NexusGenFieldTypes {
     def: boolean // Boolean!
     description: string // String!
     gamemodes: NexusGenEnums["Gamemode"][] // [Gamemode!]!
+    liked: boolean // Boolean!
     score: number // Int!
     shortId: number // Int!
     submission: boolean // Boolean!
@@ -126,6 +127,7 @@ export interface NexusGenFieldTypeNames {
     def: "Boolean"
     description: "String"
     gamemodes: "Gamemode"
+    liked: "Boolean"
     score: "Int"
     shortId: "Int"
     submission: "Boolean"
