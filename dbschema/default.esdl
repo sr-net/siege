@@ -64,5 +64,7 @@ module default {
     required link strat -> Strat;
 
     index on (.sessionId);
+
+    constraint exclusive on ((.strat, .sessionId));
   }
 }
