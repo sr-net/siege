@@ -10,11 +10,16 @@ const likedQuery = dedent`
       .strat.id = <uuid>$id
     AND
       .sessionId = <uuid>$sessionId
+    AND
+      .active = true
   );
 `
 
-export const resolveLiked: FieldResolver<"Strat", "liked"> = (strat, _, ctx) =>
-  dbClient.queryRequiredSingle<boolean>(likedQuery, {
+export const resolveLiked: FieldResolver<"Strat", "liked"> = (strat, _, ctx) => {
+  if (ctx.sessionUuid == null) return false
+
+  return dbClient.queryRequiredSingle<boolean>(likedQuery, {
     id: strat.uuid,
     sessionId: ctx.sessionUuid,
   })
+}
