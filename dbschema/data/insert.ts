@@ -80,19 +80,32 @@ const addStratsAndAuthors = async () => {
 const map = Object.fromEntries(strats.map((strat) => [strat.uuid, strat.shortId]))
 
 const addLikes = async () => {
-  await Promise.all(
-    likes.map(async ({ strat, ...like }) => {
-      like = {
-        ...like,
-        createdAt: new Date(like.createdAt) as any,
-        stratShortId: map[strat],
-      }
+  const existingLikes = new Set<`${string}:${string}`>()
+  const extras = new Set<string>()
 
-      return queue.add(() => client.execute(insertLikeQuery, like))
-    }),
+  await Promise.all(
+    likes
+      .filter(({ strat, sessionId }) => {
+        if (existingLikes.has(`${strat}:${sessionId}`)) {
+          extras.add(`${strat}:${sessionId}`)
+          return false
+        }
+
+        existingLikes.add(`${strat}:${sessionId}`)
+        return true
+      })
+      .map(async ({ strat, ...like }) => {
+        like = {
+          ...like,
+          createdAt: new Date(like.createdAt) as any,
+          stratShortId: map[strat],
+        }
+
+        return queue.add(() => client.execute(insertLikeQuery, like))
+      }),
   )
 
-  console.log("added likes")
+  console.log(`added likes, found ${extras.size} extras`)
 }
 
 const insertReportQuery = `
