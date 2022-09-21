@@ -8,4 +8,8 @@ dist/
 !.idea/template.iml
 !.idea/prettier.xml
 
+dbschema/data/*.json
+src/edgedb/**
+!src/edgedb/types.ts
+
 .env

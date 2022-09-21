@@ -1,15 +1,17 @@
-import Fastify, { FastifyReply, FastifyRequest } from "fastify"
+import Fastify, { FastifyBaseLogger, FastifyReply, FastifyRequest } from "fastify"
 import Mercurius from "mercurius"
+import type { NexusGraphQLSchema } from "nexus/dist/definitions/_types"
 import { v4 as uuid } from "uuid"
 
 import Cookie from "@fastify/cookie"
 import Cors from "@fastify/cors"
 import Helmet from "@fastify/helmet"
+import { captureException } from "@sentry/node"
 
 import { config } from "@/config"
-import { createSchema } from "@/graphql"
 
 export type Context = {
+  logger: FastifyBaseLogger
   sessionUuid: string | null
   setSessionUuid: () => string
 }
@@ -31,15 +33,17 @@ const buildContext = (req: FastifyRequest, res: FastifyReply): Context => {
   }
 
   return {
+    logger: req.log,
     sessionUuid: sessionUuid ?? null,
     setSessionUuid,
   }
 }
 
-export const buildApp = async () => {
+export const buildApp = async (schema: NexusGraphQLSchema) => {
   const app = Fastify({
     genReqId: () => uuid(),
     logger: {
+      level: process.env.LOG_LEVEL ?? config.env === "development" ? "debug" : "info",
       transport: config.env !== "production" ? { target: "pino-pretty" } : undefined,
     },
   })
@@ -57,12 +61,21 @@ export const buildApp = async () => {
   })
 
   await app.register(Mercurius, {
-    schema: await createSchema(),
+    schema,
     context: buildContext,
     graphiql: true,
 
     jit: 8,
     queryDepth: 8,
+  })
+
+  // eslint-disable-next-line @typescript-eslint/require-await
+  app.graphql.addHook("onResolution", async (execution) => {
+    if (execution.errors?.length ?? 0 !== 0) {
+      for (const error of execution.errors!) {
+        captureException(error)
+      }
+    }
   })
 
   return app

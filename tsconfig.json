@@ -5,7 +5,7 @@
 
     "sourceMap": true,
 
-    "types": ["node", "jest"],
+    "types": ["node", "vitest/importMeta"],
     "baseUrl": ".",
     "paths": {
       "@/*": ["src/*"]
@@ -16,12 +16,10 @@
     "resolveJsonModule": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
+    "downlevelIteration": true,
 
     "noUnusedLocals": true,
     "noUnusedParameters": true
-  },
-  "ts-node": {
-    "require": ["dotenv/config", "tsconfig-paths/register"]
   },
   "include": ["./src/**/*.ts", "./index.d.ts"],
   "exclude": ["node_modules"]

@@ -1,5 +1,4 @@
-import { DataSource } from "typeorm"
+import { createClient } from "edgedb"
 
-import { config } from "@/config"
-
-export const dataSource = new DataSource(config.db)
+// ?. needed for tests
+export const dbClient = createClient?.()
