@@ -9,6 +9,7 @@ dist/
 !.idea/prettier.xml
 
 dbschema/data/*.json
-src/edgedb
+src/edgedb/**
+!src/edgedb/types.ts
 
 .env
