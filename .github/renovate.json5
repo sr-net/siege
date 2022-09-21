@@ -23,7 +23,7 @@
     },
     {
       groupName: "Testing",
-      matchPackagePatterns: ["jest"],
+      matchPackagePatterns: ["vitest"],
       automerge: true,
     },
   ],
