@@ -1,5 +1,5 @@
 module.exports = {
-  ignorePatterns: ["*.generated.ts"],
+  ignorePatterns: ["*.generated.ts", "src/edgedb/**"],
   extends: [
     "plugin:@beequeue/base",
     "plugin:@beequeue/node",
