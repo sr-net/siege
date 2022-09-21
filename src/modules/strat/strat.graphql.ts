@@ -73,8 +73,8 @@ export const getFilters = <Args extends NexusGenArgTypes["Query"]["strat"]>(
   }
 
   return {
-    filters: `filter ${filters.join(" and ")}`,
-    args: newArgs as any,
+    filters: `${filters.join(" and ")}`,
+    args: (Object.keys(newArgs).length > 0 ? newArgs : undefined) as any,
   }
 }
 
@@ -111,7 +111,7 @@ export const Strat = objectType({
 })
 
 const baseStratQuery = dedent`
-  SELECT Strat {
+  select Strat {
     uuid := .id,
     shortId,
     title,
@@ -155,10 +155,10 @@ export const queryStrat = queryField("strat", {
         "Return a random Strat matching the arguments instead of the first best one.",
     }),
   },
-  resolve: async (_, gqlArgs) => {
+  resolve: async (_, gqlArgs, ctx) => {
     const { filters, args } = getFilters(gqlArgs)
     const result = await dbClient.querySingle<NexusGenTypes["allTypes"]["Strat"]>(
-      `${baseStratQuery} FILTER ${filters} LIMIT 1`,
+      `${baseStratQuery} filter ${filters} order by .shortId limit 1`,
       args,
     )
 
@@ -182,7 +182,7 @@ const PAGE_SIZE = 10
 const createStratsQuery = (gqlArgs: NexusGenArgTypes["Query"]["strats"]) => {
   const { filters, args } = getFilters(gqlArgs)
   const baseQuery = dedent`
-    ${baseStratQuery} ${filters} order by .shortId
+    ${baseStratQuery} filter ${filters} order by .shortId
   `
 
   return {
