@@ -155,7 +155,7 @@ export const queryStrat = queryField("strat", {
         "Return a random Strat matching the arguments instead of the first best one.",
     }),
   },
-  resolve: async (_, gqlArgs, ctx) => {
+  resolve: async (_, gqlArgs) => {
     const { filters, args } = getFilters(gqlArgs)
     const result = await dbClient.querySingle<NexusGenTypes["allTypes"]["Strat"]>(
       `${baseStratQuery} filter ${filters} order by .shortId limit 1`,

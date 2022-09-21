@@ -6,13 +6,13 @@ import { dbClient } from "@/db"
 import { NexusGenTypes } from "@/graphql/types.generated"
 
 const likedQuery = dedent`
-  SELECT EXISTS (
-    SELECT \`Like\`
-    FILTER
+  select exists (
+    select \`Like\`
+    filter
       .strat.id = <uuid>$id
-    AND
+    and
       .sessionId = <uuid>$sessionId
-    AND
+    and
       .active = true
   );
 `
