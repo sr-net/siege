@@ -37,15 +37,15 @@ describe("getFilters", () => {
   test("multiple filters are chained together", () => {
     expect(getFilters({ gamemode: "BOMBS", atk: true })).toMatchInlineSnapshot(
       `
-      {
-        "args": {
-          "atk": true,
-          "def": false,
-          "gamemode": "BOMBS",
-        },
-        "filters": ".submission = false and .atk = <bool>$atk and .def = <bool>$def and contains(.gamemodes, <Gamemode>$gamemode)",
-      }
-    `,
+        {
+          "args": {
+            "atk": true,
+            "def": false,
+            "gamemode": "BOMBS",
+          },
+          "filters": ".submission = false and .atk = <bool>$atk and .def = <bool>$def and contains(.gamemodes, <Gamemode>$gamemode)",
+        }
+      `,
     )
   })
 })
