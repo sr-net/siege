@@ -1,0 +1,1 @@
+/graphql?query=%7Bstrat(shortId%3A2)%7BshortId%7D%7D 2
