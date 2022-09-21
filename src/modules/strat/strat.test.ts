@@ -6,8 +6,8 @@ describe("getFilters", () => {
   test("no args returns only submission exclusion", () => {
     expect(getFilters({})).toMatchInlineSnapshot(`
       {
-        "args": {},
-        "filters": "filter .submission = false",
+        "args": undefined,
+        "filters": ".submission = false",
       }
     `)
   })
@@ -37,15 +37,15 @@ describe("getFilters", () => {
   test("multiple filters are chained together", () => {
     expect(getFilters({ gamemode: "BOMBS", atk: true })).toMatchInlineSnapshot(
       `
-        {
-          "args": {
-            "atk": true,
-            "def": false,
-            "gamemode": "BOMBS",
-          },
-          "filters": "filter .submission = false and .atk = <bool>$atk and .def = <bool>$def and contains(.gamemodes, <Gamemode>$gamemode)",
-        }
-      `,
+      {
+        "args": {
+          "atk": true,
+          "def": false,
+          "gamemode": "BOMBS",
+        },
+        "filters": ".submission = false and .atk = <bool>$atk and .def = <bool>$def and contains(.gamemodes, <Gamemode>$gamemode)",
+      }
+    `,
     )
   })
 })
