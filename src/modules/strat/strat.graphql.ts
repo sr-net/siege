@@ -19,6 +19,22 @@ import { resolveLiked } from "@/modules/like/like.graphql"
 
 import { Author } from "./author.graphql"
 
+export const stratGqlFields = dedent`
+  uuid := .id,
+  shortId,
+  title,
+  description,
+  atk,
+  def,
+  gamemodes,
+  score,
+  author: {
+    name,
+    type := .kind,
+    url,
+  },
+`
+
 export const getFilters = <Args extends NexusGenArgTypes["Query"]["strat"]>(
   args: Args,
 ): {
@@ -112,19 +128,7 @@ export const Strat = objectType({
 
 const baseStratQuery = dedent`
   select Strat {
-    uuid := .id,
-    shortId,
-    title,
-    description,
-    atk,
-    def,
-    gamemodes,
-    score,
-    author: {
-      name,
-      type := .kind,
-      url,
-    },
+    ${stratGqlFields}
   }
 `
 

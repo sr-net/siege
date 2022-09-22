@@ -4,6 +4,7 @@ import { dedent } from "ts-dedent"
 
 import { dbClient } from "@/db"
 import { NexusGenTypes } from "@/graphql/types.generated"
+import { stratGqlFields } from "@/modules/strat/strat.graphql"
 
 const likedQuery = dedent`
   select exists (
@@ -46,19 +47,7 @@ const likeQuery = dedent`
     )
   ) {
     strat: {
-      uuid := .id,
-      shortId,
-      title,
-      description,
-      atk,
-      def,
-      gamemodes,
-      score,
-      author: {
-        name,
-        type := .kind,
-        url,
-      },
+      ${stratGqlFields}
     }
   }
 `
@@ -99,19 +88,7 @@ const unlikeQuery = dedent`
     }
   ) {
     strat: {
-      uuid := .id,
-      shortId,
-      title,
-      description,
-      atk,
-      def,
-      gamemodes,
-      score,
-      author: {
-        name,
-        type := .kind,
-        url,
-      },
+      ${stratGqlFields}
     }
   }
 `
