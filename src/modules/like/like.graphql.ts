@@ -4,7 +4,7 @@ import { dedent } from "ts-dedent"
 
 import { dbClient } from "@/db"
 import { NexusGenTypes } from "@/graphql/types.generated"
-import { stratGqlFields } from "@/modules/strat/strat.graphql"
+import { stratGqlFields } from "@/modules/strat/strat.db"
 
 const likedQuery = dedent`
   select exists (

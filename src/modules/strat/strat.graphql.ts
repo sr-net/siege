@@ -1,3 +1,4 @@
+import mercurius from "mercurius"
 import {
   arg,
   booleanArg,
@@ -16,24 +17,9 @@ import { Gamemode } from "@/edgedb/types"
 import { DateTime } from "@/graphql/scalars"
 import { NexusGenArgTypes, NexusGenTypes } from "@/graphql/types.generated"
 import { resolveLiked } from "@/modules/like/like.graphql"
+import { stratGqlFields } from "@/modules/strat/strat.db"
 
 import { Author } from "./author.graphql"
-
-export const stratGqlFields = dedent`
-  uuid := .id,
-  shortId,
-  title,
-  description,
-  atk,
-  def,
-  gamemodes,
-  score,
-  author: {
-    name,
-    type := .kind,
-    url,
-  },
-`
 
 export const getFilters = <Args extends NexusGenArgTypes["Query"]["strat"]>(
   args: Args,
@@ -132,6 +118,11 @@ const baseStratQuery = dedent`
   }
 `
 
+const createRandomStratShortIdQuery = (filters: string) => dedent`
+  with S := (select Strat { shortId } filter ${filters}).shortId
+  select array_agg(S)[<int64>round(random() * count(S))]
+`
+
 export const queryStrat = queryField("strat", {
   type: Strat,
   args: {
@@ -160,6 +151,23 @@ export const queryStrat = queryField("strat", {
     }),
   },
   resolve: async (_, gqlArgs) => {
+    if (gqlArgs.random && (gqlArgs.shortId != null || gqlArgs.uuid != null)) {
+      throw new mercurius.ErrorWithProps(
+        "Can't specify `shortId` or `uuid` when `random` is true.",
+      )
+    }
+
+    if (gqlArgs.random === true) {
+      const { filters, args } = getFilters(gqlArgs)
+      const result = await dbClient.queryRequiredSingle<number>(
+        createRandomStratShortIdQuery(filters),
+        args,
+      )
+
+      gqlArgs.random = undefined
+      gqlArgs.shortId = result
+    }
+
     const { filters, args } = getFilters(gqlArgs)
     const result = await dbClient.querySingle<NexusGenTypes["allTypes"]["Strat"]>(
       `${baseStratQuery} filter ${filters} order by .shortId limit 1`,
