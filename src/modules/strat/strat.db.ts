@@ -14,4 +14,6 @@ export const stratGqlFields = dedent`
     type := .kind,
     url,
   },
+  submission,
+  acceptedAt,
 `
