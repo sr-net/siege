@@ -58,7 +58,7 @@
     "uuid": "9.0.0"
   },
   "devDependencies": {
-    "@beequeue/eslint-plugin": "0.8.0",
+    "@beequeue/eslint-plugin": "1.0.2",
     "@types/node": "18.7.18",
     "@types/uuid": "8.3.4",
     "eslint": "8.26.0",
