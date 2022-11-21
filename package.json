@@ -44,7 +44,7 @@
     "@tsconfig/node18": "1.0.1",
     "class-validator": "0.13.2",
     "dotenv": "16.0.3",
-    "edgedb": "0.22.8",
+    "edgedb": "1.0.2",
     "fastify": "4.10.2",
     "graphql": "16.6.0",
     "mercurius": "11.3.0",
