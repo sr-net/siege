@@ -94,8 +94,8 @@ devDependencies:
     specifier: 4.9.3
     version: 4.9.3
   vitest:
-    specifier: 0.25.2
-    version: 0.25.2
+    specifier: 0.25.3
+    version: 0.25.3
 
 packages:
 
@@ -3893,8 +3893,8 @@ packages:
       fsevents: 2.3.2
     dev: true
 
-  /vitest/0.25.2:
-    resolution: {integrity: sha512-qqkzfzglEFbQY7IGkgSJkdOhoqHjwAao/OrphnHboeYHC5JzsVFoLCaB2lnAy8krhj7sbrFTVRApzpkTOeuDWQ==}
+  /vitest/0.25.3:
+    resolution: {integrity: sha512-/UzHfXIKsELZhL7OaM2xFlRF8HRZgAHtPctacvNK8H4vOcbJJAMEgbWNGSAK7Y9b1NBe5SeM7VTuz2RsTHFJJA==}
     engines: {node: '>=v14.16.0'}
     hasBin: true
     peerDependencies:
