@@ -139,7 +139,7 @@ jobs:
       packages: read
     environment:
       name: prod
-      url: https://siege.sr.haglund.dev/graphiql
+      url: https://siege.stratroulette.net/graphiql
 
     steps:
       - uses: actions/checkout@v3
