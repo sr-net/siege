@@ -9,22 +9,6 @@
       packageNames: ["node"],
       allowedVersions: "<=18",
       rangeStrategy: "replace",
-    },
-    {
-      groupName: "`@types` package patches",
-      matchPackagePrefixes: ["@types/"],
-      patch: true,
-      automerge: true,
-    },
-    {
-      groupName: "Linting",
-      matchPackagePatterns: ["lint"],
-      automerge: true,
-    },
-    {
-      groupName: "Testing",
-      matchPackagePatterns: ["vitest"],
-      automerge: true,
-    },
+    }
   ],
 }
