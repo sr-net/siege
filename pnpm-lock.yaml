@@ -26,8 +26,8 @@ dependencies:
     specifier: 16.0.3
     version: 16.0.3
   edgedb:
-    specifier: 0.22.8
-    version: 0.22.8
+    specifier: 1.0.2
+    version: 1.0.2
   fastify:
     specifier: 4.10.2
     version: 4.10.2
@@ -65,7 +65,10 @@ dependencies:
 devDependencies:
   '@beequeue/eslint-plugin':
     specifier: 1.1.0
-    version: 1.1.0_lodna2kqutudccklmsddzyjx3a
+    version: 1.1.0_7kqmbfin2hbsatd5vaz65frvs4
+  '@edgedb/generate':
+    specifier: 0.0.7-beta.2
+    version: 0.0.7-beta.2_edgedb@1.0.2
   '@types/node':
     specifier: 18.11.9
     version: 18.11.9
@@ -85,14 +88,17 @@ devDependencies:
     specifier: 7.3.0
     version: 7.3.0
   prettier:
-    specifier: 2.7.1
-    version: 2.7.1
+    specifier: 2.8.0
+    version: 2.8.0
   simple-git-hooks:
     specifier: 2.8.1
     version: 2.8.1
   typescript:
     specifier: 4.9.3
     version: 4.9.3
+  vite:
+    specifier: 3.2.4
+    version: 3.2.4_@types+node@18.11.9
   vitest:
     specifier: 0.25.3
     version: 0.25.3
@@ -135,7 +141,7 @@ packages:
       regenerator-runtime: 0.13.9
     dev: true
 
-  /@beequeue/eslint-plugin/1.1.0_lodna2kqutudccklmsddzyjx3a:
+  /@beequeue/eslint-plugin/1.1.0_7kqmbfin2hbsatd5vaz65frvs4:
     resolution: {integrity: sha512-IFUNDO4v2T69LZwlWH9a6UkBXZcfdo6Qx8suZat92v7jSqclgYpXJKyPQvO9u94MJYwS8PuU3vOfpVkghRjdKw==}
     engines: {node: '>=14'}
     peerDependencies:
@@ -153,15 +159,26 @@ packages:
       eslint-plugin-import: 2.26.0_z7bumblfk7fs63kh36kvdawcaa
       eslint-plugin-jsx-a11y: 6.6.1_eslint@8.28.0
       eslint-plugin-n: 15.3.0_eslint@8.28.0
-      eslint-plugin-prettier: 4.2.1_pgxuib4rd7wiymfktharf5ydt4
+      eslint-plugin-prettier: 4.2.1_cwlo2dingkvfydnaculr42urve
       eslint-plugin-react: 7.31.10_eslint@8.28.0
       eslint-plugin-unicorn: 44.0.2_eslint@8.28.0
       eslint-plugin-vue: 9.6.0_eslint@8.28.0
-      prettier: 2.7.1
+      prettier: 2.8.0
     transitivePeerDependencies:
       - eslint-import-resolver-webpack
       - supports-color
       - typescript
+    dev: true
+
+  /@edgedb/generate/0.0.7-beta.2_edgedb@1.0.2:
+    resolution: {integrity: sha512-eAMpYWEkhEAmp7nEdpR2ycInbM+C3YXw61W51C122W4Kka9StDY+mY1yrNrnHeQmZeDx7vPCxOTdcM5lhZRp1A==}
+    engines: {node: '>= 12.0.0'}
+    hasBin: true
+    peerDependencies:
+      edgedb: ^1.0.0-alpha.0
+    dependencies:
+      chokidar: 3.5.3
+      edgedb: 1.0.2
     dev: true
 
   /@esbuild-kit/cjs-loader/2.4.0:
@@ -1112,11 +1129,10 @@ packages:
     resolution: {integrity: sha512-I88TYZWc9XiYHRQ4/3c5rjjfgkjhLyW2luGIheGERbNQ6OY7yTybanSpDXZa8y7VUP9YmDcYa+eyq4ca7iLqWA==}
     dev: true
 
-  /edgedb/0.22.8:
-    resolution: {integrity: sha512-a5PZIiEcPs9N/NwWKUsPljhQp0PwEozPvQgRGVf6Y03IvRQQiFJY+NOTDrz6ZWgEI03bdthRF+LQQabwVUCIbA==}
-    engines: {node: '>= 10.0.0'}
+  /edgedb/1.0.2:
+    resolution: {integrity: sha512-p5thPFs6LVZVTvofyh6ZLef2cuvZTr1F8hRFQACwb9DvKjQErUQrmPWCRtcdJpfTSqpTd69RYJxcwr3t7T6ISg==}
+    engines: {node: '>= 12.0.0'}
     hasBin: true
-    dev: false
 
   /ee-first/1.1.1:
     resolution: {integrity: sha512-WMwm9LhRUo+WUaRN+vRuETqG89IgZphVSNkdFgeb6sS/E4OrDIN7t48CAewSHXc6C8lefD8KKfr5vY61brQlow==}
@@ -1551,7 +1567,7 @@ packages:
       semver: 7.3.7
     dev: true
 
-  /eslint-plugin-prettier/4.2.1_pgxuib4rd7wiymfktharf5ydt4:
+  /eslint-plugin-prettier/4.2.1_cwlo2dingkvfydnaculr42urve:
     resolution: {integrity: sha512-f/0rXLXUt0oFYs8ra4w49wYZBG5GKZpAYsJSm6rnYL5uVDjd+zowwMwVZHnAjf4edNrKpCDYfXDgmRE/Ak7QyQ==}
     engines: {node: '>=12.0.0'}
     peerDependencies:
@@ -1564,7 +1580,7 @@ packages:
     dependencies:
       eslint: 8.28.0
       eslint-config-prettier: 8.5.0_eslint@8.28.0
-      prettier: 2.7.1
+      prettier: 2.8.0
       prettier-linter-helpers: 1.0.0
     dev: true
 
@@ -3095,8 +3111,8 @@ packages:
       util-deprecate: 1.0.2
     dev: true
 
-  /postcss/8.4.16:
-    resolution: {integrity: sha512-ipHE1XBvKzm5xI7hiHCZJCSugxvsdq2mPnsq5+UF+VHCjiBvtDrlxJfMBToWaP9D5XlgNmcFGqoHmUn0EYEaRQ==}
+  /postcss/8.4.19:
+    resolution: {integrity: sha512-h+pbPsyhlYj6N2ozBmHhHrs9DzGmbaarbLvWipMRO7RLS+v4onj26MPFXA5OBYFxyqYhUJK456SwDcY9H2/zsA==}
     engines: {node: ^10 || ^12 || >=14}
     dependencies:
       nanoid: 3.3.4
@@ -3116,8 +3132,8 @@ packages:
       fast-diff: 1.2.0
     dev: true
 
-  /prettier/2.7.1:
-    resolution: {integrity: sha512-ujppO+MkdPqoVINuDFDRLClm7D78qbDt0/NR+wp5FqEZOoTNAjPHWj17QRhu7geIHJfcNhRk1XVQmF8Bp3ye+g==}
+  /prettier/2.8.0:
+    resolution: {integrity: sha512-9Lmg8hTFZKG0Asr/kW9Bp8tJjRVluO8EJQVfY2T7FMw9T5jy4I/Uvx0Rca/XWf50QQ1/SS48+6IJWnrb+2yemA==}
     engines: {node: '>=10.13.0'}
     hasBin: true
     dev: true
@@ -3308,8 +3324,8 @@ packages:
       glob: 7.2.3
     dev: true
 
-  /rollup/2.78.1:
-    resolution: {integrity: sha512-VeeCgtGi4P+o9hIg+xz4qQpRl6R401LWEXBmxYKOV4zlF82lyhgh2hTZnheFUbANE8l2A41F458iwj2vEYaXJg==}
+  /rollup/2.79.1:
+    resolution: {integrity: sha512-uKxbd0IhMZOhjAiD5oAFp7BqvkA4Dv47qpOCtaNvng4HBwdbWtdOh8f5nZNuk2rp51PMGk3bzfWu5oayNEuYnw==}
     engines: {node: '>=10.0.0'}
     hasBin: true
     optionalDependencies:
@@ -3866,29 +3882,36 @@ packages:
     engines: {node: '>= 0.10'}
     dev: false
 
-  /vite/3.1.3:
-    resolution: {integrity: sha512-/3XWiktaopByM5bd8dqvHxRt5EEgRikevnnrpND0gRfNkrMrPaGGexhtLCzv15RcCMtV2CLw+BPas8YFeSG0KA==}
+  /vite/3.2.4_@types+node@18.11.9:
+    resolution: {integrity: sha512-Z2X6SRAffOUYTa+sLy3NQ7nlHFU100xwanq1WDwqaiFiCe+25zdxP1TfCS5ojPV2oDDcXudHIoPnI1Z/66B7Yw==}
     engines: {node: ^14.18.0 || >=16.0.0}
     hasBin: true
     peerDependencies:
+      '@types/node': '>= 14'
       less: '*'
       sass: '*'
       stylus: '*'
+      sugarss: '*'
       terser: ^5.4.0
     peerDependenciesMeta:
+      '@types/node':
+        optional: true
       less:
         optional: true
       sass:
         optional: true
       stylus:
         optional: true
+      sugarss:
+        optional: true
       terser:
         optional: true
     dependencies:
+      '@types/node': 18.11.9
       esbuild: 0.15.15
-      postcss: 8.4.16
+      postcss: 8.4.19
       resolve: 1.22.1
-      rollup: 2.78.1
+      rollup: 2.79.1
     optionalDependencies:
       fsevents: 2.3.2
     dev: true
@@ -3928,11 +3951,12 @@ packages:
       tinybench: 2.3.1
       tinypool: 0.3.0
       tinyspy: 1.0.2
-      vite: 3.1.3
+      vite: 3.2.4_@types+node@18.11.9
     transitivePeerDependencies:
       - less
       - sass
       - stylus
+      - sugarss
       - supports-color
       - terser
     dev: true

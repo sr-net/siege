@@ -1,10 +1,8 @@
 import { enumType, objectType } from "nexus"
 
-import { AuthorKind } from "@/edgedb/types"
-
 const AuthorTypeEnum = enumType({
   name: "AuthorType",
-  members: Object.values(AuthorKind),
+  members: ["NAME", "YOUTUBE", "TWITCH", "REDDIT"],
 })
 
 export const Author = objectType({

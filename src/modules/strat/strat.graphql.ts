@@ -13,7 +13,6 @@ import {
 import { dedent } from "ts-dedent"
 
 import { dbClient } from "@/db"
-import { Gamemode } from "@/edgedb/types"
 import { DateTime } from "@/graphql/scalars"
 import { NexusGenArgTypes, NexusGenTypes } from "@/graphql/types.generated"
 import { resolveLiked } from "@/modules/like/like.graphql"
@@ -84,7 +83,7 @@ export const getFilters = <Args extends NexusGenArgTypes["Query"]["strat"]>(
 
 export const GamemodeEnum = enumType({
   name: "Gamemode",
-  members: Object.values(Gamemode),
+  members: ["BOMBS", "HOSTAGE", "CAPTURE_AREAS"],
 })
 
 export const Strat = objectType({
