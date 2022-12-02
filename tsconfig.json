@@ -8,7 +8,8 @@
     "types": ["node", "vitest/importMeta"],
     "baseUrl": ".",
     "paths": {
-      "@/*": ["src/*"]
+      "@/*": ["./src/*"],
+      "@dbtypes": ["./dbschema/interfaces.ts"]
     },
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
@@ -21,6 +22,6 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true
   },
-  "include": ["./src/**/*.ts", "./index.d.ts"],
+  "include": ["./src/**/*.ts", "./index.d.ts", "./dbschema/interfaces.ts"],
   "exclude": ["node_modules"]
 }
