@@ -61,7 +61,7 @@
     "@beequeue/eslint-plugin": "1.1.0",
     "@edgedb/generate": "0.0.7-beta.2",
     "@types/node": "18.11.9",
-    "@types/uuid": "8.3.4",
+    "@types/uuid": "9.0.0",
     "eslint": "8.28.0",
     "lint-staged": "13.0.4",
     "nodemon": "2.0.20",
