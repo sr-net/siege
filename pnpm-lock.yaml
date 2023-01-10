@@ -35,8 +35,8 @@ dependencies:
     specifier: 16.6.0
     version: 16.6.0
   mercurius:
-    specifier: 11.4.0
-    version: 11.4.0_graphql@16.6.0
+    specifier: 11.5.0
+    version: 11.5.0_graphql@16.6.0
   nexus:
     specifier: 1.3.0
     version: 1.3.0_graphql@16.6.0
@@ -334,6 +334,21 @@ packages:
   /@humanwhocodes/object-schema/1.2.1:
     resolution: {integrity: sha512-ZnQMnLV4e7hDlUvw8H+U8ASL02SS2Gn6+9Ac3wGGLIe7+je2AeAOxPY+izIPJDfFDb7eDjev0Us8MO1iFRN8hA==}
     dev: true
+
+  /@mercuriusjs/subscription-client/0.1.0_graphql@16.6.0:
+    resolution: {integrity: sha512-ivqMmSQ4kwroK/uUZVwOnd5QEAsjrEy/EqSsEqhtEObA/Zqkc44Fgi543Mml3XjoGopY1y1rJYQSl/gzfyfgrw==}
+    engines: {node: '>=14.19.3'}
+    peerDependencies:
+      graphql: ^16.0.0
+    dependencies:
+      '@fastify/error': 3.0.0
+      graphql: 16.6.0
+      secure-json-parse: 2.5.0
+      ws: 8.8.1
+    transitivePeerDependencies:
+      - bufferutil
+      - utf-8-validate
+    dev: false
 
   /@nodelib/fs.scandir/2.1.5:
     resolution: {integrity: sha512-vq24Bq3ym5HEQm2NKCr3yXDwjc7vTsEThRDnkp2DK9p1uqLR+DHurm/NOTo0KG7HYHU7eppKZj3MyqYuMBf62g==}
@@ -2646,8 +2661,8 @@ packages:
     resolution: {integrity: sha512-Pn9cox5CsMYngeDbmChANltQl+5pi6XmTrraMSzhPmMBbmgcxmqWry0U3PGapCU1yB4/LqCcom7qhHZiF/jGfQ==}
     dev: false
 
-  /mercurius/11.4.0_graphql@16.6.0:
-    resolution: {integrity: sha512-w3MsYMJE57eSvPm9tVo1uW4J9Woy0jSHC44RrNf7AQID40hflQ9Cm49u1kYnPBqF6903In8kaXzpW3ykhGRJOw==}
+  /mercurius/11.5.0_graphql@16.6.0:
+    resolution: {integrity: sha512-e2ZGC9OyX8eY7Dt/gUrTvzjVDojXECgv4dkjOz7Mux80V0D8ZC7im2cuywsInIQw6pEK1/p8WeVzuIADdWAJag==}
     engines: {node: '>=14.19.3'}
     peerDependencies:
       graphql: ^16.0.0
@@ -2655,6 +2670,7 @@ packages:
       '@fastify/error': 3.0.0
       '@fastify/static': 6.5.0
       '@fastify/websocket': 7.0.1
+      '@mercuriusjs/subscription-client': 0.1.0_graphql@16.6.0
       fastify-plugin: 4.2.1
       graphql: 16.6.0
       graphql-jit: 0.7.4_graphql@16.6.0
