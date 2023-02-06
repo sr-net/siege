@@ -160,6 +160,6 @@ jobs:
       - name: Push to dokku
         uses: dokku/github-action@v1.4.0
         with:
-          git_remote_url: "ssh://dokku@siege.stratroulette.net:22/siege"
+          git_remote_url: "ssh://dokku@${{ secrets.SERVER_IP }}:22/siege"
           deploy_docker_image: "ghcr.io/sr-net/siege:${{ steps.sha.outputs.short }}"
           ssh_private_key: ${{ secrets.DOKKU_PRIVATE_KEY }}
