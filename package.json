@@ -7,7 +7,7 @@
     "type": "github",
     "url": "sr-net/siege"
   },
-  "packageManager": "pnpm@7.29.3",
+  "packageManager": "pnpm@8.1.1",
   "engines": {
     "node": "^18"
   },
