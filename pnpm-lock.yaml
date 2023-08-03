@@ -319,8 +319,8 @@ packages:
       - supports-color
     dev: false
 
-  /@fastify/websocket@7.0.1:
-    resolution: {integrity: sha512-LHOUKqRr1iV4w47sVQAT5IrVPsTiuEAqOS1QgtRymJYPeVfIC65LTxg22eoR7kyYW4W84oWJk0gtsBwUGhDEVg==}
+  /@fastify/websocket@7.2.0:
+    resolution: {integrity: sha512-vhWQCT0I5a1JIKc34LXHQ2earW7kViYvhGn5x+lZr8TIOJKmx6NJk0Bw9zGWakulXhMsu/0y89QnsUnHiII9ag==}
     dependencies:
       fastify-plugin: 4.2.1
       ws: 8.8.1
@@ -2897,7 +2897,7 @@ packages:
     dependencies:
       '@fastify/error': 3.0.0
       '@fastify/static': 6.5.0
-      '@fastify/websocket': 7.0.1
+      '@fastify/websocket': 7.2.0
       fastify-plugin: 4.2.1
       graphql: 16.6.0
       graphql-jit: 0.8.0(graphql@16.6.0)
