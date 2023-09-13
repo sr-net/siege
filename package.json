@@ -41,7 +41,7 @@
     "@fastify/cors": "8.2.1",
     "@fastify/helmet": "10.1.0",
     "@sentry/node": "7.43.0",
-    "@tsconfig/node18": "1.0.1",
+    "@tsconfig/node18": "18.2.2",
     "class-validator": "0.14.0",
     "dotenv": "16.0.3",
     "edgedb": "1.1.0",
