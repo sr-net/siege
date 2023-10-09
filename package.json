@@ -7,7 +7,7 @@
     "type": "github",
     "url": "sr-net/siege"
   },
-  "packageManager": "pnpm@8.1.1",
+  "packageManager": "pnpm@8.9.0",
   "engines": {
     "node": "^18"
   },
@@ -34,42 +34,42 @@
     "typecheck": "tsc --noEmit -P tsconfig.json"
   },
   "resolutions": {
-    "@types/node": "18.15.3"
+    "@types/node": "18.18.4"
   },
   "dependencies": {
     "@fastify/cookie": "8.3.0",
-    "@fastify/cors": "8.2.1",
-    "@fastify/helmet": "10.1.0",
-    "@sentry/node": "7.43.0",
-    "@tsconfig/node18": "1.0.1",
+    "@fastify/cors": "8.4.0",
+    "@fastify/helmet": "10.1.1",
+    "@sentry/node": "7.73.0",
+    "@tsconfig/node18": "1.0.3",
     "class-validator": "0.14.0",
-    "dotenv": "16.0.3",
-    "edgedb": "1.1.0",
-    "fastify": "4.14.1",
+    "dotenv": "16.3.1",
+    "edgedb": "1.3.6",
+    "fastify": "4.23.2",
     "graphql": "16.6.0",
     "mercurius": "12.2.0",
     "nexus": "1.3.0",
-    "pino": "8.11.0",
-    "pino-pretty": "10.0.0",
-    "remeda": "1.9.1",
+    "pino": "8.16.0",
+    "pino-pretty": "10.2.3",
+    "remeda": "1.27.1",
     "ts-dedent": "2.2.0",
-    "tsconfig-paths": "4.1.2",
-    "tsx": "3.12.5",
-    "uuid": "9.0.0"
+    "tsconfig-paths": "4.2.0",
+    "tsx": "3.13.0",
+    "uuid": "9.0.1"
   },
   "devDependencies": {
-    "@beequeue/eslint-plugin": "2.0.1",
-    "@edgedb/generate": "0.0.8",
-    "@types/node": "18.15.3",
-    "@types/uuid": "9.0.1",
-    "eslint": "8.36.0",
-    "lint-staged": "13.2.0",
-    "nodemon": "2.0.21",
-    "p-queue": "7.3.4",
-    "prettier": "2.8.4",
-    "simple-git-hooks": "2.8.1",
-    "typescript": "5.0.2",
+    "@beequeue/eslint-plugin": "2.1.1",
+    "@edgedb/generate": "0.3.3",
+    "@types/node": "18.18.4",
+    "@types/uuid": "9.0.5",
+    "eslint": "8.51.0",
+    "lint-staged": "13.3.0",
+    "nodemon": "2.0.22",
+    "p-queue": "7.4.1",
+    "prettier": "2.8.8",
+    "simple-git-hooks": "2.9.0",
+    "typescript": "5.2.2",
     "vite": "3.2.5",
-    "vitest": "0.29.3"
+    "vitest": "0.34.6"
   }
 }
