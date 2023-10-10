@@ -2,17 +2,10 @@ import "dotenv/config"
 
 import { setTimeout } from "timers/promises"
 
-import { init } from "@sentry/node"
-
 import { buildApp } from "@/app"
 import { config } from "@/config"
-import { Environment } from "@/constants"
 import { dbClient } from "@/db"
 import { createSchema } from "@/graphql/schema"
-
-if (config.env === Environment.PRODUCTION) {
-  init(config.sentry)
-}
 
 const start = async () => {
   const schema = createSchema()

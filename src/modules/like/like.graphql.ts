@@ -1,5 +1,4 @@
 import { FieldResolver, idArg, mutationField, nonNull } from "nexus"
-import { isNil } from "remeda"
 import { dedent } from "ts-dedent"
 
 import { dbClient } from "@/db"
@@ -59,7 +58,7 @@ export const mutationLikeStrat = mutationField("likeStrat", {
   },
 
   resolve: async (_, args, ctx) => {
-    if (isNil(ctx.sessionUuid)) {
+    if (ctx.sessionUuid == null) {
       ctx.sessionUuid = ctx.setSessionUuid()
     }
 
@@ -100,7 +99,7 @@ export const mutationUnlikeStrat = mutationField("unlikeStrat", {
   },
 
   resolve: async (_, args, ctx) => {
-    if (isNil(ctx.sessionUuid)) {
+    if (ctx.sessionUuid == null) {
       ctx.sessionUuid = ctx.setSessionUuid()
     }
 
