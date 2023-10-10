@@ -33,7 +33,7 @@ export const getFilters = <Args extends NexusGenArgTypes["Query"]["strat"]>(
       filters: ".id = <uuid>$uuid",
       args: {
         uuid: args.uuid,
-      } as any,
+      } as never,
     }
   }
 
@@ -42,7 +42,7 @@ export const getFilters = <Args extends NexusGenArgTypes["Query"]["strat"]>(
       filters: ".shortId = <int32>$shortId",
       args: {
         shortId: args.shortId,
-      } as any,
+      } as never,
     }
   }
 
@@ -54,28 +54,30 @@ export const getFilters = <Args extends NexusGenArgTypes["Query"]["strat"]>(
 
   if (args.excludeShortIds != null && args.excludeShortIds.length > 0) {
     filters.push("not contains(<array<int32>>$excludeShortIds, .shortId)")
-    newArgs["excludeShortIds"] = args.excludeShortIds
+    newArgs.excludeShortIds = args.excludeShortIds
   }
 
   if (args.atk === true || args.def === true) {
     filters.push(".atk = <bool>$atk", ".def = <bool>$def")
 
-    newArgs["atk"] = args.atk ?? false
-    newArgs["def"] = args.def ?? false
+    newArgs.atk = args.atk ?? false
+    newArgs.def = args.def ?? false
   }
 
   if (args.gamemode != null) {
     filters.push("contains(.gamemodes, <Gamemode>$gamemode)")
-    newArgs["gamemode"] = args.gamemode
+    newArgs.gamemode = args.gamemode
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   if ((args as any).page != null) {
-    newArgs["page"] = (args as any).page
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    newArgs.page = (args as any).page
   }
 
   return {
     filters: `${filters.join(" and ")}`,
-    args: (Object.keys(newArgs).length > 0 ? newArgs : undefined) as any,
+    args: (Object.keys(newArgs).length > 0 ? newArgs : undefined) as never,
   }
 }
 
