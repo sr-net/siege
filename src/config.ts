@@ -1,15 +1,13 @@
-import type { NodeOptions } from "@sentry/node"
-
 import { Environment } from "@/constants"
 
 type Config = {
   [key in Environment]: {
     env: Environment
     port: number
-    sentry?: NodeOptions
   }
 }
 
+// eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
 const port = Number(process.env.PORT || "3000")
 
 const _config: Config = {
@@ -24,11 +22,6 @@ const _config: Config = {
   [Environment.PRODUCTION]: {
     env: Environment.PRODUCTION,
     port,
-    sentry: {
-      dsn: process.env.SENTRY_DSN,
-      release: process.env.GIT_REV,
-      environment: Environment.PRODUCTION,
-    },
   },
 }
 

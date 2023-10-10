@@ -6,7 +6,6 @@ import { v4 as uuid } from "uuid"
 import Cookie from "@fastify/cookie"
 import Cors from "@fastify/cors"
 import Helmet from "@fastify/helmet"
-import { captureException } from "@sentry/node"
 
 import { config } from "@/config"
 
@@ -67,15 +66,6 @@ export const buildApp = async (schema: NexusGraphQLSchema) => {
 
     jit: 8,
     queryDepth: 8,
-  })
-
-  // eslint-disable-next-line @typescript-eslint/require-await
-  app.graphql.addHook("onResolution", async (execution) => {
-    if (execution.errors?.length ?? 0 !== 0) {
-      for (const error of execution.errors!) {
-        captureException(error)
-      }
-    }
   })
 
   return app
