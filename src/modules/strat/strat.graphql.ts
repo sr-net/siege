@@ -26,7 +26,7 @@ export const getFilters = <
 ): {
   filters: string
   args: Args extends NexusGenArgTypes["Query"]["strats"]
-    ? c
+    ? NexusGenArgTypes["Query"]["strats"]
     : NexusGenArgTypes["Query"]["strat"]
 } => {
   if (args.uuid != null) {
