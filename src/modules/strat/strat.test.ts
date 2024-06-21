@@ -1,9 +1,9 @@
-import { describe, expect, test } from "vitest"
+import { describe, expect, it } from "vitest"
 
 import { getFilters } from "@/modules/strat/strat.graphql"
 
 describe("getFilters", () => {
-  test("no args returns only submission exclusion", () => {
+  it("no args returns only submission exclusion", () => {
     expect(getFilters({})).toMatchInlineSnapshot(`
       {
         "args": undefined,
@@ -12,7 +12,7 @@ describe("getFilters", () => {
     `)
   })
 
-  test("uuid only filters for id", () => {
+  it("uuid only filters for id", () => {
     expect(getFilters({ uuid: "uuid" })).toMatchInlineSnapshot(`
       {
         "args": {
@@ -23,7 +23,7 @@ describe("getFilters", () => {
     `)
   })
 
-  test("uuid only filters for shortId", () => {
+  it("uuid only filters for shortId", () => {
     expect(getFilters({ shortId: 123 })).toMatchInlineSnapshot(`
       {
         "args": {
@@ -34,7 +34,7 @@ describe("getFilters", () => {
     `)
   })
 
-  test("multiple filters are chained together", () => {
+  it("multiple filters are chained together", () => {
     expect(getFilters({ gamemode: "BOMBS", atk: true })).toMatchInlineSnapshot(
       `
         {

@@ -12,20 +12,21 @@ import {
 } from "nexus"
 import { dedent } from "ts-dedent"
 
+import { Author } from "./author.graphql"
 import { dbClient } from "@/db"
 import { DateTime } from "@/graphql/scalars"
-import { NexusGenArgTypes, NexusGenTypes } from "@/graphql/types.generated"
+import type { NexusGenArgTypes, NexusGenTypes } from "@/graphql/types.generated"
 import { resolveLiked } from "@/modules/like/like.graphql"
 import { stratGqlFields } from "@/modules/strat/strat.db"
 
-import { Author } from "./author.graphql"
-
-export const getFilters = <Args extends NexusGenArgTypes["Query"]["strat"]>(
+export const getFilters = <
+  Args extends NexusGenArgTypes["Query"]["strat"] | NexusGenArgTypes["Query"]["strats"],
+>(
   args: Args,
 ): {
   filters: string
   args: Args extends NexusGenArgTypes["Query"]["strats"]
-    ? NexusGenArgTypes["Query"]["strats"]
+    ? c
     : NexusGenArgTypes["Query"]["strat"]
 } => {
   if (args.uuid != null) {
@@ -69,10 +70,8 @@ export const getFilters = <Args extends NexusGenArgTypes["Query"]["strat"]>(
     newArgs.gamemode = args.gamemode
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  if ((args as any).page != null) {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    newArgs.page = (args as any).page
+  if ("page" in args && args.page != null) {
+    newArgs.page = args.page
   }
 
   return {
@@ -152,7 +151,7 @@ export const queryStrat = queryField("strat", {
     }),
   },
   resolve: async (_, gqlArgs) => {
-    if (gqlArgs.random && (gqlArgs.shortId != null || gqlArgs.uuid != null)) {
+    if (gqlArgs.random === true && (gqlArgs.shortId != null || gqlArgs.uuid != null)) {
       throw new mercurius.ErrorWithProps(
         "Can't specify `shortId` or `uuid` when `random` is true.",
       )
@@ -238,7 +237,7 @@ export const queryStrats = queryField("strats", {
 
     const result = await dbClient.querySingle<{
       lastPage: number
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+
       items: any[]
     }>(query, args)
 

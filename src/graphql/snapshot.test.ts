@@ -1,12 +1,12 @@
-import { readFileSync } from "fs"
-import path from "path"
-import { setTimeout } from "timers/promises"
+import { readFileSync } from "node:fs"
+import path from "node:path"
+import { setTimeout } from "node:timers/promises"
 
-import { test, expect } from "vitest"
+import { expect, it } from "vitest"
 
 import { createSchema } from "@/graphql/schema"
 
-test("generated schema should be identical to snapshot", async () => {
+it("generated schema should be identical to snapshot", async () => {
   const snapshot = readFileSync(path.resolve(__dirname, "snapshot.graphql")).toString()
 
   createSchema()

@@ -1,8 +1,8 @@
-import { FieldResolver, idArg, mutationField, nonNull } from "nexus"
+import { type FieldResolver, idArg, mutationField, nonNull } from "nexus"
 import { dedent } from "ts-dedent"
 
 import { dbClient } from "@/db"
-import { NexusGenTypes } from "@/graphql/types.generated"
+import type { NexusGenTypes } from "@/graphql/types.generated"
 import { stratGqlFields } from "@/modules/strat/strat.db"
 
 const likedQuery = dedent`

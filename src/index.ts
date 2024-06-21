@@ -1,6 +1,6 @@
 import "dotenv/config"
 
-import { setTimeout } from "timers/promises"
+import { setTimeout } from "node:timers/promises"
 
 import { buildApp } from "@/app"
 import { config } from "@/config"
@@ -19,7 +19,6 @@ const start = async () => {
     port: config.port,
   })
 
-  // eslint-disable-next-line no-console
   console.log(`Listening on ${config.port}`)
 }
 

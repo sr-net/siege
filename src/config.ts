@@ -7,8 +7,7 @@ type Config = {
   }
 }
 
-// eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
-const port = Number(process.env.PORT || "3000")
+const port = Number(process.env.PORT ?? "3000")
 
 const _config: Config = {
   [Environment.DEVELOPMENT]: {

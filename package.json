@@ -55,11 +55,11 @@
     "uuid": "10.0.0"
   },
   "devDependencies": {
-    "@beequeue/eslint-plugin": "4.0.0",
+    "@antfu/eslint-config": "2.21.1",
     "@edgedb/generate": "0.4.1",
     "@types/node": "20.14.7",
     "@types/uuid": "9.0.7",
-    "eslint": "8.56.0",
+    "eslint": "8.57.0",
     "lint-staged": "15.2.7",
     "nodemon": "3.0.2",
     "prettier": "3.1.1",
@@ -69,18 +69,7 @@
   },
   "pnpm": {
     "overrides": {
-      "array-includes": "npm:@nolyfill/array-includes@latest",
-      "array.prototype.flat": "npm:@nolyfill/array.prototype.flat@latest",
-      "array.prototype.flatmap": "npm:@nolyfill/array.prototype.flatmap@latest",
-      "array.prototype.tosorted": "npm:@nolyfill/array.prototype.tosorted@latest",
-      "es-iterator-helpers": "npm:@nolyfill/es-iterator-helpers@latest",
-      "has": "npm:@nolyfill/has@latest",
-      "object.assign": "npm:@nolyfill/object.assign@latest",
-      "object.entries": "npm:@nolyfill/object.entries@latest",
-      "object.fromentries": "npm:@nolyfill/object.fromentries@latest",
-      "object.hasown": "npm:@nolyfill/object.hasown@latest",
-      "object.values": "npm:@nolyfill/object.values@latest",
-      "string.prototype.matchall": "npm:@nolyfill/string.prototype.matchall@latest"
+      "hasown": "npm:@nolyfill/hasown@latest"
     }
   }
 }

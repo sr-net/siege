@@ -1,4 +1,8 @@
-import Fastify, { FastifyBaseLogger, FastifyReply, FastifyRequest } from "fastify"
+import Fastify, {
+  type FastifyBaseLogger,
+  type FastifyReply,
+  type FastifyRequest,
+} from "fastify"
 import Mercurius from "mercurius"
 import type { NexusGraphQLSchema } from "nexus/dist/definitions/_types"
 import { v4 as uuid } from "uuid"
@@ -42,7 +46,7 @@ export const buildApp = async (schema: NexusGraphQLSchema) => {
   const app = Fastify({
     genReqId: () => uuid(),
     logger: {
-      level: process.env.LOG_LEVEL ?? config.env === "development" ? "debug" : "info",
+      level: process.env.LOG_LEVEL ?? (config.env === "development" ? "debug" : "info"),
       transport: config.env !== "production" ? { target: "pino-pretty" } : undefined,
     },
   })
