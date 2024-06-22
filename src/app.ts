@@ -46,7 +46,7 @@ export const buildApp = async (schema: NexusGraphQLSchema) => {
   return new Hono<{ Variables: Variables }>()
     .use("*", async (c, next) => {
       const start = Date.now()
-      logger.info(
+      c.var.logger.info(
         {
           method: c.req.method,
           path: c.req.path,
@@ -57,7 +57,7 @@ export const buildApp = async (schema: NexusGraphQLSchema) => {
 
       await next()
 
-      logger.info(
+      c.var.logger.info(
         {
           status: c.res.status,
           ms: Date.now() - start,
