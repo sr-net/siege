@@ -13,13 +13,11 @@ const start = async () => {
   const schema = createSchema()
   const app = await buildApp(schema)
 
-  // await setTimeout(1000)
   await dbClient.ensureConnected()
 
   serve(
     {
       fetch: app.fetch,
-      hostname: "0.0.0.0",
       port: config.port,
     },
     () => {
