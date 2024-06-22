@@ -16,7 +16,7 @@ export const createSchema = () => {
 
     contextType: {
       module: path.resolve(__dirname, "../app.ts"),
-      export: "Context",
+      export: "GraphQLContext",
     },
     sourceTypes: {
       modules: [],

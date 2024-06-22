@@ -18,11 +18,11 @@ const likedQuery = dedent`
 `
 
 export const resolveLiked: FieldResolver<"Strat", "liked"> = (strat, _, ctx) => {
-  if (ctx.sessionUuid == null) return false
+  if (ctx.var.sessionUuid == null) return false
 
   return dbClient.queryRequiredSingle<boolean>(likedQuery, {
     id: strat.uuid,
-    sessionId: ctx.sessionUuid,
+    sessionId: ctx.var.sessionUuid,
   })
 }
 
@@ -58,18 +58,18 @@ export const mutationLikeStrat = mutationField("likeStrat", {
   },
 
   resolve: async (_, args, ctx) => {
-    if (ctx.sessionUuid == null) {
-      ctx.sessionUuid = ctx.setSessionUuid()
+    if (ctx.var.sessionUuid == null) {
+      ctx.var.setSessionUuid()
     }
 
     const result = await dbClient.queryRequiredSingle<{
       strat: Omit<NexusGenTypes["allTypes"]["Strat"], "liked">
     }>(likeQuery, {
       stratId: args.uuid,
-      sessionId: ctx.sessionUuid,
+      sessionId: ctx.var.sessionUuid,
     })
 
-    ctx.logger.debug({ result })
+    ctx.var.logger.debug({ result })
 
     return result.strat
   },
@@ -99,18 +99,18 @@ export const mutationUnlikeStrat = mutationField("unlikeStrat", {
   },
 
   resolve: async (_, args, ctx) => {
-    if (ctx.sessionUuid == null) {
-      ctx.sessionUuid = ctx.setSessionUuid()
+    if (ctx.var.sessionUuid == null) {
+      ctx.var.setSessionUuid()
     }
 
     const result = await dbClient.queryRequiredSingle<{
       strat: Omit<NexusGenTypes["allTypes"]["Strat"], "liked">
     }>(unlikeQuery, {
       stratId: args.uuid,
-      sessionId: ctx.sessionUuid,
+      sessionId: ctx.var.sessionUuid,
     })
 
-    ctx.logger.debug({ result })
+    ctx.var.logger.debug({ result })
 
     return result.strat
   },

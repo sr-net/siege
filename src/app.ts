@@ -1,4 +1,4 @@
-import { Hono, type MiddlewareHandler } from "hono"
+import { type Context, Hono, type MiddlewareHandler } from "hono"
 import { cors } from "hono/cors"
 import { getCookie, setCookie } from "hono/cookie"
 import { secureHeaders } from "hono/secure-headers"
@@ -16,6 +16,8 @@ export type Variables = {
   setSessionUuid: () => string
 }
 
+export type GraphQLContext = Context<{ Variables: Variables }>
+
 const buildContext: MiddlewareHandler<{ Variables: Variables }> = async (c, next) => {
   let sessionUuid = getCookie(c, "sessionUuid")
 
@@ -28,6 +30,7 @@ const buildContext: MiddlewareHandler<{ Variables: Variables }> = async (c, next
       secure: config.env === "production",
       sameSite: "lax",
     })
+    c.set("sessionUuid", sessionUuid)
 
     return sessionUuid
   }

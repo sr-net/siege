@@ -3,7 +3,7 @@
  * Do not make changes to this file directly
  */
 
-import type { Context } from "./../app"
+import type { GraphQLContext } from "./../app"
 
 declare global {
   interface NexusGen extends NexusGenTypes {}
@@ -205,7 +205,7 @@ export type NexusGenFeaturesConfig = {
 }
 
 export interface NexusGenTypes {
-  context: Context
+  context: GraphQLContext
   inputTypes: NexusGenInputs
   rootTypes: NexusGenRootTypes
   inputTypeShapes: NexusGenInputs & NexusGenEnums & NexusGenScalars
