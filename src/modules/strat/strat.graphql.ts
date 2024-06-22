@@ -1,4 +1,3 @@
-import mercurius from "mercurius"
 import {
   arg,
   booleanArg,
@@ -11,7 +10,6 @@ import {
   queryField,
 } from "nexus"
 import { dedent } from "ts-dedent"
-
 import { Author } from "./author.graphql"
 import { dbClient } from "@/db"
 import { DateTime } from "@/graphql/scalars"
@@ -152,9 +150,7 @@ export const queryStrat = queryField("strat", {
   },
   resolve: async (_, gqlArgs) => {
     if (gqlArgs.random === true && (gqlArgs.shortId != null || gqlArgs.uuid != null)) {
-      throw new mercurius.ErrorWithProps(
-        "Can't specify `shortId` or `uuid` when `random` is true.",
-      )
+      throw new Error("Can't specify `shortId` or `uuid` when `random` is true.")
     }
 
     if (gqlArgs.random === true) {
