@@ -44,6 +44,7 @@ const buildContext: MiddlewareHandler<{ Variables: Variables }> = async (c, next
 
 export const buildApp = async (schema: NexusGraphQLSchema) => {
   return new Hono<{ Variables: Variables }>()
+    .use("*", buildContext)
     .use("*", async (c, next) => {
       const start = Date.now()
       c.var.logger.info(
@@ -67,5 +68,5 @@ export const buildApp = async (schema: NexusGraphQLSchema) => {
     })
     .use("*", cors({ credentials: true, origin: (origin) => origin }))
     .use("*", secureHeaders())
-    .post("/graphql", buildContext, graphqlServer({ schema }))
+    .post("/graphql", graphqlServer({ schema }))
 }
