@@ -1,10 +1,10 @@
+import { randomUUID } from "node:crypto"
 import { type Context, Hono, type MiddlewareHandler } from "hono"
 import { cors } from "hono/cors"
 import { getCookie, setCookie } from "hono/cookie"
 import { secureHeaders } from "hono/secure-headers"
 import type { NexusGraphQLSchema } from "nexus/dist/definitions/_types"
 import type { Logger } from "pino"
-import { v4 as uuid } from "uuid"
 import { graphqlServer } from "@hono/graphql-server"
 
 import { config } from "@/config"
@@ -22,7 +22,7 @@ const buildContext: MiddlewareHandler<{ Variables: Variables }> = async (c, next
   let sessionUuid = getCookie(c, "sessionUuid")
 
   const setSessionUuid = () => {
-    sessionUuid = uuid()
+    sessionUuid = randomUUID()
 
     setCookie(c, "sessionUuid", sessionUuid, {
       maxAge: 60 * 60 * 24 * 30 * 12 * 5,

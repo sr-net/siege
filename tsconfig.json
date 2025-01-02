@@ -4,6 +4,7 @@
     "noEmit": true,
 
     "sourceMap": true,
+    "moduleResolution": "bundler",
 
     "types": ["node", "vitest/importMeta"],
     "baseUrl": ".",
