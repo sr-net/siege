@@ -33,8 +33,8 @@ importers:
         specifier: 22.0.0
         version: 22.0.0
       edgedb:
-        specifier: 1.5.7
-        version: 1.5.7
+        specifier: 1.5.12
+        version: 1.5.12
       graphql:
         specifier: 16.10.0
         version: 16.10.0
@@ -64,8 +64,8 @@ importers:
         specifier: 3.12.1
         version: 3.12.1(@typescript-eslint/utils@8.19.0(eslint@9.17.0)(typescript@5.7.2))(eslint@9.17.0)(typescript@5.7.2)(vitest@3.0.0-beta.3(@types/node@22.10.4)(tsx@4.19.2)(yaml@2.6.1))
       '@edgedb/generate':
-        specifier: 0.5.3
-        version: 0.5.3(edgedb@1.5.7)
+        specifier: 0.5.6
+        version: 0.5.6(edgedb@1.5.12)
       '@types/node':
         specifier: 22.10.4
         version: 22.10.4
@@ -159,12 +159,12 @@ packages:
   '@clack/prompts@0.9.0':
     resolution: {integrity: sha512-nGsytiExgUr4FL0pR/LeqxA28nz3E0cW7eLTSh3Iod9TGrbBt8Y7BHbV3mmkNC4G0evdYyQ3ZsbiBkk7ektArA==}
 
-  '@edgedb/generate@0.5.3':
-    resolution: {integrity: sha512-cOcCPmnmtCSD1ZwwmVZ/iIkwvtQk0loHrQIAMmFOUyfxN+nm3kff7MnmF44igPDc7D7aIwgpRo95qZqvIG+xgA==}
+  '@edgedb/generate@0.5.6':
+    resolution: {integrity: sha512-Nmd4ibgN3M7qxxHsOyB9NERp03449BfV+W7CWCpIE/tcvBr19GynoT5yI3k55k5NKzzstATwKtV+wVHXiOgizw==}
     engines: {node: '>= 18.0.0'}
     hasBin: true
     peerDependencies:
-      edgedb: ^1.5.0
+      edgedb: ^1.5.10
 
   '@es-joy/jsdoccomment@0.49.0':
     resolution: {integrity: sha512-xjZTSFgECpb9Ohuk5yMX5RhUEbfeQcuOp8IF60e+wyzWEF0M5xeSgqsfLtvPEX8BIyOX9saZqzuGPmZ8oWc+5Q==}
@@ -800,8 +800,8 @@ packages:
     resolution: {integrity: sha512-yS+Q5i3hBf7GBkd4KG8a7eBNNWNGLTaEwwYWUijIYM7zrlYDM0BFXHjjPWlWZ1Rg7UaddZeIDmi9jF3HmqiQ2w==}
     engines: {node: '>=6.0.0'}
 
-  edgedb@1.5.7:
-    resolution: {integrity: sha512-PlINnSnjPUaRxFKUaq+vfIIirdtN8RO3WrYwDEE9qz58MaX9ZlFnrX23AmJExZSKAsHnJUI33GofZWn9qN2G5Q==}
+  edgedb@1.5.12:
+    resolution: {integrity: sha512-IZHCAyKmdSpLqGuM2oSrw0037Qr8Y0S5KoJYArsc5KYJCv10ScU7Uyr/b7pOd2UYWx8DBFSyTmMweIgFRVOdCQ==}
     engines: {node: '>= 18.0.0'}
     hasBin: true
 
@@ -1942,10 +1942,13 @@ snapshots:
       picocolors: 1.1.1
       sisteransi: 1.0.5
 
-  '@edgedb/generate@0.5.3(edgedb@1.5.7)':
+  '@edgedb/generate@0.5.6(edgedb@1.5.12)':
     dependencies:
       '@iarna/toml': 2.2.5
-      edgedb: 1.5.7
+      debug: 4.4.0
+      edgedb: 1.5.12
+    transitivePeerDependencies:
+      - supports-color
 
   '@es-joy/jsdoccomment@0.49.0':
     dependencies:
@@ -2460,7 +2463,7 @@ snapshots:
     dependencies:
       esutils: 2.0.3
 
-  edgedb@1.5.7:
+  edgedb@1.5.12:
     dependencies:
       debug: 4.4.0
       env-paths: 3.0.0
