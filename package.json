@@ -2,6 +2,7 @@
   "name": "@sr-net/siege",
   "version": "1.0.0",
   "author": "BeeeQueue",
+  "type": "module",
   "private": true,
   "repository": {
     "type": "github",
@@ -9,7 +10,7 @@
   },
   "packageManager": "pnpm@9.4.0",
   "engines": {
-    "node": "^20"
+    "node": "^22"
   },
   "simple-git-hooks": {
     "pre-commit": "pnpm lint-staged"
@@ -20,7 +21,7 @@
     ]
   },
   "scripts": {
-    "dev": "na nodemon --exec tsx src/index.ts",
+    "dev": "tsx --watch --env-file .env src/index.ts",
     "db:reset": "nu scripts/db-reset.nu",
     "docker:build": "docker build . --tag siege",
     "docker:prune": "docker image prune --force",
@@ -33,11 +34,13 @@
     "test": "vitest",
     "typecheck": "tsc --noEmit -P tsconfig.json"
   },
+  "resolutions": {
+    "esbuild": "0.24.2"
+  },
   "dependencies": {
     "@hono/graphql-server": "0.4.3",
     "@hono/node-server": "1.11.4",
-    "@tsconfig/node20": "20.1.4",
-    "dotenv": "16.4.5",
+    "@tsconfig/node22": "22.0.0",
     "edgedb": "1.5.7",
     "graphql": "16.9.0",
     "hono": "4.4.7",
@@ -46,13 +49,13 @@
     "pino-pretty": "11.2.1",
     "ts-dedent": "2.2.0",
     "tsconfig-paths": "4.2.0",
-    "tsx": "4.15.7",
+    "tsx": "4.19.2",
     "uuid": "10.0.0"
   },
   "devDependencies": {
     "@antfu/eslint-config": "2.21.1",
     "@edgedb/generate": "0.5.3",
-    "@types/node": "20.14.8",
+    "@types/node": "22.10.4",
     "@types/uuid": "10.0.0",
     "eslint": "8.57.0",
     "lint-staged": "15.2.7",
@@ -60,7 +63,8 @@
     "prettier": "3.3.2",
     "simple-git-hooks": "2.11.1",
     "typescript": "5.5.2",
-    "vitest": "1.6.0"
+    "vite": "6.0.7",
+    "vitest": "3.0.0-beta.3"
   },
   "pnpm": {
     "overrides": {

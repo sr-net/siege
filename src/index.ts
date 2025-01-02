@@ -1,5 +1,3 @@
-import "dotenv/config"
-
 // import { setTimeout } from "node:timers/promises"
 
 import { serve } from "@hono/node-server"

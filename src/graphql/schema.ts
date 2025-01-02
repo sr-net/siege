@@ -15,7 +15,7 @@ export const createSchema = () => {
     types,
 
     contextType: {
-      module: path.resolve(__dirname, "../app.ts"),
+      module: path.resolve(import.meta.dirname, "../app.ts"),
       export: "GraphQLContext",
     },
     sourceTypes: {
@@ -27,10 +27,10 @@ export const createSchema = () => {
 
     shouldGenerateArtifacts: isSnapshotRun || config.env === Environment.DEVELOPMENT,
     shouldExitAfterGenerateArtifacts: isSnapshotRun,
-    prettierConfig: path.resolve(__dirname, "../../.prettierrc"),
+    prettierConfig: path.resolve(import.meta.dirname, "../../.prettierrc"),
     outputs: {
-      schema: path.resolve(__dirname, "snapshot.graphql"),
-      typegen: path.resolve(__dirname, "types.generated.ts"),
+      schema: path.resolve(import.meta.dirname, "snapshot.graphql"),
+      typegen: path.resolve(import.meta.dirname, "types.generated.ts"),
     },
   })
 }
