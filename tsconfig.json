@@ -4,6 +4,7 @@
     "noEmit": true,
 
     "sourceMap": true,
+    "module": "esnext",
     "moduleResolution": "bundler",
 
     "types": ["node", "vitest/importMeta"],

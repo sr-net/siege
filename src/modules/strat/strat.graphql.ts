@@ -10,12 +10,14 @@ import {
   queryField,
 } from "nexus"
 import { dedent } from "ts-dedent"
-import { Author } from "./author.graphql"
+
 import { dbClient } from "@/db"
 import { DateTime } from "@/graphql/scalars"
 import type { NexusGenArgTypes, NexusGenTypes } from "@/graphql/types.generated"
 import { resolveLiked } from "@/modules/like/like.graphql"
 import { stratGqlFields } from "@/modules/strat/strat.db"
+
+import { Author } from "./author.graphql"
 
 export const getFilters = <
   Args extends NexusGenArgTypes["Query"]["strat"] | NexusGenArgTypes["Query"]["strats"],

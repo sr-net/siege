@@ -8,7 +8,7 @@
     "type": "github",
     "url": "sr-net/siege"
   },
-  "packageManager": "pnpm@9.4.0",
+  "packageManager": "pnpm@9.15.2",
   "engines": {
     "node": "^22"
   },
@@ -52,19 +52,30 @@
     "tsx": "4.19.2"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "2.21.1",
+    "@antfu/eslint-config": "3.12.1",
     "@edgedb/generate": "0.5.3",
     "@types/node": "22.10.4",
-    "eslint": "8.57.0",
-    "lint-staged": "15.2.7",
-    "prettier": "3.3.2",
+    "eslint": "9.17.0",
+    "lint-staged": "15.3.0",
+    "prettier": "3.4.2",
     "simple-git-hooks": "2.11.1",
-    "typescript": "5.5.2",
+    "typescript": "5.7.2",
     "vite": "6.0.7",
     "vitest": "3.0.0-beta.3"
   },
   "pnpm": {
     "overrides": {
+      "@eslint/markdown": "-",
+      "@stylistic/eslint-plugin": "-",
+      "eslint-plugin-jsdoc": "-",
+      "eslint-plugin-jsonc": "-",
+      "eslint-plugin-toml": "-",
+      "eslint-plugin-vue": "-",
+      "eslint-processor-vue-blocks": "-",
+      "eslint-plugin-yml": "-",
+      "jsonc-eslint-parser": "-",
+      "toml-eslint-parser": "-",
+      "yaml-eslint-parser": "-",
       "hasown": "npm:@nolyfill/hasown@latest"
     }
   }

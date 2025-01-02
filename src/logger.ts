@@ -1,5 +1,6 @@
 import { pino } from "pino"
 import PinoPretty from "pino-pretty"
+
 import { config } from "@/config"
 
 export const logger = pino(

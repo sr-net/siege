@@ -17,7 +17,7 @@ const likedQuery = dedent`
   );
 `
 
-export const resolveLiked: FieldResolver<"Strat", "liked"> = (strat, _, ctx) => {
+export const resolveLiked: FieldResolver<"Strat", "liked"> = async (strat, _, ctx) => {
   if (ctx.var.sessionUuid == null) return false
 
   return dbClient.queryRequiredSingle<boolean>(likedQuery, {

@@ -1,11 +1,12 @@
 import { randomUUID } from "node:crypto"
+
+import { graphqlServer } from "@hono/graphql-server"
 import { type Context, Hono, type MiddlewareHandler } from "hono"
-import { cors } from "hono/cors"
 import { getCookie, setCookie } from "hono/cookie"
+import { cors } from "hono/cors"
 import { secureHeaders } from "hono/secure-headers"
 import type { NexusGraphQLSchema } from "nexus/dist/definitions/_types"
 import type { Logger } from "pino"
-import { graphqlServer } from "@hono/graphql-server"
 
 import { config } from "@/config"
 import { logger } from "@/logger"
