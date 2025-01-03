@@ -79,7 +79,7 @@
       "jsonc-eslint-parser": "-",
       "toml-eslint-parser": "-",
       "yaml-eslint-parser": "-",
-      "hasown": "npm:@nolyfill/hasown@latest"
+      "is-core-module": "npm:@nolyfill/is-core-module@^1"
     }
   }
 }
