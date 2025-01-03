@@ -1,7 +1,13 @@
-import { Kind } from "graphql"
-import { scalarType } from "nexus"
+import { GraphQLScalarType, Kind } from "graphql"
+import * as v from "valibot"
 
-export const DateTime = scalarType({
+export type TN<Str extends string> = { __typename: Str }
+
+export const Uuid = v.pipe(v.string(), v.uuid())
+
+export const PositiveInteger = v.pipe(v.number(), v.integer(), v.minValue(0))
+
+export const GQLDateTime = new GraphQLScalarType({
   name: "DateTime",
   description:
     "The javascript `Date` as string. Type represents date and time as the ISO Date string.",

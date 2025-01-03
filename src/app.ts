@@ -1,11 +1,11 @@
 import { randomUUID } from "node:crypto"
 
 import { graphqlServer } from "@hono/graphql-server"
+import type { GraphQLSchema } from "graphql/type"
 import { type Context, Hono, type MiddlewareHandler } from "hono"
 import { getCookie, setCookie } from "hono/cookie"
 import { cors } from "hono/cors"
 import { secureHeaders } from "hono/secure-headers"
-import type { NexusGraphQLSchema } from "nexus/dist/definitions/_types"
 import type { Logger } from "pino"
 
 import { config } from "@/config"
@@ -43,7 +43,7 @@ const buildContext: MiddlewareHandler<{ Variables: Variables }> = async (c, next
   await next()
 }
 
-export const buildApp = async (schema: NexusGraphQLSchema) => {
+export const buildApp = async (schema: GraphQLSchema) => {
   return new Hono<{ Variables: Variables }>()
     .use("*", buildContext)
     .use("*", async (c, next) => {

@@ -1,15 +1,13 @@
-import { enumType, objectType } from "nexus"
+import { asEnumType } from "@gqloom/valibot"
+import * as v from "valibot"
 
-const AuthorTypeEnum = enumType({
-  name: "AuthorType",
-  members: ["NAME", "YOUTUBE", "TWITCH", "REDDIT"],
-})
+export const Author = v.object({
+  __typename: v.literal("Author"),
 
-export const Author = objectType({
-  name: "Author",
-  definition(t) {
-    t.nonNull.string("name")
-    t.nonNull.field("type", { type: AuthorTypeEnum })
-    t.string("url")
-  },
+  name: v.string(),
+  type: v.pipe(
+    v.picklist(["NAME", "YOUTUBE", "TWITCH", "REDDIT"]),
+    asEnumType({ name: "AuthorType" }),
+  ),
+  url: v.nullish(v.pipe(v.string(), v.url())),
 })

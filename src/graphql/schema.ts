@@ -1,36 +1,42 @@
+import fs from "node:fs"
 import path from "node:path"
 
-import { makeSchema } from "nexus"
+import { ValibotWeaver, weave } from "@gqloom/valibot"
+import { lexicographicSortSchema, printSchema } from "graphql"
+import { format } from "prettier"
 
 import { config } from "@/config"
 import { Environment } from "@/constants"
-import * as types from "@/graphql/resolvers"
+import { GQLDateTime } from "@/graphql/scalars"
+import { likedResolver, likeResolver } from "@/modules/like/like.graphql"
+import { stratResolver } from "@/modules/strat/strat.graphql"
 
-export const createSchema = () => {
+const weaver = ValibotWeaver.config({
+  presetGraphQLType: (schema) => {
+    switch (schema.type) {
+      case "date":
+        return GQLDateTime
+    }
+  },
+})
+
+export const createSchema = async () => {
   const isSnapshotRun = process.argv.some(
     (str) => str.includes("--snapshot") || str.includes("-shot"),
   )
 
-  return makeSchema({
-    types,
+  const schema = weave(weaver, stratResolver, likedResolver, likeResolver)
 
-    contextType: {
-      module: path.resolve(import.meta.dirname, "../app.ts"),
-      export: "GraphQLContext",
-    },
-    sourceTypes: {
-      modules: [],
-      mapping: {
-        DateTime: "Date",
-      },
-    },
+  if (isSnapshotRun || config.env === Environment.DEVELOPMENT) {
+    const snapshotFilePath = path.resolve(import.meta.dirname, "snapshot.graphql")
+    const contents = printSchema(lexicographicSortSchema(schema))
 
-    shouldGenerateArtifacts: isSnapshotRun || config.env === Environment.DEVELOPMENT,
-    shouldExitAfterGenerateArtifacts: isSnapshotRun,
-    prettierConfig: path.resolve(import.meta.dirname, "../../.prettierrc"),
-    outputs: {
-      schema: path.resolve(import.meta.dirname, "snapshot.graphql"),
-      typegen: path.resolve(import.meta.dirname, "types.generated.ts"),
-    },
-  })
+    fs.writeFileSync(snapshotFilePath, await format(contents, { parser: "graphql" }))
+
+    if (isSnapshotRun) {
+      process.exit(0)
+    }
+  }
+
+  return schema
 }
