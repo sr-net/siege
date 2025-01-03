@@ -3,7 +3,6 @@ import path from "node:path"
 
 import { ValibotWeaver, weave } from "@gqloom/valibot"
 import { lexicographicSortSchema, printSchema } from "graphql"
-import { format } from "prettier"
 
 import { config } from "#r/config.ts"
 import { GQLDateTime } from "#r/graphql/scalars.ts"
@@ -28,9 +27,13 @@ export const createSchema = async () => {
 
   if (isSnapshotRun || config.env === "development") {
     const snapshotFilePath = path.resolve(import.meta.dirname, "snapshot.graphql")
-    const contents = printSchema(lexicographicSortSchema(schema))
 
-    fs.writeFileSync(snapshotFilePath, await format(contents, { parser: "graphql" }))
+    let contents = printSchema(lexicographicSortSchema(schema))
+    contents = await import("prettier").then(async ({ format }) =>
+      format(contents, { parser: "graphql" }),
+    )
+
+    fs.writeFileSync(snapshotFilePath, contents)
 
     if (isSnapshotRun) {
       process.exit(0)
