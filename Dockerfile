@@ -17,4 +17,4 @@ ENV NODE_ENV=production
 # Install dependencies
 RUN pnpm install --frozen-lockfile --ignore-scripts
 
-CMD ["pnpm", "--silent", "start"]
+CMD ["node", "--run", "start"]

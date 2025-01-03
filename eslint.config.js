@@ -25,7 +25,7 @@ export default antfu({
         "error",
         {
           type: "natural",
-          internalPattern: ["@/", "~/"],
+          internalPattern: ["^@/", "^~/", "^#.+/"],
           newlinesBetween: "always",
           groups: [
             ["builtin", "builtin-type"],

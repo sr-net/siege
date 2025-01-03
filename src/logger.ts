@@ -1,7 +1,7 @@
 import { pino } from "pino"
 import PinoPretty from "pino-pretty"
 
-import { config } from "@/config.ts"
+import { config } from "#r/config.ts"
 
 export const logger = pino(
   {

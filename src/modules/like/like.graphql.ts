@@ -2,11 +2,11 @@ import { field, mutation, resolver, useContext } from "@gqloom/valibot"
 import { dedent } from "ts-dedent"
 import * as v from "valibot"
 
-import type { GraphQLContext } from "@/app.ts"
-import { dbClient } from "@/db.ts"
-import { Uuid } from "@/graphql/scalars.ts"
-import { type DefaultStratObject, stratGqlFields } from "@/modules/strat/strat.db.ts"
-import { Strat } from "@/modules/strat/strat.graphql.ts"
+import type { GraphQLContext } from "#r/app.ts"
+import { dbClient } from "#r/db.ts"
+import { Uuid } from "#r/graphql/scalars.ts"
+import { type DefaultStratObject, stratGqlFields } from "#r/modules/strat/strat.db.ts"
+import { Strat } from "#r/modules/strat/strat.graphql.ts"
 
 const likedQuery = dedent`
   select exists (

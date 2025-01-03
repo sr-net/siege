@@ -18,12 +18,7 @@
     "exactOptionalPropertyTypes": false,
 
     // Extra types
-    "types": ["node", "vitest/importMeta"],
-    "baseUrl": ".",
-    "paths": {
-      "@/*": ["./src/*"],
-      "@dbtypes": ["./dbschema/interfaces.ts"]
-    }
+    "types": ["node", "vitest/importMeta"]
   },
 
   "include": ["./src/**/*.ts", "./index.d.ts", "./dbschema/interfaces.ts"]
