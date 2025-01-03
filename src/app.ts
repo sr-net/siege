@@ -8,8 +8,8 @@ import { cors } from "hono/cors"
 import { secureHeaders } from "hono/secure-headers"
 import type { Logger } from "pino"
 
-import { config } from "@/config"
-import { logger } from "@/logger"
+import { config } from "@/config.ts"
+import { logger } from "@/logger.ts"
 
 export type Variables = {
   logger: Logger<string>

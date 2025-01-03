@@ -1,29 +1,30 @@
 {
-  "extends": "@tsconfig/node22/tsconfig.json",
+  "extends": ["@tsconfig/node22/tsconfig.json", "@tsconfig/strictest/tsconfig.json"],
   "compilerOptions": {
+    // Output
     "noEmit": true,
-
     "sourceMap": true,
-    "module": "esnext",
-    "moduleResolution": "bundler",
 
+    // Modules
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "allowImportingTsExtensions": true,
+
+    // Lessen strictness
+    "importsNotUsedAsValues": "remove",
+    "noImplicitReturns": false,
+    "noPropertyAccessFromIndexSignature": false,
+    "noUncheckedIndexedAccess": false,
+    "exactOptionalPropertyTypes": false,
+
+    // Extra types
     "types": ["node", "vitest/importMeta"],
     "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"],
       "@dbtypes": ["./dbschema/interfaces.ts"]
-    },
-    "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true,
-    "allowSyntheticDefaultImports": true,
-    "resolveJsonModule": true,
-    "emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
-    "downlevelIteration": true,
-
-    "noUnusedLocals": true,
-    "noUnusedParameters": true
+    }
   },
-  "include": ["./src/**/*.ts", "./index.d.ts", "./dbschema/interfaces.ts"],
-  "exclude": ["node_modules"]
+
+  "include": ["./src/**/*.ts", "./index.d.ts", "./dbschema/interfaces.ts"]
 }

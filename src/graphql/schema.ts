@@ -5,10 +5,10 @@ import { ValibotWeaver, weave } from "@gqloom/valibot"
 import { lexicographicSortSchema, printSchema } from "graphql"
 import { format } from "prettier"
 
-import { config } from "@/config"
-import { GQLDateTime } from "@/graphql/scalars"
-import { likedResolver, likeResolver } from "@/modules/like/like.graphql"
-import { stratResolver } from "@/modules/strat/strat.graphql"
+import { config } from "@/config.ts"
+import { GQLDateTime } from "@/graphql/scalars.ts"
+import { likedResolver, likeResolver } from "@/modules/like/like.graphql.ts"
+import { stratResolver } from "@/modules/strat/strat.graphql.ts"
 
 const weaver = ValibotWeaver.config({
   presetGraphQLType: (schema) => {

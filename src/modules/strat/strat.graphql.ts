@@ -2,11 +2,11 @@ import { asEnumType, query, resolver } from "@gqloom/valibot"
 import { dedent } from "ts-dedent"
 import * as v from "valibot"
 
-import { dbClient } from "@/db"
-import { PositiveInteger, Uuid } from "@/graphql/scalars"
-import { type DefaultStratObject, stratGqlFields } from "@/modules/strat/strat.db"
+import { dbClient } from "@/db.ts"
+import { PositiveInteger, Uuid } from "@/graphql/scalars.ts"
+import { type DefaultStratObject, stratGqlFields } from "@/modules/strat/strat.db.ts"
 
-import { Author } from "./author.graphql"
+import { Author } from "./author.graphql.ts"
 
 type InputObject = {
   shortId: number | null | undefined

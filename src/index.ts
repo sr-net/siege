@@ -1,9 +1,9 @@
 import { serve } from "@hono/node-server"
 
-import { buildApp } from "@/app"
-import { config } from "@/config"
-import { dbClient } from "@/db"
-import { createSchema } from "@/graphql/schema"
+import { buildApp } from "@/app.ts"
+import { config } from "@/config.ts"
+import { dbClient } from "@/db.ts"
+import { createSchema } from "@/graphql/schema.ts"
 
 const start = async () => {
   const schema = await createSchema()

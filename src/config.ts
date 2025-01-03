@@ -1,4 +1,4 @@
-import type { Environment } from "@/constants"
+import type { Environment } from "@/constants.ts"
 
 type Config = {
   [key in Environment]: {
