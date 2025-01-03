@@ -6,7 +6,6 @@ import { lexicographicSortSchema, printSchema } from "graphql"
 import { format } from "prettier"
 
 import { config } from "@/config"
-import { Environment } from "@/constants"
 import { GQLDateTime } from "@/graphql/scalars"
 import { likedResolver, likeResolver } from "@/modules/like/like.graphql"
 import { stratResolver } from "@/modules/strat/strat.graphql"
@@ -27,7 +26,7 @@ export const createSchema = async () => {
 
   const schema = weave(weaver, stratResolver, likedResolver, likeResolver)
 
-  if (isSnapshotRun || config.env === Environment.DEVELOPMENT) {
+  if (isSnapshotRun || config.env === "development") {
     const snapshotFilePath = path.resolve(import.meta.dirname, "snapshot.graphql")
     const contents = printSchema(lexicographicSortSchema(schema))
 
