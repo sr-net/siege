@@ -1,36 +1,44 @@
+import fs from "node:fs"
 import path from "node:path"
 
-import { makeSchema } from "nexus"
+import { ValibotWeaver, weave } from "@gqloom/valibot"
+import { lexicographicSortSchema, printSchema } from "graphql"
 
-import { config } from "@/config"
-import { Environment } from "@/constants"
-import * as types from "@/graphql/resolvers"
+import { config } from "#r/config.ts"
+import { GQLDateTime } from "#r/graphql/scalars.ts"
+import { likedResolver, likeResolver } from "#r/modules/like/like.graphql.ts"
+import { stratResolver } from "#r/modules/strat/strat.graphql.ts"
 
-export const createSchema = () => {
+const weaver = ValibotWeaver.config({
+  presetGraphQLType: (schema) => {
+    switch (schema.type) {
+      case "date":
+        return GQLDateTime
+    }
+  },
+})
+
+export const createSchema = async () => {
   const isSnapshotRun = process.argv.some(
     (str) => str.includes("--snapshot") || str.includes("-shot"),
   )
 
-  return makeSchema({
-    types,
+  const schema = weave(weaver, stratResolver, likedResolver, likeResolver)
 
-    contextType: {
-      module: path.resolve(__dirname, "../app.ts"),
-      export: "GraphQLContext",
-    },
-    sourceTypes: {
-      modules: [],
-      mapping: {
-        DateTime: "Date",
-      },
-    },
+  if (isSnapshotRun || config.env === "development") {
+    const snapshotFilePath = path.resolve(import.meta.dirname, "snapshot.graphql")
 
-    shouldGenerateArtifacts: isSnapshotRun || config.env === Environment.DEVELOPMENT,
-    shouldExitAfterGenerateArtifacts: isSnapshotRun,
-    prettierConfig: path.resolve(__dirname, "../../.prettierrc"),
-    outputs: {
-      schema: path.resolve(__dirname, "snapshot.graphql"),
-      typegen: path.resolve(__dirname, "types.generated.ts"),
-    },
-  })
+    let contents = printSchema(lexicographicSortSchema(schema))
+    contents = await import("prettier").then(async ({ format }) =>
+      format(contents, { parser: "graphql" }),
+    )
+
+    fs.writeFileSync(snapshotFilePath, contents)
+
+    if (isSnapshotRun) {
+      process.exit(0)
+    }
+  }
+
+  return schema
 }

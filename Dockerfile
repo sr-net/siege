@@ -1,9 +1,26 @@
-FROM node:20-alpine
+FROM node:22-alpine as runtime_deps
 
 RUN corepack enable
 
 WORKDIR /app
 
+COPY package.json .
+COPY pnpm-lock.yaml .
+COPY .npmrc .
+
+ENV PNPM_HOME=/pnpm
+ENV CI=1
+ENV NODE_ENV=production
+# Install dependencies
+RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install --frozen-lockfile --ignore-scripts
+
+FROM node:22-alpine
+
+RUN corepack enable
+
+WORKDIR /app
+
+COPY --from=runtime_deps /app/node_modules node_modules
 COPY . .
 
 # Run with...
@@ -14,7 +31,4 @@ ENV NODE_NO_WARNINGS=1
 # Use production in case any dependencies use it in any way
 ENV NODE_ENV=production
 
-# Install dependencies
-RUN pnpm install --frozen-lockfile --ignore-scripts
-
-CMD ["pnpm", "--silent", "start"]
+CMD ["node", "--run", "start"]

@@ -1,4 +1,4 @@
-import { Environment } from "@/constants"
+import type { Environment } from "#r/constants.ts"
 
 type Config = {
   [key in Environment]: {
@@ -10,16 +10,16 @@ type Config = {
 const port = Number(process.env.PORT ?? "3000")
 
 const _config: Config = {
-  [Environment.DEVELOPMENT]: {
-    env: Environment.DEVELOPMENT,
+  development: {
+    env: "development",
     port,
   },
-  [Environment.TEST]: {
-    env: Environment.TEST,
+  test: {
+    env: "test",
     port,
   },
-  [Environment.PRODUCTION]: {
-    env: Environment.PRODUCTION,
+  production: {
+    env: "production",
     port,
   },
 }

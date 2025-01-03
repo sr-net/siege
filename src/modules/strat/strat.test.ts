@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest"
 
-import { getFilters } from "@/modules/strat/strat.graphql"
+import { getFilters } from "#r/modules/strat/strat.graphql.ts"
 
 describe("getFilters", () => {
   it("no args returns only submission exclusion", () => {

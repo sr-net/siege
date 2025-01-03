@@ -1,16 +1,12 @@
-import "dotenv/config"
-
-// import { setTimeout } from "node:timers/promises"
-
 import { serve } from "@hono/node-server"
 
-import { buildApp } from "@/app"
-import { config } from "@/config"
-import { dbClient } from "@/db"
-import { createSchema } from "@/graphql/schema"
+import { buildApp } from "#r/app.ts"
+import { config } from "#r/config.ts"
+import { dbClient } from "#r/db.ts"
+import { createSchema } from "#r/graphql/schema.ts"
 
 const start = async () => {
-  const schema = createSchema()
+  const schema = await createSchema()
   const app = await buildApp(schema)
 
   await dbClient.ensureConnected()

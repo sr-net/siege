@@ -1,9 +1,12 @@
-import { type FieldResolver, idArg, mutationField, nonNull } from "nexus"
+import { field, mutation, resolver, useContext } from "@gqloom/valibot"
 import { dedent } from "ts-dedent"
+import * as v from "valibot"
 
-import { dbClient } from "@/db"
-import type { NexusGenTypes } from "@/graphql/types.generated"
-import { stratGqlFields } from "@/modules/strat/strat.db"
+import type { GraphQLContext } from "#r/app.ts"
+import { dbClient } from "#r/db.ts"
+import { Uuid } from "#r/graphql/scalars.ts"
+import { type DefaultStratObject, stratGqlFields } from "#r/modules/strat/strat.db.ts"
+import { Strat } from "#r/modules/strat/strat.graphql.ts"
 
 const likedQuery = dedent`
   select exists (
@@ -17,14 +20,18 @@ const likedQuery = dedent`
   );
 `
 
-export const resolveLiked: FieldResolver<"Strat", "liked"> = (strat, _, ctx) => {
-  if (ctx.var.sessionUuid == null) return false
+export const likedResolver = resolver.of(Strat, {
+  liked: field(v.boolean(), async ({ uuid }) => {
+    const ctx = useContext<GraphQLContext>()
 
-  return dbClient.queryRequiredSingle<boolean>(likedQuery, {
-    id: strat.uuid,
-    sessionId: ctx.var.sessionUuid,
-  })
-}
+    if (ctx.var.sessionUuid == null) return false
+
+    return dbClient.queryRequiredSingle<boolean>(likedQuery, {
+      id: uuid,
+      sessionId: ctx.var.sessionUuid,
+    })
+  }),
+})
 
 // Mutations
 
@@ -51,30 +58,6 @@ const likeQuery = dedent`
   }
 `
 
-export const mutationLikeStrat = mutationField("likeStrat", {
-  type: "Strat",
-  args: {
-    uuid: nonNull(idArg()),
-  },
-
-  resolve: async (_, args, ctx) => {
-    if (ctx.var.sessionUuid == null) {
-      ctx.var.setSessionUuid()
-    }
-
-    const result = await dbClient.queryRequiredSingle<{
-      strat: Omit<NexusGenTypes["allTypes"]["Strat"], "liked">
-    }>(likeQuery, {
-      stratId: args.uuid,
-      sessionId: ctx.var.sessionUuid,
-    })
-
-    ctx.var.logger.debug({ result })
-
-    return result.strat
-  },
-})
-
 const unlikeQuery = dedent`
   select (
     update \`Like\`
@@ -92,26 +75,46 @@ const unlikeQuery = dedent`
   }
 `
 
-export const mutationUnlikeStrat = mutationField("unlikeStrat", {
-  type: "Strat",
-  args: {
-    uuid: nonNull(idArg()),
-  },
+type QueryResult = { strat: DefaultStratObject }
 
-  resolve: async (_, args, ctx) => {
-    if (ctx.var.sessionUuid == null) {
-      ctx.var.setSessionUuid()
-    }
+export const likeResolver = resolver({
+  likeStrat: mutation(v.nullish(Strat), {
+    input: {
+      uuid: Uuid,
+    },
+    resolve: async (args) => {
+      const ctx = useContext<GraphQLContext>()
 
-    const result = await dbClient.queryRequiredSingle<{
-      strat: Omit<NexusGenTypes["allTypes"]["Strat"], "liked">
-    }>(unlikeQuery, {
-      stratId: args.uuid,
-      sessionId: ctx.var.sessionUuid,
-    })
+      const result = await dbClient.queryRequiredSingle<QueryResult>(likeQuery, {
+        stratId: args.uuid,
+        sessionId: ctx.var.sessionUuid,
+      })
 
-    ctx.var.logger.debug({ result })
+      ctx.var.logger.debug({ result })
 
-    return result.strat
-  },
+      return result.strat
+    },
+  }),
+
+  unlikeStrat: mutation(v.nullish(Strat), {
+    input: {
+      uuid: Uuid,
+    },
+    resolve: async (args) => {
+      const ctx = useContext<GraphQLContext>()
+
+      if (ctx.var.sessionUuid == null) {
+        ctx.var.setSessionUuid()
+      }
+
+      const result = await dbClient.queryRequiredSingle<QueryResult>(unlikeQuery, {
+        stratId: args.uuid,
+        sessionId: ctx.var.sessionUuid,
+      })
+
+      ctx.var.logger.debug({ result })
+
+      return result.strat
+    },
+  }),
 })

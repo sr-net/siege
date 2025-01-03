@@ -1,14 +1,15 @@
-import { type Context, Hono, type MiddlewareHandler } from "hono"
-import { cors } from "hono/cors"
-import { getCookie, setCookie } from "hono/cookie"
-import { secureHeaders } from "hono/secure-headers"
-import type { NexusGraphQLSchema } from "nexus/dist/definitions/_types"
-import type { Logger } from "pino"
-import { v4 as uuid } from "uuid"
-import { graphqlServer } from "@hono/graphql-server"
+import { randomUUID } from "node:crypto"
 
-import { config } from "@/config"
-import { logger } from "@/logger"
+import { graphqlServer } from "@hono/graphql-server"
+import type { GraphQLSchema } from "graphql/type"
+import { type Context, Hono, type MiddlewareHandler } from "hono"
+import { getCookie, setCookie } from "hono/cookie"
+import { cors } from "hono/cors"
+import { secureHeaders } from "hono/secure-headers"
+import type { Logger } from "pino"
+
+import { config } from "#r/config.ts"
+import { logger } from "#r/logger.ts"
 
 export type Variables = {
   logger: Logger<string>
@@ -22,7 +23,7 @@ const buildContext: MiddlewareHandler<{ Variables: Variables }> = async (c, next
   let sessionUuid = getCookie(c, "sessionUuid")
 
   const setSessionUuid = () => {
-    sessionUuid = uuid()
+    sessionUuid = randomUUID()
 
     setCookie(c, "sessionUuid", sessionUuid, {
       maxAge: 60 * 60 * 24 * 30 * 12 * 5,
@@ -42,7 +43,7 @@ const buildContext: MiddlewareHandler<{ Variables: Variables }> = async (c, next
   await next()
 }
 
-export const buildApp = async (schema: NexusGraphQLSchema) => {
+export const buildApp = async (schema: GraphQLSchema) => {
   return new Hono<{ Variables: Variables }>()
     .use("*", buildContext)
     .use("*", async (c, next) => {

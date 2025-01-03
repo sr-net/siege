@@ -1,5 +1,4 @@
 import { createClient } from "edgedb"
-import PQueue from "p-queue"
 
 import likesData from "./likes_json.json"
 import reportsData from "./reports_json.json"
@@ -9,7 +8,6 @@ const { likes } = likesData[0]
 const { reports } = reportsData[0]
 const { strats } = stratsData[0]
 
-const queue = new PQueue({ concurrency: 20 })
 const client = createClient({ tlsSecurity: "insecure" })
 
 const insertStratQuery = `
@@ -63,14 +61,12 @@ const addStratsAndAuthors = async () => {
         acceptedAt: (strat.acceptedAt ? new Date(strat.acceptedAt) : null) as any,
       }
 
-      return queue.add(() =>
-        client.execute(insertStratQuery, {
-          ...strat,
-          authorName: author.name,
-          authorKind: author.type,
-          authorUrl: author.url,
-        }),
-      )
+      return client.execute(insertStratQuery, {
+        ...strat,
+        authorName: author.name,
+        authorKind: author.type,
+        authorUrl: author.url,
+      })
     }),
   )
 
@@ -101,7 +97,7 @@ const addLikes = async () => {
           stratShortId: map[strat],
         }
 
-        return queue.add(() => client.execute(insertLikeQuery, like))
+        return client.execute(insertLikeQuery, like)
       }),
   )
 
@@ -129,7 +125,7 @@ const addReports = async () => {
         stratShortId: map[strat],
       }
 
-      return queue.add(() => client.execute(insertReportQuery, report))
+      return client.execute(insertReportQuery, report)
     }),
   )
 
