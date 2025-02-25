@@ -8,7 +8,7 @@
     "type": "github",
     "url": "sr-net/siege"
   },
-  "packageManager": "pnpm@9.15.2",
+  "packageManager": "pnpm@9.15.6",
   "engines": {
     "node": "^22"
   },
@@ -42,30 +42,30 @@
     "esbuild": "0.24.2"
   },
   "dependencies": {
-    "@gqloom/valibot": "0.6.1",
+    "@gqloom/valibot": "0.7.1",
     "@hono/graphql-server": "0.5.1",
-    "@hono/node-server": "1.13.7",
+    "@hono/node-server": "1.13.8",
     "edgedb": "1.5.12",
     "graphql": "16.10.0",
-    "hono": "4.6.15",
+    "hono": "4.7.2",
     "pino": "9.6.0",
     "pino-pretty": "13.0.0",
     "ts-dedent": "2.2.0",
-    "valibot": "1.0.0-beta.9"
+    "valibot": "1.0.0-rc.2"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "3.12.1",
-    "@edgedb/generate": "0.5.6",
+    "@antfu/eslint-config": "3.16.0",
+    "@edgedb/generate": "0.6.1",
     "@tsconfig/node22": "22.0.0",
     "@tsconfig/strictest": "2.0.5",
-    "@types/node": "22.10.4",
-    "eslint": "9.17.0",
-    "lint-staged": "15.3.0",
-    "prettier": "3.4.2",
+    "@types/node": "22.13.5",
+    "eslint": "9.21.0",
+    "lint-staged": "15.4.3",
+    "prettier": "3.5.2",
     "simple-git-hooks": "2.11.1",
-    "typescript": "5.7.2",
-    "vite": "6.0.9",
-    "vitest": "3.0.0-beta.3"
+    "typescript": "5.7.3",
+    "vite": "6.2.0",
+    "vitest": "3.0.7"
   },
   "pnpm": {
     "overrides": {
