@@ -7,11 +7,6 @@ export default defineConfig({
   semi: false,
   useTabs: false,
 
-  sortImports: {
-    type: "natural",
-    internalPattern: ["#/", "@/"],
-    groups: ["builtin", "external", "internal", "parent", "sibling", "index", "unknown"],
-  },
-
+  sortImports: false,
   sortPackageJson: false,
 })
