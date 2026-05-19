@@ -1,7 +1,12 @@
 import { loadEnvFile } from "node:process"
+
 import { defineConfig } from "vitest/config"
 
-loadEnvFile()
+try {
+  loadEnvFile()
+} catch {
+  // ignore
+}
 
 export default defineConfig({
   test: {

@@ -16,7 +16,8 @@ it("generated schema should be identical to snapshot", async () => {
 
   const newSnapshot = readFileSync(
     path.resolve(import.meta.dirname, "snapshot.graphql"),
-  ).toString()
+    "utf8",
+  )
 
   expect(newSnapshot).toEqual(snapshot)
 })
