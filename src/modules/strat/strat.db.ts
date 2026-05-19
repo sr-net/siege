@@ -1,7 +1,7 @@
+import type { types } from "#dbschema/interfaces.ts"
 import { dedent } from "ts-dedent"
 
-import type { types } from "#dbschema/interfaces.ts"
-import type { TN } from "#r/graphql/scalars.ts"
+import type { TN } from "#/graphql/scalars.ts"
 
 export type DefaultStratObject = TN<"Strat"> & {
   uuid: types["default"]["Strat"]["id"]
