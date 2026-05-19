@@ -1,5 +1,6 @@
 FROM node:26-alpine as runtime_deps
 
+RUN npm i -g corepack
 RUN corepack enable
 
 WORKDIR /app
@@ -13,8 +14,6 @@ ENV NODE_ENV=production
 RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install --frozen-lockfile --ignore-scripts
 
 FROM node:26-alpine
-
-RUN corepack enable
 
 WORKDIR /app
 
