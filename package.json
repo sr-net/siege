@@ -30,7 +30,7 @@
     "docker:build": "docker build . --tag siege",
     "docker:prune": "docker image prune --force",
     "docker:run": "docker run --rm --name siege -p 3000:3000 siege",
-    "gen": "@edgedb/generate interfaces",
+    "gen": "@gel/generate interfaces",
     "lint": "eslint --flag unstable_native_nodejs_ts_config",
     "postinstall": "simple-git-hooks",
     "snapshot": "node src/index.ts -shot",
@@ -52,7 +52,8 @@
   },
   "devDependencies": {
     "@antfu/eslint-config": "9.0.0",
-    "@edgedb/generate": "0.6.1",
+    "@gel/generate": "0.7.1",
+    "@gqloom/core": "0.16.1",
     "@tsconfig/node22": "22.0.5",
     "@tsconfig/strictest": "2.0.8",
     "@types/node": "25.8.0",

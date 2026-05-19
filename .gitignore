@@ -13,3 +13,4 @@ src/edgedb/**
 !src/edgedb/types.ts
 
 .env
+gel.local*

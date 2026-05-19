@@ -1,7 +1,9 @@
 import fs from "node:fs"
 import path from "node:path"
 
-import { ValibotWeaver, weave } from "@gqloom/valibot"
+import { weave } from "@gqloom/core"
+import { asyncContextProvider } from "@gqloom/core/context"
+import { ValibotWeaver } from "@gqloom/valibot"
 import { lexicographicSortSchema, printSchema } from "graphql"
 
 import { config } from "#/config.ts"
@@ -23,14 +25,20 @@ export const createSchema = async () => {
     (str) => str.includes("--snapshot") || str.includes("-shot"),
   )
 
-  const schema = weave(weaver, stratResolver, likedResolver, likeResolver)
+  const schema = weave(
+    weaver,
+    asyncContextProvider,
+    stratResolver,
+    likedResolver,
+    likeResolver,
+  )
 
   if (isSnapshotRun || config.env === "development") {
     const snapshotFilePath = path.resolve(import.meta.dirname, "snapshot.graphql")
 
     let contents = printSchema(lexicographicSortSchema(schema))
-    contents = await import("prettier").then(async ({ format }) =>
-      format(contents, { parser: "graphql" }),
+    contents = await import("oxfmt").then(
+      async ({ format }) => (await format("snapshot.graphql", contents)).code,
     )
 
     fs.writeFileSync(snapshotFilePath, contents)

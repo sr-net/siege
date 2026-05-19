@@ -6,6 +6,8 @@
     "sourceMap": true,
 
     // Modules
+    "module": "nodenext",
+    "moduleResolution": "nodenext",
     "resolveJsonModule": true,
     "esModuleInterop": true,
     "allowImportingTsExtensions": true,

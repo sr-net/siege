@@ -1,4 +1,5 @@
-import { field, mutation, resolver, useContext } from "@gqloom/valibot"
+import { field, mutation, resolver } from "@gqloom/core"
+import { useContext } from "@gqloom/core/context"
 import { dedent } from "ts-dedent"
 import * as v from "valibot"
 
