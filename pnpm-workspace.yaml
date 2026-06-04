@@ -20,3 +20,6 @@ overrides:
 
 savePrefix: ""
 shellEmulator: true
+minimumReleaseAgeExclude:
+  # Renovate security update: hono@4.12.21
+  - hono@4.12.21
