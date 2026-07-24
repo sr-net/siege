@@ -41,7 +41,7 @@
   "dependencies": {
     "@gqloom/valibot": "0.16.0",
     "@hono/graphql-server": "0.7.0",
-    "@hono/node-server": "2.0.2",
+    "@hono/node-server": "2.0.5",
     "gel": "2.2.0",
     "graphql": "16.14.0",
     "hono": "4.12.21",
