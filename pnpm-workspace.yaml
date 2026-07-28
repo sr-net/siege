@@ -25,3 +25,5 @@ minimumReleaseAgeExclude:
   - hono@4.12.21
   # Renovate security update: @hono/node-server@2.0.5 || 2.0.10
   - "@hono/node-server@2.0.5 || 2.0.10"
+  # Renovate security update: valibot@1.4.2
+  - valibot@1.4.2

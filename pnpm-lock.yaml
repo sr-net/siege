@@ -22,7 +22,7 @@ importers:
     dependencies:
       '@gqloom/valibot':
         specifier: 0.16.0
-        version: 0.16.0(@gqloom/core@0.16.1)(graphql@16.14.0)(valibot@1.4.0)
+        version: 0.16.0(@gqloom/core@0.16.1)(graphql@16.14.0)(valibot@1.4.2)
       '@hono/graphql-server':
         specifier: 0.7.0
         version: 0.7.0(hono@4.12.21)
@@ -48,8 +48,8 @@ importers:
         specifier: 2.2.0
         version: 2.2.0
       valibot:
-        specifier: 1.4.0
-        version: 1.4.0(typescript@6.0.3)
+        specifier: 1.4.2
+        version: 1.4.2(typescript@6.0.3)
     devDependencies:
       '@antfu/eslint-config':
         specifier: 9.0.0
@@ -1756,8 +1756,8 @@ packages:
   uri-js@4.4.1:
     resolution: {integrity: sha512-7rKUyy33Q1yc98pQ1DAmLtwX109F7TIfWlW1Ydo8Wl1ii1SeHieeh0HHfPeL2fMXK6z0s8ecKs9frCuLJvndBg==}
 
-  valibot@1.4.0:
-    resolution: {integrity: sha512-iC/x7fVcSyOwlm/VSt7RlHnzNGLGvR9GnxdifUeWoCJo0q4ZZvrVkIHC6faTlkxG47I2Y4UrFquPuVHCrOnrLg==}
+  valibot@1.4.2:
+    resolution: {integrity: sha512-gjdCvJ6d3RyHAneqxMYMW9QMCwYMb3jpOO0IyHZV1bnRHFBHrX3VkIILt5XYR0WhwHiH7Mty8ovuPZ/O3gamrg==}
     peerDependencies:
       typescript: '>=5'
     peerDependenciesMeta:
@@ -2061,11 +2061,11 @@ snapshots:
     dependencies:
       graphql: 16.14.0
 
-  '@gqloom/valibot@0.16.0(@gqloom/core@0.16.1)(graphql@16.14.0)(valibot@1.4.0)':
+  '@gqloom/valibot@0.16.0(@gqloom/core@0.16.1)(graphql@16.14.0)(valibot@1.4.2)':
     dependencies:
       '@gqloom/core': 0.16.1(graphql@16.14.0)
       graphql: 16.14.0
-      valibot: 1.4.0(typescript@6.0.3)
+      valibot: 1.4.2(typescript@6.0.3)
 
   '@hono/graphql-server@0.7.0(hono@4.12.21)':
     dependencies:
@@ -3417,7 +3417,7 @@ snapshots:
     dependencies:
       punycode: 2.3.1
 
-  valibot@1.4.0(typescript@6.0.3):
+  valibot@1.4.2(typescript@6.0.3):
     optionalDependencies:
       typescript: 6.0.3
 
