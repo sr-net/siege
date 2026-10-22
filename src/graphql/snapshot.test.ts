@@ -7,17 +7,12 @@ import { expect, it } from "vitest"
 import { createSchema } from "#/graphql/schema.ts"
 
 it("generated schema should be identical to snapshot", async () => {
-  const snapshot = readFileSync(
-    path.resolve(import.meta.dirname, "snapshot.graphql"),
-  ).toString()
+  const snapshot = readFileSync(path.resolve(import.meta.dirname, "snapshot.graphql")).toString()
 
   await createSchema()
   await setTimeout(1000)
 
-  const newSnapshot = readFileSync(
-    path.resolve(import.meta.dirname, "snapshot.graphql"),
-    "utf8",
-  )
+  const newSnapshot = readFileSync(path.resolve(import.meta.dirname, "snapshot.graphql"), "utf8")
 
   expect(newSnapshot).toEqual(snapshot)
 })

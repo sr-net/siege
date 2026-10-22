@@ -25,13 +25,7 @@ export const createSchema = async () => {
     (str) => str.includes("--snapshot") || str.includes("-shot"),
   )
 
-  const schema = weave(
-    weaver,
-    asyncContextProvider,
-    stratResolver,
-    likedResolver,
-    likeResolver,
-  )
+  const schema = weave(weaver, asyncContextProvider, stratResolver, likedResolver, likeResolver)
 
   if (isSnapshotRun || config.env === "development") {
     const snapshotFilePath = path.resolve(import.meta.dirname, "snapshot.graphql")

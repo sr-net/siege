@@ -9,6 +9,7 @@ type Config = {
 
 const port = Number(process.env.PORT ?? "3000")
 
+// oxlint-disable-next-line no-underscore-dangle
 const _config: Config = {
   development: {
     env: "development",

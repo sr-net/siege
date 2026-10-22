@@ -30,12 +30,11 @@
     "docker:prune": "docker image prune --force",
     "docker:run": "docker run --rm --name siege -p 3000:3000 siege",
     "gen": "@gel/generate interfaces",
-    "lint": "eslint --flag unstable_native_nodejs_ts_config",
+    "lint": "oxlint",
     "postinstall": "simple-git-hooks",
     "snapshot": "node src/index.ts -shot",
     "start": "node src/index.ts",
-    "test": "vitest",
-    "typecheck": "tsc"
+    "test": "vitest"
   },
   "dependencies": {
     "@gqloom/valibot": "0.16.0",
@@ -50,17 +49,17 @@
     "valibot": "1.5.0"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "9.5.1",
+    "@e18e/eslint-plugin": "0.8.1",
     "@gel/generate": "0.7.1",
     "@gqloom/core": "0.16.2",
     "@tsconfig/node26": "26.0.1",
     "@tsconfig/strictest": "2.0.8",
     "@types/node": "26.6.5",
-    "eslint": "10.13.0",
     "lint-staged": "17.6.0",
-    "oxfmt": "0.73.0",
+    "oxfmt": "0.74.0",
+    "oxlint": "1.89.0",
+    "oxlint-tsgolint": "7.0.2004",
     "simple-git-hooks": "2.14.0",
-    "typescript": "6.0.3",
     "vitest": "5.0.5"
   }
 }
