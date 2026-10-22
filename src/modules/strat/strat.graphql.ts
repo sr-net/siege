@@ -1,4 +1,5 @@
-import { asEnumType, query, resolver } from "@gqloom/valibot"
+import { query, resolver } from "@gqloom/core"
+import { asEnumType } from "@gqloom/valibot"
 import { dedent } from "ts-dedent"
 import * as v from "valibot"
 
@@ -74,7 +75,8 @@ export const getFilters = <Args extends SingleInputObject | PageInputObject>(
   }
 
   return {
-    filters: `${filters.join(" and ")}`,
+    filters: filters.join(" and "),
+    // oxlint-disable-next-line no-undefined
     args: (Object.keys(newArgs).length > 0 ? newArgs : undefined) as never,
   }
 }
@@ -168,6 +170,7 @@ export const stratResolver = resolver({
           args,
         )
 
+        // oxlint-disable-next-line no-undefined
         gqlArgs.random = undefined
         gqlArgs.shortId = result
       }
