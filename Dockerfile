@@ -25,11 +25,11 @@ RUN npm i -g upm@1.4.0
 RUN --mount=type=cache,target=/upm \
     upm install --frozen-lockfile --ignore-scripts
 
-FROM base_deps AS build
+FROM base AS build
 
 WORKDIR /app
 
-COPY --from=runtime_deps /app/node_modules/ node_modules/
+COPY --from=base_deps /app/node_modules/ node_modules/
 COPY dbschema/ dbschema/
 COPY src/ src/
 COPY package.json tsconfig.json ./
