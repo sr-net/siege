@@ -34,7 +34,7 @@
     "postinstall": "simple-git-hooks",
     "snapshot": "node src/index.ts -shot",
     "start": "node src/index.ts",
-    "test": "vitest"
+    "test": "node --test --env-file-if-exists .env"
   },
   "dependencies": {
     "@gqloom/valibot": "0.16.0",
@@ -59,7 +59,6 @@
     "oxfmt": "0.74.0",
     "oxlint": "1.89.0",
     "oxlint-tsgolint": "7.0.2004",
-    "simple-git-hooks": "2.14.0",
-    "vitest": "5.0.5"
+    "simple-git-hooks": "2.14.0"
   }
 }

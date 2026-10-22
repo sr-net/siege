@@ -6,26 +6,11 @@
     "typeCheck": true,
     "reportUnusedDisableDirectives": "error"
   },
-  "settings": {
-    "vitest": {
-      "typecheck": true
-    }
-  },
   "env": {
     "es2025": true,
     "node": true
   },
-  "plugins": [
-    "eslint",
-    "import",
-    "jsdoc",
-    "node",
-    "oxc",
-    "promise",
-    "typescript",
-    "unicorn",
-    "vitest"
-  ],
+  "plugins": ["eslint", "import", "jsdoc", "node", "oxc", "promise", "typescript", "unicorn"],
   "jsPlugins": ["@e18e/eslint-plugin"],
   "categories": {
     "perf": "error",
@@ -37,6 +22,14 @@
     "typescript/consistent-type-imports": [
       "error",
       { "fixStyle": "inline-type-imports", "disallowTypeAnnotations": false }
+    ],
+    "typescript/no-floating-promises": [
+      "warn",
+      {
+        "allowForKnownSafeCalls": [
+          { "from": "package", "package": "node:test", "name": ["describe", "it", "suite", "test"] }
+        ]
+      }
     ],
 
     "eqeqeq": ["error", "always", { "null": "never" }],
