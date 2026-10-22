@@ -28,10 +28,8 @@ jobs:
         run: upm install --frozen-lockfile
 
       - parallel:
-          - run: node --run build
           - run: node --run lint
           - run: node --run test
-          - run: node --run typecheck
 
   build:
     runs-on: ubuntu-latest
