@@ -38,11 +38,11 @@
   },
   "dependencies": {
     "@gqloom/valibot": "0.16.0",
-    "@hono/graphql-server": "0.7.0",
+    "@hono/graphql-server": "0.7.1",
     "@hono/node-server": "2.1.5",
     "gel": "2.2.1",
     "graphql": "16.14.2",
-    "hono": "4.13.13",
+    "hono": "4.13.14",
     "pino": "10.4.0",
     "pino-pretty": "13.2.0",
     "ts-dedent": "2.3.0",
@@ -54,11 +54,11 @@
     "@gqloom/core": "0.16.2",
     "@tsconfig/node26": "26.0.1",
     "@tsconfig/strictest": "2.0.8",
-    "@types/node": "26.6.5",
+    "@types/node": "26.6.6",
     "lint-staged": "17.6.0",
-    "oxfmt": "0.74.0",
-    "oxlint": "1.89.0",
-    "oxlint-tsgolint": "7.0.2004",
+    "oxfmt": "0.75.0",
+    "oxlint": "1.90.0",
+    "oxlint-tsgolint": "7.0.2005",
     "simple-git-hooks": "2.14.0"
   }
 }
