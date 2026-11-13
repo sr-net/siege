@@ -42,7 +42,7 @@
     "@hono/node-server": "2.1.5",
     "gel": "2.2.1",
     "graphql": "16.14.2",
-    "hono": "4.13.13",
+    "hono": "4.13.16",
     "pino": "10.4.0",
     "pino-pretty": "13.2.0",
     "ts-dedent": "2.3.0",
